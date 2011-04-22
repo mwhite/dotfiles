@@ -1,4 +1,4 @@
-" mwhite's .vimrc
+" mwhite's .vimrc  
 
 " SuperTab preferences: use omnicompletion, then context completion
 
