@@ -1,0 +1,3 @@
+set columns=track title length album date artist genre
+
+set sort=track disc album date albumartistsort genre
