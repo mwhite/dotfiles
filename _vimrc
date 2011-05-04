@@ -33,6 +33,8 @@ set hlsearch
 set completeopt=longest,menuone,preview
 
 if has("autocmd")
+	autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
+
 	" language-specific indentation settings
 	autocmd FileType c,cpp				setlocal ts=4 sts=4 sw=4 et tw=80 nowrap
 	autocmd FileType sh,csh,tcsh,zsh	setlocal ts=4 sts=4 sw=4 noet
@@ -45,6 +47,9 @@ if has("autocmd")
 	" language-specific general settings
 	autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR>		" run file
 	autocmd FileType php noremap <C-L> :w!<CR>:!php -l %<CR>	" check syntax
+
+	" Make programs
+	autocmd FileType markdown			setlocal makeprg=markdown2pdf\ %
 
 endif
 
