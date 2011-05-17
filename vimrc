@@ -28,8 +28,14 @@ set completeopt=longest,menuone,preview
 
 set noet ts=4 sts=4 sw=4
 
+set autoindent
+
 filetype plugin on
 filetype indent on
+
+set showmatch
+
+set wildmode=longest,full
 
 if has("autocmd")
 
@@ -58,4 +64,6 @@ noremap <C-M> :make<CR><CR>
 " Merge consecutive empty lines and clean up trailing whitespace
 map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
 map <Leader>v :so ~/.vimrc<CR>
+
+map <Leader>hl :set hlsearch!<CR>
 
