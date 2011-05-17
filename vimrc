@@ -1,12 +1,22 @@
 " mwhite's .vimrc
-
-" include scripts in ~/.vim/bundle/ using vim-pathogen
-silent! call pathogen#runtime_append_all_bundles()
-silent! call pathogen#helptags()
-
+set nocompatible
 silent! colorscheme ir_black
 
-set nocompatible
+set rtp+=~/.vim/bundle/vundle/
+silent! call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Github repos:
+Bundle 'msanders/snipmate.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-markdown'
+
+" Vim.org scripts
+Bundle 'Smart-Tabs'
+Bundle 'jQuery'
+
 set smartindent
 set wrap
 set autowrite
