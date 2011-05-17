@@ -1,71 +1,61 @@
 " mwhite's .vimrc
-set nocompatible
 silent! colorscheme ir_black
 
 set rtp+=~/.vim/bundle/vundle/
-silent! call vundle#rc()
-
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+call vundle#rc()
 
 " Github repos:
+Bundle 'gmarik/vundle'
 Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-markdown'
+" Tabs (or spaces if expandtab is set) for indentation, spaces elsewhere
+Bundle 'Soares/vim-smarttab'
 
-" Vim.org scripts
-Bundle 'Smart-Tabs'
+" Vim.org scripts (from vim-scripts github mirror)
 Bundle 'jQuery'
 
-set smartindent
-set wrap
-set autowrite
+set nocompatible
 set number
-set incsearch
+set wrap
 set mouse=a
-set pastetoggle=<F2>	" toggle whether to auto-indent external pasted text
-
-set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
-
-" set default indentation (per-language settings below)
-set tabstop=4 softtabstop=4 shiftwidth=4
-
-filetype plugin on
-filetype indent on
-
-" Case insensitive searches except with capitals
-set smartcase
-set hlsearch
+set autowrite
+set incsearch
+set smartcase	" Case-insensitive unless search string has capitals
 
 " only complete up to longest common string, always show a menu
 set completeopt=longest,menuone,preview
 
-" Merge consecutive empty lines and clean up trailing whitespace
-map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
+set noet ts=4 sts=4 sw=4
 
-" reload vimrc
-map <Leader>v :so ~/.vimrc<CR>
+filetype plugin on
+filetype indent on
 
 if has("autocmd")
 
-	autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
+    autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
 
-	" language-specific indentation settings
-	autocmd FileType c,cpp				setlocal ts=4 sts=4 sw=4 tw=80 et
-	autocmd FileType sh,csh,tcsh,zsh	setlocal ts=4 sts=4 sw=4
-	autocmd FileType php,javascript,css	setlocal ts=4 sts=4 sw=4
-	autocmd FileType ruby,eruby,yaml	setlocal ts=2 sts=2 sw=2 et
-	autocmd FileType text,txt,mkd		setlocal ts=4 sts=4 sw=4 tw=80 et
-	autocmd FileType html,xhtml,xml		setlocal ts=2 sts=2 sw=2
-	autocmd FileType haskell			setlocal ts=8 sts=8 sw=8
+    autocmd FileType c,cpp              setlocal ts=4 sts=4 sw=4 et tw=80
+    autocmd FileType sh,csh,tcsh,zsh    setlocal ts=4 sts=4 sw=4 et
+    autocmd FileType php,javascript,css setlocal ts=4 sts=4 sw=4 noet
+    autocmd FileType ruby,eruby,yaml    setlocal ts=2 sts=2 sw=2 et
+    autocmd FileType text,txt,mkd       setlocal ts=4 sts=4 sw=4 et tw=80
+    autocmd FileType html,xhtml,xml     setlocal ts=2 sts=2 sw=2 noet
+    autocmd FileType haskell            setlocal ts=8 sts=8 sw=8 et
+    autocmd FileType vim                setlocal ts=4 sts=4 sw=4 et
 
-	" Make programs
-	autocmd FileType markdown			setlocal makeprg=markdown2pdf\ %
-	autocmd FileType php				setlocal makeprg=php\ -l\ %
+    autocmd FileType markdown           setlocal makeprg=markdown2pdf\ %
+    autocmd FileType php                setlocal makeprg=php\ -l\ %
 
 endif
 
+set pastetoggle=<F2>    " toggle whether to auto-indent external pasted text
+
+set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
+
 noremap <C-M> :make<CR><CR>
 
-nnoremap <Space> <PageDown>
-nnoremap <S-Space> <PageUp>		" only works in GVim
+" Merge consecutive empty lines and clean up trailing whitespace
+map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
+map <Leader>v :so ~/.vimrc<CR>
+
