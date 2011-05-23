@@ -26,7 +26,7 @@ set smartcase	" Case-insensitive unless search string has capitals
 " only complete up to longest common string, always show a menu
 set completeopt=longest,menuone,preview
 
-set noet ts=4 sts=4 sw=4
+set et ts=4 sts=4 sw=4
 
 set autoindent
 
@@ -45,7 +45,7 @@ if has("autocmd")
     autocmd FileType sh,csh,tcsh,zsh    setlocal ts=4 sts=4 sw=4 et
     autocmd FileType php,javascript,css setlocal ts=4 sts=4 sw=4 noet
     autocmd FileType ruby,eruby,yaml    setlocal ts=2 sts=2 sw=2 et
-    autocmd FileType text,txt,mkd       setlocal ts=4 sts=4 sw=4 et tw=80
+    autocmd FileType text,txt,markdown  setlocal ts=4 sts=4 sw=4 et tw=80
     autocmd FileType html,xhtml,xml     setlocal ts=2 sts=2 sw=2 noet
     autocmd FileType haskell            setlocal ts=8 sts=8 sw=8 et
     autocmd FileType vim                setlocal ts=4 sts=4 sw=4 et
@@ -67,3 +67,16 @@ map <Leader>v :so ~/.vimrc<CR>
 
 map <Leader>hl :set hlsearch!<CR>
 
+map - :Explore<cr>
+map <c-j> j<c-e>
+map <c-k> k<c-y>
+
+map <c-l> :tabnext<enter>
+imap <c-l> <esc>:tabnext<enter>
+map <c-h> :tabprevious<enter>
+imap <c-h> <esc>:tabprevious<enter>
+
+map <c-t> :tabnew<enter>i
+imap <c-t> <esc>:tabnew<enter>i
+map <c-w> :q<enter>
+imap <c-w> <esc>:q<enter>
