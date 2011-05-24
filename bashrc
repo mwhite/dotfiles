@@ -101,3 +101,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 PS1="\e[1;30m[\d \t \u@\h:\w ] $\e[m "
+
+function mkcd
+{
+    dir="$*";
+    mkdir -p "$dir" && cd "$dir";
+}

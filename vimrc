@@ -78,5 +78,3 @@ imap <c-h> <esc>:tabprevious<enter>
 
 map <c-t> :tabnew<enter>i
 imap <c-t> <esc>:tabnew<enter>i
-map <c-w> :q<enter>
-imap <c-w> <esc>:q<enter>
