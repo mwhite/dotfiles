@@ -9,11 +9,14 @@ Bundle 'gmarik/vundle'
 Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-markdown'
+Bundle 'majutsushi/tagbar'
+
 " Tabs (or spaces if expandtab is set) for indentation, spaces elsewhere
 Bundle 'Soares/vim-smarttab'
 
 " Vim.org scripts (from vim-scripts github mirror)
 Bundle 'jQuery'
+Bundle 'xml.vim'
 
 set nocompatible
 set number
@@ -40,6 +43,7 @@ set wildmode=longest,full
 if has("autocmd")
 
     autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
+    autocmd BufRead,BufNewFile *.jison setlocal filetype=javascript
 
     autocmd FileType c,cpp              setlocal ts=4 sts=4 sw=4 et tw=80
     autocmd FileType sh,csh,tcsh,zsh    setlocal ts=4 sts=4 sw=4 et
@@ -58,6 +62,8 @@ endif
 set pastetoggle=<F2>    " toggle whether to auto-indent external pasted text
 
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
+
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
 noremap <C-M> :make<CR><CR>
 
