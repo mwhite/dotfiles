@@ -2,7 +2,7 @@
 silent! colorscheme ir_black
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+silent! call vundle#rc()
 
 " Github repos:
 Bundle 'gmarik/vundle'
@@ -17,6 +17,8 @@ Bundle 'Soares/vim-smarttab'
 " Vim.org scripts (from vim-scripts github mirror)
 Bundle 'jQuery'
 Bundle 'xml.vim'
+Bundle 'vimwiki'
+" Bundle 'AutoComplPop'
 
 set nocompatible
 set number
@@ -35,25 +37,31 @@ set autoindent
 
 filetype plugin on
 filetype indent on
-
 set showmatch
 
 set wildmode=longest,full
 
 if has("autocmd")
 
-    autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
-    autocmd BufRead,BufNewFile *.jison setlocal filetype=javascript
+    autocmd BufEnter * lcd %:p:h
+
+    autocmd BufRead,BufNewFile *.txt,*.log,README,INSTALL setlocal filetype=text
+    autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown setlocal filetype=markdown
+    autocmd BufRead,BufNewFile *.json,*.jison setlocal filetype=javascript
+
+    autocmd FileType php,ruby,c,cpp,python,javascript,java nested TagbarOpen
 
     autocmd FileType c,cpp              setlocal ts=4 sts=4 sw=4 et tw=80
+    autocmd fileType python             setlocal ts=4 sts=4 sw=4 et
     autocmd FileType sh,csh,tcsh,zsh    setlocal ts=4 sts=4 sw=4 et
     autocmd FileType php,javascript,css setlocal ts=4 sts=4 sw=4 noet
     autocmd FileType ruby,eruby,yaml    setlocal ts=2 sts=2 sw=2 et
-    autocmd FileType text,txt,markdown  setlocal ts=4 sts=4 sw=4 et tw=80
+    autocmd FileType text,txt,markdown  setlocal ts=4 sts=4 sw=4 et
     autocmd FileType html,xhtml,xml     setlocal ts=2 sts=2 sw=2 noet
     autocmd FileType haskell            setlocal ts=8 sts=8 sw=8 et
     autocmd FileType vim                setlocal ts=4 sts=4 sw=4 et
 
+    autocmd FileType tex                setlocal makeprg=pdflatex\ %
     autocmd FileType markdown           setlocal makeprg=markdown2pdf\ %
     autocmd FileType php                setlocal makeprg=php\ -l\ %
 
@@ -61,19 +69,22 @@ endif
 
 set pastetoggle=<F2>    " toggle whether to auto-indent external pasted text
 
+" Merge consecutive empty lines and clean up trailing whitespace
+map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
+
+" Reload vimrc
+map <Leader>v :so ~/.vimrc<CR>
+
+" Toggle highlight
+map <Leader>hl :set hlsearch!<CR>
+
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 
 nnoremap <silent> <F9> :TagbarToggle<CR>
+map - :NERDTreeToggle<cr>
 
 noremap <C-M> :make<CR><CR>
 
-" Merge consecutive empty lines and clean up trailing whitespace
-map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
-map <Leader>v :so ~/.vimrc<CR>
-
-map <Leader>hl :set hlsearch!<CR>
-
-map - :Explore<cr>
 map <c-j> j<c-e>
 map <c-k> k<c-y>
 
