@@ -10,7 +10,9 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-markdown'
 Bundle 'majutsushi/tagbar'
-
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'wincent/Command-T'
+Bundle 'Raimondi/delimitMate'
 " Tabs (or spaces if expandtab is set) for indentation, spaces elsewhere
 Bundle 'Soares/vim-smarttab'
 
@@ -26,6 +28,7 @@ set wrap
 set mouse=a
 set autowrite
 set incsearch
+set ignorecase
 set smartcase	" Case-insensitive unless search string has capitals
 
 " only complete up to longest common string, always show a menu
@@ -41,7 +44,13 @@ set showmatch
 
 set wildmode=longest,full
 
+" Open moves to the existing buffer instead of reopening it
+set switchbuf=useopen,usetab
+
 if has("autocmd")
+
+    " Remember cursor position
+    autocmd BufReadPost * normal `"
 
     autocmd BufEnter * lcd %:p:h
 
@@ -49,7 +58,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown setlocal filetype=markdown
     autocmd BufRead,BufNewFile *.json,*.jison setlocal filetype=javascript
 
-    autocmd FileType php,ruby,c,cpp,python,javascript,java nested TagbarOpen
+    " autocmd FileType php,ruby,c,cpp,python,javascript,java nested TagbarOpen
 
     autocmd FileType c,cpp              setlocal ts=4 sts=4 sw=4 et tw=80
     autocmd fileType python             setlocal ts=4 sts=4 sw=4 et
@@ -68,6 +77,9 @@ if has("autocmd")
 endif
 
 set pastetoggle=<F2>    " toggle whether to auto-indent external pasted text
+
+map :W :w
+map :Tabnew :tabnew
 
 " Merge consecutive empty lines and clean up trailing whitespace
 map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>

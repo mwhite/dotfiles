@@ -100,7 +100,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-PS1="\e[1;30m[\d \t \u@\h:\w ] $\e[m "
+# PS1="\e[1;30m[\d \t \u@\h:\w ] $\e[m "
 
 function mkcd
 {
