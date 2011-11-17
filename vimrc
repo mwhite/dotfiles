@@ -1,5 +1,5 @@
 " mwhite's .vimrc
-silent! colorscheme ir_black
+silent! colorscheme morning
 
 set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
