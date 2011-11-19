@@ -18,11 +18,13 @@ silent! call vundle#rc()
 
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
+    Bundle 'jQuery'
+    Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
     Bundle 'msanders/snipmate.vim'
-    Bundle 'scrooloose/nerdcommenter'
+    Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
-    Bundle 'wincent/Command-T'
+    Bundle 'xml.vim'
 
     Bundle 'godlygeek/csapprox'
     Bundle 'molokai'
@@ -41,8 +43,6 @@ if exists('*vundle#rc')
     let g:snips_author = "Michael White <m@mwhite.info>"
     let g:pandoc_no_folding = 1
     
-    Bundle 'jQuery'
-    Bundle 'xml.vim'
 
     " Bundle 'Soares/vim-smarttab'  " buggy/several conflicts
 endif
