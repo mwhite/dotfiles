@@ -17,17 +17,21 @@ set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
 
 if exists('*vundle#rc')
-    " Github repos:
     Bundle 'gmarik/vundle'
     Bundle 'scrooloose/nerdtree'
     Bundle 'msanders/snipmate.vim'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'tpope/vim-markdown'
+    Bundle 'wincent/Command-T'
+
+    Bundle 'godlygeek/csapprox'
+    Bundle 'molokai'
+    Bundle 'wgibbs/vim-irblack'
+
     Bundle 'majutsushi/tagbar'
-    Bundle 'altercation/vim-colors-solarized'
-    Bundle 'wincent/Command-T' 
-   
-    Bundle 'Raimondi/delimitMate' 
+    let g:tagbar_singleclick = 1
+
+    Bundle 'Raimondi/delimitMate'
     let delimitMate_autoclose = 1
     let delimitMate_expand_cr = 1
     let delimitMate_expand_space = 1
@@ -37,7 +41,6 @@ if exists('*vundle#rc')
     let g:snips_author = "Michael White <m@mwhite.info>"
     let g:pandoc_no_folding = 1
     
-    " Vim.org scripts (from vim-scripts github mirror)
     Bundle 'jQuery'
     Bundle 'xml.vim'
 
@@ -50,7 +53,7 @@ filetype on
 " 2. General settings
 " -------------------
 
-colorscheme morning
+colorscheme ir_black
 
 set nocompatible
 set mouse=a
@@ -190,7 +193,7 @@ if has("autocmd")
         " au filetype php,ruby,c,cpp,python,javascript,java nested TagbarOpen
 
         " Always show line numbers, but only in current window
-        au WinEnter * setlocal number
+        au WinEnter * if &modifiable | setlocal number | endif
         au WinLeave * setlocal nonumber
 
         " Automatically resize vertical splits
