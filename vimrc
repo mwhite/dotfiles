@@ -53,6 +53,7 @@ filetype on
 " 2. General settings
 " -------------------
 
+set t_Co=256
 colorscheme ir_black
 
 set nocompatible
