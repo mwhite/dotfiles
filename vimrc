@@ -22,6 +22,7 @@ if exists('*vundle#rc')
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
     Bundle 'msanders/snipmate.vim'
+    Bundle 'ap/vim-css-color'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
     Bundle 'xml.vim'
