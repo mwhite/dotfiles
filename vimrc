@@ -18,10 +18,12 @@ silent! call vundle#rc()
 
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
+    Bundle 'kien/ctrlp.vim'
     Bundle 'jQuery'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
     Bundle 'msanders/snipmate.vim'
+    Bundle 'kien/tabman.vim'
     Bundle 'ap/vim-css-color'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
@@ -43,7 +45,6 @@ if exists('*vundle#rc')
     Bundle 'vim-pandoc/vim-pandoc'
     let g:snips_author = "Michael White <m@mwhite.info>"
     let g:pandoc_no_folding = 1
-    
 
     " Bundle 'Soares/vim-smarttab'  " buggy/several conflicts
 endif
@@ -111,7 +112,7 @@ vnoremap / /\v
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 
 " -----------
-" 3. Mappings
+" 3. MappingS
 " -----------
 
 set pastetoggle=<F2>
