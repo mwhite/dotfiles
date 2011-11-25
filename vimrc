@@ -27,6 +27,7 @@ if exists('*vundle#rc')
     Bundle 'ap/vim-css-color'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
+    Bundle 'mikewest/vimroom'
     Bundle 'xml.vim'
 
     Bundle 'godlygeek/csapprox'
