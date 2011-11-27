@@ -20,17 +20,25 @@ if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
     Bundle 'kien/ctrlp.vim'
     Bundle 'jQuery'
+    Bundle 'gregsexton/MatchTag'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
-    Bundle 'msanders/snipmate.vim'
     Bundle 'kien/tabman.vim'
     Bundle 'ap/vim-css-color'
+    Bundle 'acustodioo/vim-enter-indent'
     Bundle 'tpope/vim-fugitive'
+    Bundle 'pangloss/vim-javascript'
     Bundle 'tpope/vim-markdown'
     Bundle 'mikewest/vimroom'
+    Bundle 'garbas/vim-snipmate'
+    " (dependencies of snipmate")
+    Bundle "MarcWeber/vim-addon-mw-utils.git"
+    Bundle "tomtom/tlib_vim.git"
+    Bundle 'honza/vim-snippets'
+
     Bundle 'xml.vim'
 
-    Bundle 'godlygeek/csapprox'
+    silent! Bundle 'godlygeek/csapprox'
     Bundle 'molokai'
     Bundle 'wgibbs/vim-irblack'
 
@@ -46,6 +54,7 @@ if exists('*vundle#rc')
     Bundle 'vim-pandoc/vim-pandoc'
     let g:snips_author = "Michael White <m@mwhite.info>"
     let g:pandoc_no_folding = 1
+    let g:pandoc_use_hard_wraps = 1
 
     " Bundle 'Soares/vim-smarttab'  " buggy/several conflicts
 endif
@@ -113,7 +122,7 @@ vnoremap / /\v
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 
 " -----------
-" 3. MappingS
+" 3. Mappings
 " -----------
 
 set pastetoggle=<F2>
@@ -141,6 +150,10 @@ map <c-k> k<c-y>
 " Scroll within wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" Copy and paste to/from OS clipboard
+noremap <leader>yy "+y
+noremap <leader>pp "+gP
 
 " move a line of text using ALT+[jk], indent with ALT+[hl]
 nnoremap <A-j> :m+<CR>==
