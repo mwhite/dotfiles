@@ -38,7 +38,9 @@ if exists('*vundle#rc')
 
     Bundle 'xml.vim'
 
-    silent! Bundle 'godlygeek/csapprox'
+    Bundle 'godlygeek/csapprox'
+    let g:CSApprox_verbose_level = 0
+
     Bundle 'molokai'
     Bundle 'wgibbs/vim-irblack'
 
@@ -223,7 +225,7 @@ if has("autocmd")
         au filetype c,cpp                     setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype sh,csh,tcsh,zsh           setlocal ts=4 sts=4 sw=4 et
-        au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 noet
+        au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et
         au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
         au filetype text,txt,markdown,pandoc  setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype html,xhtml,xml            setlocal ts=2 sts=2 sw=2 noet
