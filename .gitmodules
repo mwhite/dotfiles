@@ -1,0 +1,3 @@
+[submodule "bash/pandoc-completion"]
+	path = bash/pandoc-completion
+	url = git@github.com:dsanson/pandoc-completion.git

@@ -1,8 +1,4 @@
-# mwhite's .bashrc.  basically ubuntu's default plus a custom prompt
-
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# mwhite's .bashrc.  based on ubuntu's default
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -100,11 +96,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# PS1="\e[1;30m[\d \t \u@\h:\w ] $\e[m "
-
 function mkcd
 {
     dir="$*";
     mkdir -p "$dir" && cd "$dir";
 }
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+[[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]] && source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
