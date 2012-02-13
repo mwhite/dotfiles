@@ -3,8 +3,14 @@
 """
 pan is a wrapper for the swiss army knife document processor pandoc.
 
+Use it like so:
+
+    pan foo.mla.md
+
 It allows you to define rules that map file endings to a program (pandoc or
-markdown2pdf) and command-line options.
+markdown2pdf) and additional command-line options for it.  Any passed arguments
+will be passed through to pandoc, and take precedence over any inferred
+arguments.
 
 For example, in the below configuration, all *.mla.md files will use a
 latex mla-paper template to generate a PDF, extracting variables from the
