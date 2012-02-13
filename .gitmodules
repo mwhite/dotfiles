@@ -1,3 +1,6 @@
 [submodule "bash/pandoc-completion"]
 	path = bash/pandoc-completion
 	url = git@github.com:dsanson/pandoc-completion.git
+[submodule "pandoc/pandoc-templates"]
+	path = pandoc/pandoc-templates
+	url = git@github.com:mwhite/pandoc-templates.git
