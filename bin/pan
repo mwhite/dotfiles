@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+
+"""
+pan is a wrapper for the swiss army knife document processor pandoc.
+
+It allows you to define rules that map file endings to a program (pandoc or
+markdown2pdf) and command-line options.
+
+For example, in the below configuration, all *.mla.md files will use a
+latex mla-paper template to generate a PDF, extracting variables from the
+markdown file as follows:
+
+    % Paper Title
+    % $authorfirst$ $authorlast$
+    % Date
+    <!-- $classname$ -->
+    <!-- $professorlast$ -->
+
+"""
+
+import sys
+import os
+import re
+import subprocess
+from linecache import getline
+
+PANDOC = 'pandoc'
+TEMPLATE_DIR = os.environ['HOME'] + '/dotfiles/pandoc/pandoc-templates/'
+
+def match_file_ending(filename, pattern):
+    """Match filename on *.pattern or *.pattern.ext"""
+    return re.search(r'{0}(\.[^\./]+)?$'.format(pattern), filename)
+
+def get_pandoc_args(filename):
+    def line(n):
+        return getline(filename, n)
+
+    if match_file_ending(filename, 'mla(-paper)?'):
+        classname = re.search(r'<!-- (.*) -->', line(4)).group(1)
+        professor = re.search(r'<!-- (.*) -->', line(5)).group(1)
+        first, last = re.search(r'^% (.+)\s([^\s]+)$', line(2)).groups()
+
+        return '-t pdf --template=%s ' % (TEMPLATE_DIR + 'default.mla-paper') + \
+               '-V authorfirst="%s" ' % first + \
+               '-V authorlast="%s" ' % last + \
+               '-V professorlast="%s" ' % professor + \
+               '-V class="%s" -V bibliotitle="Works Cited"' % classname
+
+    elif match_file_ending(filename, 'note(s)?'):
+        return '-t html'
+
+    elif match_file_ending(filename, 'hw'):
+        return '-t pdf --template=%s ' % (TEMPLATE_DIR + 'default.latex-hw')
+
+    else:
+        return '-t pdf'
+
+if __name__ == '__main__':
+    try:
+        infile = sys.argv[1]
+        passed_args = sys.argv[2:]
+        new_args = get_pandoc_args(os.path.abspath(infile))
+        
+        if 'pdf' in new_args and not 'latex' in passed_args:
+            program = 'markdown2pdf'
+            new_args = new_args.replace('-t pdf', '')
+        else:
+            program = 'pandoc'
+
+        import shlex
+        new_args = shlex.split(new_args)
+        # re-add quotes to variables, shlex doesn't handle them properly
+        # new_args = [re.sub(r'^([^-].+)=(.+)$', r'\1="\2"', x) for x in new_args]
+        subprocess.call([program, sys.argv[1]] + new_args + passed_args)
+    except IndexError:
+        print "No file provided."
+
+
