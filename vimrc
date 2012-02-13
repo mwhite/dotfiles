@@ -284,12 +284,12 @@ if has("autocmd")
 
     augroup ft_markdown
         au!
-        au filetype markdown setlocal makeprg=markdown2pdf\ %
+        au filetype markdown setlocal makeprg=pan\ %
     augroup END
 
     augroup ft_pandoc
         au!
-        au filetype pandoc setlocal makeprg=markdown2pdf\ %
+        au filetype pandoc setlocal makeprg=pan\ %
     augroup END
 
     augroup ft_php
