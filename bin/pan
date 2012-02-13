@@ -74,10 +74,7 @@ if __name__ == '__main__':
             program = 'pandoc'
 
         import shlex
-        new_args = shlex.split(new_args)
-        # re-add quotes to variables, shlex doesn't handle them properly
-        # new_args = [re.sub(r'^([^-].+)=(.+)$', r'\1="\2"', x) for x in new_args]
-        subprocess.call([program, sys.argv[1]] + new_args + passed_args)
+        subprocess.call([program, sys.argv[1]] + shlex.split(new_args) + passed_args)
     except IndexError:
         print "No file provided."
 
