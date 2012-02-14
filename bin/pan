@@ -66,12 +66,13 @@ if __name__ == '__main__':
         infile = sys.argv[1]
         passed_args = sys.argv[2:]
         new_args = get_pandoc_args(os.path.abspath(infile))
-        
+
         if 'pdf' in new_args and not 'latex' in passed_args:
             program = 'markdown2pdf'
-            new_args = new_args.replace('-t pdf', '')
         else:
             program = 'pandoc'
+
+        new_args = new_args.replace('-t pdf', '')
 
         import shlex
         subprocess.call([program, sys.argv[1]] + shlex.split(new_args) + passed_args)
