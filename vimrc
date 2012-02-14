@@ -223,7 +223,7 @@ if has("autocmd")
     augroup tab_settings
         au!
         au filetype c,cpp                     setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=80
+        au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=79
         au filetype sh,csh,tcsh,zsh           setlocal ts=4 sts=4 sw=4 et
         au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et
         au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
@@ -231,6 +231,7 @@ if has("autocmd")
         au filetype html,xhtml,xml            setlocal ts=2 sts=2 sw=2 noet
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
+        au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
     augroup END
 
     augroup ft_c
@@ -242,8 +243,8 @@ if has("autocmd")
         au!
         au BufNewFile,BufRead *.less setlocal filetype=less
 
-        au filetype less,css setlocal foldmethod=marker
-        au filetype less,css setlocal foldmarker={,}
+        " au filetype less,css setlocal foldmethod=marker
+        " au filetype less,css setlocal foldmarker={,}
         au filetype less,css setlocal omnifunc=csscomplete#CompleteCSS
         au filetype less,css setlocal iskeyword+=-
 
