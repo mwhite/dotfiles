@@ -106,5 +106,7 @@ function mkcd
 
 [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]] && source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
 
+[[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
+
 PATH=$PATH:$HOME/dotfiles/bin
 export PATH
