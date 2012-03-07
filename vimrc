@@ -13,6 +13,7 @@
 " -----------------------------------
 
 filetype off
+set backspace=2
 set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
 
@@ -62,6 +63,7 @@ if exists('*vundle#rc')
 endif
 
 filetype on
+syntax on
 
 " -------------------
 " 2. General settings
