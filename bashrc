@@ -120,4 +120,5 @@ function mkcd
 [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
 
 PATH=$PATH:$HOME/dotfiles/bin
+PATH=$PATH:$HOME/.cabal/bin
 export PATH
