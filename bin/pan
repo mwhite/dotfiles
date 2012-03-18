@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-pan is a wrapper for the swiss army knife document processor pandoc.
+pan is a wrapper for the document processor pandoc (>=1.9).
 
 Use it like so:
 
@@ -64,19 +64,17 @@ def get_pandoc_args(filename):
 if __name__ == '__main__':
     try:
         infile = sys.argv[1]
-        passed_args = sys.argv[2:]
-        new_args = get_pandoc_args(os.path.abspath(infile))
-
-        if 'pdf' in new_args and not 'latex' in passed_args:
-            program = 'markdown2pdf'
-        else:
-            program = 'pandoc'
-
-        new_args = new_args.replace('-t pdf', '')
-
-        import shlex
-        subprocess.call([program, sys.argv[1]] + shlex.split(new_args) + passed_args)
     except IndexError:
         print "No file provided."
 
+    passed_args = sys.argv[2:]
+    new_args = get_pandoc_args(os.path.abspath(infile))
+
+    if '-t pdf' in new_args:
+        outfile = re.sub(r'^(.*)\..*', r'\1.pdf', infile)
+        new_args = new_args.replace('-t pdf', '')
+        new_args += ' -o {0}'.format(outfile)
+
+    import shlex
+    subprocess.call([PANDOC, sys.argv[1]] + shlex.split(new_args) + passed_args)
 

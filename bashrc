@@ -122,3 +122,5 @@ function mkcd
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
 export PATH
+
+PYTHONPATH=$HOME/.cabal/bin
