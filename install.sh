@@ -34,12 +34,21 @@ repos=(
     # Indicator applet clone of GNOME 2 system monitor panel applet
     ppa:indicator-multiload/stable-daily
 
+    # Elementary PPAs
+    ppa:elementary-os/daily
+    ppa:marlin-devls/marlin-daily
+
     # Official last.fm repository
     'deb http://apt.last.fm/ debian testing'
 );
 
 # Packages to install
 install=(
+    ## Elementary
+    elementary-theme
+    elementary-icon-theme
+    marlin marlin-plugin-dropbox
+
     ## Multimedia
     ubuntu-restricted-extras non-free-codecs w32codecs libdvdcss2   # from Medibuntu
     vlc gnome-media-player
@@ -76,8 +85,11 @@ install=(
     skype
     openssh-server
     ddclient
+    nautilus-dropbox
 
     ## Misc
+    synaptic
+    gdebi
     gconf-editor
     gnome-tweak-tool
     htop
@@ -142,4 +154,5 @@ sudo apt-get install $(join "${install[@]}") | sed '/already the newest version/
 sudo apt-get remove $(join "${remove[@]}") 
 sudo apt-get autoremove
 sudo apt-get dist-upgrade
+
 
