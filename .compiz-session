@@ -3,4 +3,6 @@
 gnome-settings-daemon &
 gnome-panel &
 nm-applet --sm-disable &
+dropbox start &
 indicator-multiload &
+
