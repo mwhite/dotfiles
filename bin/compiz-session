@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# http://www.webupd8.org/2012/02/how-to-create-standalone-compiz-session.html
+
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+    eval `dbus-launch --sh-syntax --exit-with-session`
+fi
+
+compiz --replace ccp & wmpid=$!
+sleep 1
+
+if [ -f ~/.compiz-session ]; then
+    source ~/.compiz-session &
+else
+    gnome-terminal &
+fi
+
+# Wait for WM
+wait $wmpid

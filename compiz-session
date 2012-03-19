@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gnome-settings-daemon &
+gnome-panel &
+nm-applet --sm-disable &
+indicator-multiload &
