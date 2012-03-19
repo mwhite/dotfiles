@@ -19,10 +19,10 @@ done
 
 sudo cp -f ~/dotfiles/bin/compiz-session /usr/local/bin/compiz-session
 
-ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/pmsrc ~/.pms/rc
-ln -sf ~/dotfiles/bashrc ~/.bashrc
-ln -sf ~/dotfiles/compiz-session ~/.compiz-session
+ln -sf ~/dotfiles/.bashrc ~/.bashrc
+ln -sf ~/dotfiles/.compiz-session ~/.compiz-session
 
 source ~/.bashrc
 
