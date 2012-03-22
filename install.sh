@@ -144,12 +144,10 @@ if [ ! -f /etc/apt/sources.list.d/medibuntu.list ]; then
         http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list > /dev/null
     sudo apt-get update > /dev/null
     sudo apt-get --yes --quiet --allow-unauthenticated install medibuntu-keyring > /dev/null
-    sudo apt-get update > /dev/null
-else
-    sudo apt-get update > /dev/null
 fi
 
 # Update packages
+sudo apt-get update > /dev/null
 sudo apt-get install $(join "${install[@]}") | sed '/already the newest version/d'
 sudo apt-get remove $(join "${remove[@]}") 
 sudo apt-get autoremove
