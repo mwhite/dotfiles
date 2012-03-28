@@ -36,9 +36,8 @@ repos=(
 
     # Elementary PPAs
     ppa:elementary-os/daily
-    ppa:marlin-devls/marlin-daily
+    ppa:marlin-devs/marlin-daily
 
-    # Official last.fm repository
     'deb http://apt.last.fm/ debian testing'
 );
 
@@ -105,12 +104,10 @@ install=(
     gnuplot
     scrot
     wordplay
-);
 
-# Packages to remove
-remove=(
-    #indicator-messages
-    #thunderbird
+    ## Packages to remove
+    #indicator-messages-
+    #thunderbird-
 );
 
 function join() {
@@ -137,6 +134,14 @@ if [[ ! $(sudo apt-key list | grep "last.fm") ]]; then
     wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add - > /dev/null
 fi
 
+# install mendeley
+if ! dpkg-query -W mendeleydesktop > /dev/null; then
+    echo "installing mendeley"
+    wget -q http://www.mendeley.com/repositories/ubuntu/stable/mendeleydesktop.key -O- | sudo apt-key add - > /dev/null
+    wget -q http://www.mendeley.com/repositories/ubuntu/stable/i386/mendeleydesktop-latest --output-document=/tmp/mendeley.deb
+    sudo dpkg -i /tmp/mendeley.deb
+fi
+
 # Add Medibuntu
 if [ ! -f /etc/apt/sources.list.d/medibuntu.list ]; then
     echo "adding medibuntu"
@@ -148,9 +153,8 @@ fi
 
 # Update packages
 sudo apt-get update > /dev/null
-sudo apt-get install $(join "${install[@]}") | sed '/already the newest version/d'
-sudo apt-get remove $(join "${remove[@]}") 
+sudo apt-get -y install $(join "${install[@]}") | sed '/already the newest version/d'
 sudo apt-get autoremove
-sudo apt-get dist-upgrade
+#sudo apt-get dist-upgrade
 
 
