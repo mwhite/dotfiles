@@ -4,7 +4,7 @@
 if [ ! -d ~/dotfiles ]; then
     if ! dpkg-query -W git; then
         echo "installing git"
-        sudo apt-get install -y git > /dev/null
+        sudo apt-get install -q git
     fi
 
     echo "cloning dotfiles repo"
@@ -61,9 +61,11 @@ install=(
     ## Office/Productivity
     pandoc
     texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+    bibclean
     abiword
     gnumeric
     qalculate
+    catdoc
 
     ## Development
     build-essential
@@ -147,14 +149,14 @@ if [ ! -f /etc/apt/sources.list.d/medibuntu.list ]; then
     echo "adding medibuntu"
     sudo -E wget -q --output-document=/etc/apt/sources.list.d/medibuntu.list \
         http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list > /dev/null
-    sudo apt-get update > /dev/null
-    sudo apt-get --yes --quiet --allow-unauthenticated install medibuntu-keyring > /dev/null
+    sudo apt-get -q update
+    sudo apt-get -q --allow-unauthenticated install medibuntu-keyring > /dev/null
 fi
 
 # Update packages
-sudo apt-get update > /dev/null
+sudo apt-get -q update
 sudo apt-get -y install $(join "${install[@]}") | sed '/already the newest version/d'
-sudo apt-get autoremove
+sudo apt-get -q autoremove
 #sudo apt-get dist-upgrade
 
 
