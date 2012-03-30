@@ -35,7 +35,7 @@ if exists('*vundle#rc')
     " (dependencies of snipmate")
     Bundle "MarcWeber/vim-addon-mw-utils.git"
     Bundle "tomtom/tlib_vim.git"
-    Bundle 'honza/vim-snippets'
+    Bundle 'honza/snipmate-snippets'
 
     Bundle 'xml.vim'
 
@@ -234,6 +234,11 @@ if has("autocmd")
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
         au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
+    augroup END
+
+    augroup ft_bib
+        au!
+        au filetype bib setlocal makeprg=bibclean\ %
     augroup END
 
     augroup ft_c
