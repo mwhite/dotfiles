@@ -70,7 +70,7 @@ install=(
     ## Development
     build-essential
     ddd
-    vim vim-gnome
+    vim vim-gnome exuberant-ctags
     git
     mercurial
     subversion
@@ -95,6 +95,7 @@ install=(
     gnome-tweak-tool
     htop
     ack-grep
+    pdftk
 
     nautilus-open-terminal
     compizconfig-settings-manager
