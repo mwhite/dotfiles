@@ -27,7 +27,6 @@ if exists('*vundle#rc')
     Bundle 'kien/tabman.vim'
     Bundle 'ap/vim-css-color'
     Bundle 'acustodioo/vim-enter-indent'
-    Bundle 'tpope/vim-fugitive'
     Bundle 'pangloss/vim-javascript'
     Bundle 'tpope/vim-markdown'
     Bundle 'mikewest/vimroom'
@@ -130,7 +129,7 @@ set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 " -----------
 
 set pastetoggle=<F2>
-map + :TagbarToggle<CR>
+map = :TagbarToggle<CR>
 map - :NERDTreeToggle<CR>
 
 map <Leader>v :so ~/.vimrc<CR>
@@ -192,6 +191,36 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap K <nop>
 " hash key
 inoremap # X<BS>#
+
+" From http://www.agillo.net/simple-vim-window-management/
+function! WinMove(key) 
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr()) "we havent moved
+        if (match(a:key,'[jk]')) "were we going up/down
+            wincmd v
+        else 
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
+map <leader>h  :call WinMove('h')<cr>
+map <leader>k  :call WinMove('k')<cr>
+map <leader>l  :call WinMove('l')<cr>
+map <leader>j  :call WinMove('j')<cr>
+map <leader>wc :wincmd q<cr>
+map <leader>wr <C-W>r
+map <leader>H  :wincmd H<cr>
+map <leader>K  :wincmd K<cr>
+map <leader>L  :wincmd L<cr>
+map <leader>J  :wincmd J<cr>
+nmap <left>    :3wincmd <<cr>
+nmap <right>   :3wincmd ><cr>
+nmap <up>      :3wincmd +<cr>
+nmap <down>    :3wincmd -<cr>
+
 
 " ---------------
 " 4. Autocommands
