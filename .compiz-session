@@ -5,4 +5,4 @@ gnome-panel &
 nm-applet --sm-disable &
 dropbox start &
 indicator-multiload &
-
+kupfer --no-splash &
