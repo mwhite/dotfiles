@@ -10,6 +10,8 @@ if [ ! -d ~/dotfiles ]; then
     echo "cloning dotfiles repo"
     mkdir -p ~/dotfiles ~/.pms
     git clone git@github.com:mwhite/dotfiles.git ~/dotfiles
+    cd ~/dotfiles
+    git submodule update --init
 fi
 
 cd ~/dotfiles/xsessions
