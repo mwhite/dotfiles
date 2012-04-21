@@ -1,49 +1,43 @@
-[screenshot]
-as_directory = /home/michael/Desktop
-
-[gnomecompat]
-as_run_command_terminal_key = F10
+[wallpaper]
+s0_bg_image = /home/michael/wallpaper.jpg;
+s0_bg_image_pos = 0;
+s0_bg_fill_type = 0;
+s0_bg_color1 = #000000ff;
+s0_bg_color2 = #000000ff;
 
 [core]
-as_active_plugins = core;ccp;move;resize;place;decoration;screenshot;gnomecompat;svg;text;put;imgjpeg;resizeinfo;mousepoll;png;vpswitch;grid;commands;regex;session;dbus;workarounds;neg;animation;snap;obs;wall;expo;fade;ezoom;scale;staticswitcher;scaleaddon;
-as_cursor_theme = DMZ-White
-as_cursor_size = 24
-as_autoraise = false
-as_autoraise_delay = 500
-as_maximize_window_key = Disabled
-as_toggle_window_maximized_key = <Alt>F10
-s0_hsize = 2
-s0_vsize = 2
+s0_active_plugins = core;composite;opengl;compiztoolbox;decor;vpswitch;snap;mousepoll;imgjpeg;resize;gnomecompat;extrawm;place;regex;grid;move;wallpaper;animation;imgpng;wall;put;expo;session;workarounds;ezoom;unitymtgrabhandles;staticswitcher;fade;scale;
 s0_outputs = 1680x1050+1280+0;1280x768+0+0;
+s0_toggle_window_maximized_key = <Alt>F10
 
-[expo]
-as_vp_distance = 0.750000
-as_hide_docks = true
-as_reflection = false
+[animation]
+s0_open_effects = animation:Zoom;animation:None;animation:Fade;
 
-[decoration]
-as_shadow_radius = 9.000000
-as_decoration_match = any & !(class=Kupfer.py)
+[wall]
+s0_slide_duration = 0.000000
+s0_edgeflip_move = true
+s0_edgeflip_dnd = true
 
 [put]
-as_put_viewport_left_key = <Control><Alt><Super>Left
-as_put_viewport_right_key = <Control><Alt><Super>Right
-as_put_viewport_up_key = <Control><Alt><Super>Up
-as_put_viewport_down_key = <Control><Alt><Super>Down
-as_put_left_key = Disabled
-as_put_right_key = Disabled
-as_put_top_key = Disabled
-as_put_bottom_key = Disabled
-as_put_topleft_key = Disabled
-as_put_topright_key = Disabled
-as_put_bottomleft_key = Disabled
-as_put_bottomright_key = Disabled
+s0_put_viewport_left_key = <Control><Primary><Alt><Super>Left
+s0_put_viewport_right_key = <Control><Primary><Alt><Super>Right
+s0_put_viewport_up_key = <Control><Primary><Alt><Super>Up
+s0_put_viewport_down_key = <Control><Primary><Alt><Super>Down
 s0_unfocus_window = true
 s0_speed = 5.000000
 
 [scale]
-as_initiate_all_key = <Shift><Alt>Up
 s0_speed = 5.000000
+
+[expo]
+s0_expo_key = <Super>e
+s0_x_offset = 0
+s0_y_offset = 0
+s0_vp_brightness = 60.000000
+
+[extrawm]
+s0_toggle_fullscreen_key = <Alt>F11
+s0_toggle_sticky_key = <Control><Primary><Alt>s
 
 [place]
 s0_mode = 1
@@ -52,23 +46,18 @@ s0_mode = 1
 s0_fullscreen_visual_bell = true
 
 [grid]
-as_put_center_key = <Control><Alt>j
-as_put_left_key = <Control><Alt>h
-as_put_right_key = <Control><Alt>k
-as_put_top_key = <Control><Alt>u
-as_put_bottom_key = <Control><Alt>m
-as_put_topleft_key = <Control><Alt>y
-as_put_topright_key = <Control><Alt>i
-as_put_bottomleft_key = <Control><Alt>n
-as_put_bottomright_key = <Control><Alt>comma
+s0_put_center_key = <Control><Primary><Alt>j
+s0_put_left_key = <Control><Primary><Alt>h
+s0_put_right_key = <Control><Primary><Alt>k
+s0_put_top_key = <Control><Primary><Alt>u
+s0_put_bottom_key = <Control><Primary><Alt>m
+s0_put_topleft_key = <Control><Primary><Alt>y
+s0_put_topright_key = <Control><Primary><Alt>i
+s0_put_bottomleft_key = <Control><Primary><Alt>n
+s0_put_bottomright_key = <Control><Primary><Alt>comma
 
-[extrawm]
-as_toggle_fullscreen_key = <Alt>F11
-
-[wall]
-as_preview_timeout = 0.000000
-as_preview_scale = 250
-as_slide_duration = 0.000000
-s0_edgeflip_move = true
-s0_edgeflip_dnd = true
+[ezoom]
+s0_zoom_in_button = <Super>Button4
+s0_zoom_out_button = <Super>Button5
+s0_scale_mouse = false
 
