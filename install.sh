@@ -6,7 +6,7 @@ if [ ! -d ~/dotfiles ]; then
         sudo apt-get install -q git
     fi
 
-    mkdir -p ~/dotfiles ~/.pms
+
     git clone git@github.com:mwhite/dotfiles.git ~/dotfiles
     cd ~/dotfiles && git submodule update --init
 fi
@@ -19,10 +19,14 @@ done
 sudo cp -f ~/dotfiles/bin/compiz-session /usr/local/bin/compiz-session
 sudo chmod 755 /usr/local/bin/compiz-session
 
-ln -sf ~/dotfiles/.vimrc ~/.vimrc
-ln -sf ~/dotfiles/pmsrc ~/.pms/rc
+mkdir -p ~/.pms ~/.mpd/playlists
+cd ~/.mpd && touch playlists mpd.db mpd.log sticker.sqlite
+
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
 ln -sf ~/dotfiles/.compiz-session ~/.compiz-session
+ln -sf ~/dotfiles/.mpdconf ~/.mpdconf
+ln -sf ~/dotfiles/pmsrc ~/.pms/rc
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
 
 source ~/.bashrc
 
