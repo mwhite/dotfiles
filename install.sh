@@ -2,16 +2,13 @@
 
 # clone and install config files
 if [ ! -d ~/dotfiles ]; then
-    if ! dpkg-query -W git; then
-        echo "installing git"
+    if ! dpkg-query -W git > /dev/null; then
         sudo apt-get install -q git
     fi
 
-    echo "cloning dotfiles repo"
     mkdir -p ~/dotfiles ~/.pms
     git clone git@github.com:mwhite/dotfiles.git ~/dotfiles
-    cd ~/dotfiles
-    git submodule update --init
+    cd ~/dotfiles && git submodule update --init
 fi
 
 cd ~/dotfiles/xsessions
@@ -45,11 +42,6 @@ repos=(
 
 # Packages to install
 install=(
-    ## Elementary
-    elementary-theme
-    elementary-icon-theme
-    marlin marlin-plugin-dropbox
-
     ## Multimedia
     ubuntu-restricted-extras non-free-codecs w32codecs libdvdcss2   # from Medibuntu
     vlc gnome-media-player
@@ -123,37 +115,34 @@ function join() {
 
 # enable all ubuntu repositories except cd-rom
 sudo sed -i "s/# deb http/deb http/g" /etc/apt/sources.list
+sudo sed -i "s/\ndeb-src/\r# deb-src/g" /etc/apt/sources.list
 
 # add apt repositories
 for r in "${repos[@]}"; do
     ppa=$(echo $r | sed -e 's/ppa://')
     if [[ ! $(sudo grep -r "$ppa" /etc/apt/) ]]; then 
-        echo "adding $r"
-        sudo add-apt-repository -y "$r" &> /dev/null
+        sudo add-apt-repository -y "$r"
     fi
 done
 
 # Add last.fm key
 if [[ ! $(sudo apt-key list | grep "last.fm") ]]; then
-    echo "adding last.fm key"
-    wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add - > /dev/null
+    wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add -
 fi
 
 # install mendeley
 if ! dpkg-query -W mendeleydesktop > /dev/null; then
-    echo "installing mendeley"
-    wget -q http://www.mendeley.com/repositories/ubuntu/stable/mendeleydesktop.key -O- | sudo apt-key add - > /dev/null
-    wget -q http://www.mendeley.com/repositories/ubuntu/stable/i386/mendeleydesktop-latest --output-document=/tmp/mendeley.deb
-    sudo dpkg -i /tmp/mendeley.deb
+    wget -q http://www.mendeley.com/repositories/ubuntu/stable/mendeleydesktop.key -O- | sudo apt-key add -
+    wget -q http://www.mendeley.com/repositories/ubuntu/stable/i386/mendeleydesktop-latest --output-document=mendeley.deb
+    sudo dpkg -i mendeley.deb
 fi
 
 # Add Medibuntu
 if [ ! -f /etc/apt/sources.list.d/medibuntu.list ]; then
-    echo "adding medibuntu"
     sudo -E wget -q --output-document=/etc/apt/sources.list.d/medibuntu.list \
-        http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list > /dev/null
+        http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list
     sudo apt-get -q update
-    sudo apt-get -q --allow-unauthenticated install medibuntu-keyring > /dev/null
+    sudo apt-get -q --allow-unauthenticated install medibuntu-keyring
 fi
 
 # Update packages
