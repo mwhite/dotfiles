@@ -17,6 +17,7 @@ for f in *; do
 done
 
 sudo cp -f ~/dotfiles/bin/compiz-session /usr/local/bin/compiz-session
+sudo chmod 755 /usr/local/bin/compiz-session
 
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/pmsrc ~/.pms/rc
