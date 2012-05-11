@@ -37,11 +37,10 @@ repos=(
 
     # Indicator applet clone of GNOME 2 system monitor panel applet
     ppa:indicator-multiload/stable-daily
+    ppa:bitcoin/bitcoin
 
-    # Elementary PPAs
-    ppa:elementary-os/daily
-    ppa:marlin-devs/marlin-daily
-
+    # patched compiz
+    ppa:ef/grid-cycling
     'deb http://apt.last.fm/ debian testing'
 );
 
@@ -95,6 +94,7 @@ install=(
     htop
     ack-grep
     pdftk
+    bitcoin-qt
 
     nautilus-open-terminal
     compizconfig-settings-manager

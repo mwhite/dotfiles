@@ -29,6 +29,7 @@ if exists('*vundle#rc')
     Bundle 'acustodioo/vim-enter-indent'
     Bundle 'pangloss/vim-javascript'
     Bundle 'tpope/vim-markdown'
+    Bundle 'juvenn/mustache.vim'
     Bundle 'mikewest/vimroom'
     Bundle 'garbas/vim-snipmate'
     " (dependencies of snipmate")
@@ -36,6 +37,7 @@ if exists('*vundle#rc')
     Bundle "tomtom/tlib_vim.git"
     Bundle 'honza/snipmate-snippets'
 
+    Bundle 'nvie/vim-flake8'
     Bundle 'xml.vim'
 
     Bundle 'godlygeek/csapprox'
@@ -129,7 +131,7 @@ set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 " -----------
 
 set pastetoggle=<F2>
-map = :TagbarToggle<CR>
+map + :TagbarToggle<CR>
 map - :NERDTreeToggle<CR>
 
 map <Leader>v :so ~/.vimrc<CR>
