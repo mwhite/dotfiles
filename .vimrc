@@ -1,16 +1,7 @@
 " mwhite's .vimrc, cobbled from various sources
-" =============================================
-"
-"   1. Vundle repos and plugin settings
-"   2. General settings
-"   3. Mappings
-"   4. Autocommands
-"
-" =============================================
 
-" -----------------------------------
-" 1. Vundle repos and plugin settings
-" -----------------------------------
+" Plugins
+" =======
 
 filetype off
 set backspace=2
@@ -19,66 +10,58 @@ silent! call vundle#rc()
 
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'jQuery'
-    Bundle 'gregsexton/MatchTag'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'kien/tabman.vim'
-    Bundle 'ap/vim-css-color'
-    Bundle 'acustodioo/vim-enter-indent'
-    Bundle 'pangloss/vim-javascript'
-    Bundle 'tpope/vim-markdown'
-    Bundle 'juvenn/mustache.vim'
-    Bundle 'mikewest/vimroom'
-    Bundle 'garbas/vim-snipmate'
-    " (dependencies of snipmate")
-    Bundle "MarcWeber/vim-addon-mw-utils.git"
-    Bundle "tomtom/tlib_vim.git"
-    Bundle 'honza/snipmate-snippets'
-
-    Bundle 'nvie/vim-flake8'
-    Bundle 'xml.vim'
-
+    Bundle 'wgibbs/vim-irblack'
     Bundle 'godlygeek/csapprox'
     let g:CSApprox_verbose_level = 0
 
-    Bundle 'molokai'
-    Bundle 'wgibbs/vim-irblack'
-
+    Bundle 'mikewest/vimroom'
     Bundle 'majutsushi/tagbar'
-    let g:tagbar_singleclick = 1
+    Bundle 'scrooloose/nerdcommenter'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'jistr/vim-nerdtree-tabs'
 
+    Bundle 'acustodioo/vim-enter-indent'
+    Bundle 'gregsexton/MatchTag'
+    Bundle 'garbas/vim-snipmate'
     Bundle 'Raimondi/delimitMate'
     let delimitMate_autoclose = 1
     let delimitMate_expand_cr = 1
     let delimitMate_expand_space = 1
     let delimitMate_balance_matchpairs = 1
 
+    Bundle 'ap/vim-css-color'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'tpope/vim-markdown'
+    Bundle 'juvenn/mustache.vim'
     Bundle 'vim-pandoc/vim-pandoc'
-    let g:snips_author = "Michael White <m@mwhite.info>"
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
+    Bundle 'nvie/vim-flake8'
+    Bundle 'xml.vim'
 
-    " Bundle 'Soares/vim-smarttab'  " buggy/several conflicts
+    " dependencies of snipmate
+    Bundle "MarcWeber/vim-addon-mw-utils.git"
+    Bundle "tomtom/tlib_vim.git"
+    Bundle 'honza/snipmate-snippets'
+
 endif
 
 filetype on
 syntax on
 
-" -------------------
-" 2. General settings
-" -------------------
+" Settings
+" ========
 
 set t_Co=256
 colorscheme ir_black
 
 set nocompatible
+filetype plugin on
+filetype indent on
 set mouse=a
 set wrap
 set number
 set cursorline
-
 set splitbelow
 set splitright
 
@@ -91,8 +74,6 @@ set switchbuf=useopen,usetab
 " write files you opened without the necessary permissions with :w!!
 cmap w!! %!sudo tee > /dev/null %
 
-filetype plugin on
-filetype indent on
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4  " filetype-specific settings below
 set autoindent
 set autowrite
@@ -126,67 +107,92 @@ vnoremap / /\v
 
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 
-" -----------
-" 3. Mappings
-" -----------
+" Mappings
+" ========
+
+nnoremap ; :
+let mapleader = ","
+nmap \ ,
 
 set pastetoggle=<F2>
 map + :TagbarToggle<CR>
-map - :NERDTreeToggle<CR>
-
-map <Leader>v :so ~/.vimrc<CR>
-map <Leader>hl :set hlsearch!<CR>
-map <Leader>w :set wrap!<CR>
-
-" Merge consecutive empty lines and clean up trailing whitespace
-map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
-
-noremap <C-M> :make<CR><CR>
-nnoremap :W :make<CR><CR>
+map - :NERDTreeTabsToggle<CR>
 
 map H ^
 map L $
-nnoremap ; :
-
-" Scroll viewport with cursor
-map <c-j> j<c-e>
-map <c-k> k<c-y>
 
 " Scroll within wrapped lines
 nnoremap j gj
 nnoremap k gk
 
-" Copy and paste to/from OS clipboard
-noremap <leader>yy "+y
-noremap <leader>pp "+gP
+" Scroll viewport with cursor
+map <c-j> j<c-e>
+map <c-k> k<c-y>
 
-" move a line of text using ALT+[jk], indent with ALT+[hl]
-nnoremap <A-j> :m+<CR>==
-nnoremap <A-k> :m-2<CR>==
-nnoremap <A-h> <<
-nnoremap <A-l> >>
-inoremap <A-j> <Esc>:m+<CR>==gi
-inoremap <A-k> <Esc>:m-2<CR>==gi
-inoremap <A-h> <Esc><<]a
-inoremap <A-l> <Esc>>>]a
-vnoremap <A-j> :m'>+<CR>gv=gv
-vnoremap <A-k> :m-2<CR>gv=gv
-vnoremap <A-h> <gv
-vnoremap <A-l> >gv
-
+" Switch between tabs
 map <c-l> :tabn<CR>
 imap <c-l> <ESC>:tabn<CR>
 map <c-h> :tabp<CR>
 imap <c-h> <ESC>:tabp<CR>
 
-map <c-t> :tabnew<CR>i
-imap <c-t> <ESC>:tabnew<CR>i
+" Tab management
+map <Leader>t :tabnew<CR>
+map <Leader>q :q<CR>
 
-" Map double-tap Esc to clear search highlights
+" Reload vimrc
+map <Leader>v :so ~/.vimrc<CR>
+
+" Toggle search highlighting
+map <Leader>hl :set hlsearch!<CR>
+
+" <Esc><Esc> to clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
+" Toggle display wrap
+map <Leader>w :set wrap!<CR>
+
+" Merge consecutive empty lines and clean up trailing whitespace
+map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
+
+" Copy and paste to/from OS clipboard
+noremap <Leader>yy "+y
+noremap <Leader>pp "+gP
+
+" From http://www.agillo.net/simple-vim-window-management/
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr()) "we havent moved
+        if (match(a:key,'[jk]')) "were we going up/down
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
+" Switch to or create new windows in the given direction
+map <Leader>h  :call WinMove('h')<cr>
+map <Leader>k  :call WinMove('k')<cr>
+map <Leader>l  :call WinMove('l')<cr>
+map <Leader>j  :call WinMove('j')<cr>
+map <Leader>wc :wincmd q<cr>
+map <Leader>wr <C-W>r
+
+" Move current window to the given edge of the frame
+map <Leader>H  :wincmd H<cr>
+map <Leader>K  :wincmd K<cr>
+map <Leader>L  :wincmd L<cr>
+map <Leader>J  :wincmd J<cr>
+
+" Resize current window
+nmap <left>    :3wincmd <<cr>
+nmap <right>   :3wincmd ><cr>
+nmap <up>      :3wincmd +<cr>
+nmap <down>    :3wincmd -<cr>
+
 " Disable useless keys
-" help key
 noremap <F1> :set invfullscreen<CR>
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 " manual key
@@ -194,43 +200,15 @@ nnoremap K <nop>
 " hash key
 inoremap # X<BS>#
 
-" From http://www.agillo.net/simple-vim-window-management/
-function! WinMove(key) 
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr()) "we havent moved
-        if (match(a:key,'[jk]')) "were we going up/down
-            wincmd v
-        else 
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfunction
-
-map <leader>h  :call WinMove('h')<cr>
-map <leader>k  :call WinMove('k')<cr>
-map <leader>l  :call WinMove('l')<cr>
-map <leader>j  :call WinMove('j')<cr>
-map <leader>wc :wincmd q<cr>
-map <leader>wr <C-W>r
-map <leader>H  :wincmd H<cr>
-map <leader>K  :wincmd K<cr>
-map <leader>L  :wincmd L<cr>
-map <leader>J  :wincmd J<cr>
-nmap <left>    :3wincmd <<cr>
-nmap <right>   :3wincmd ><cr>
-nmap <up>      :3wincmd +<cr>
-nmap <down>    :3wincmd -<cr>
-
-
-" ---------------
-" 4. Autocommands
-" ---------------
+" Autocommands
+" ============
 
 if has("autocmd")
     augroup general
         au!
+
+        " Change to current directory
+        au BufEnter * lcd %:p:h
 
         " Highlight cursorline only in the active window
         au WinEnter * setlocal cursorline
@@ -239,18 +217,10 @@ if has("autocmd")
         " Remember cursor position
         au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-        " Change to current directory
-        au BufEnter * lcd %:p:h
-
-        " au filetype php,ruby,c,cpp,python,javascript,java nested TagbarOpen
-
         " Always show line numbers, but only in current window
         au WinEnter * if &modifiable | setlocal number | endif
         au WinLeave * setlocal nonumber
 
-        " Automatically resize vertical splits
-        " au WinEnter * :set winfixheight
-        " au WinEnter * :wincmd =
     augroup END
 
     augroup tab_settings
@@ -287,7 +257,7 @@ if has("autocmd")
         au filetype less,css setlocal iskeyword+=-
 
         " Use <Leader>S to sort properties by name
-        au BufNewFile,BufRead *.less,*.css nnoremap <buffer> <localleader>S?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+        au BufNewFile,BufRead *.less,*.css nnoremap <buffer> <localLeader>S?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
 
         " Make {<CR> insert a pair of brackets with the cursor positioned
         " inside of them AND the following code doesn't get unfolded
