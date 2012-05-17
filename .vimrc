@@ -95,11 +95,15 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc
 
-" Backups
 set backupdir=~/.vim/tmp/backup//
 set directory=~/.vim/tmp/swap//
 set backup
 set backupskip=/tmp/*
+
+if has("persistent_undo")
+    set undodir=~/.vim/undodir
+    set undofile
+endif
 
 " Use sane regexes
 nnoremap / /\v
@@ -117,9 +121,6 @@ nmap \ ,
 set pastetoggle=<F2>
 map + :TagbarToggle<CR>
 map - :NERDTreeTabsToggle<CR>
-
-map H ^
-map L $
 
 " Scroll within wrapped lines
 nnoremap j gj
@@ -217,9 +218,10 @@ if has("autocmd")
         " Remember cursor position
         au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-        " Always show line numbers, but only in current window
-        au WinEnter * if &modifiable | setlocal number | endif
-        au WinLeave * setlocal nonumber
+        " Leave insert mode after 15 seconds without input
+        au CursorHoldI * stopinsert
+        au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+        au InsertLeave * let &updatetime=updaterestore
 
     augroup END
 
@@ -228,7 +230,7 @@ if has("autocmd")
         au filetype c,cpp                     setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=79
         au filetype sh,csh,tcsh,zsh           setlocal ts=4 sts=4 sw=4 et
-        au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et
+        au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
         au filetype text,txt,markdown,pandoc  setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype html,xhtml,xml            setlocal ts=2 sts=2 sw=2 noet
