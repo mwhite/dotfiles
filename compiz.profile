@@ -7,6 +7,7 @@ s0_bg_color2 = #000000ff;
 
 [core]
 s0_active_plugins = core;composite;opengl;compiztoolbox;decor;snap;mousepoll;imgjpeg;scale;resize;gnomecompat;extrawm;regex;grid;move;wallpaper;imgpng;wall;put;expo;ezoom;staticswitcher;
+s0_focus_prevention_match = !(class=Polkit-gnome-authentication-agent-1) | class=Gnome-panel
 s0_show_desktop_key = <Control><Primary><Alt>d
 s0_toggle_window_maximized_key = <Alt>F10
 s0_number_of_desktops = 4
