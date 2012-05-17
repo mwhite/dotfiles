@@ -19,10 +19,13 @@ done
 sudo cp -f ~/dotfiles/bin/compiz-session /usr/local/bin/compiz-session
 sudo chmod 755 /usr/local/bin/compiz-session
 
-mkdir -p ~/.pms ~/.mpd/playlists
+mkdir -p ~/.pms ~/.mpd/playlists \
+    ~/.vim/tmp/backup ~/.vim/tmp/swap ~/.vim/undodir
+
 cd ~/.mpd && touch playlists mpd.db mpd.log sticker.sqlite
 
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
+ln -sf ~/dotfiles/.bash_aliases ~/.bash_aliases
 ln -sf ~/dotfiles/.compiz-session ~/.compiz-session
 ln -sf ~/dotfiles/.mpdconf ~/.mpdconf
 ln -sf ~/dotfiles/pmsrc ~/.pms/rc
