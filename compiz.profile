@@ -51,6 +51,13 @@ s0_put_topleft_key = <Control><Primary><Alt>y
 s0_put_topright_key = <Control><Primary><Alt>i
 s0_put_bottomleft_key = <Control><Primary><Alt>n
 s0_put_bottomright_key = <Control><Primary><Alt>comma
+s0_top_left_corner_action = 0
+s0_top_edge_action = 0
+s0_top_right_corner_action = 0
+s0_left_edge_action = 0
+s0_right_edge_action = 0
+s0_bottom_left_corner_action = 0
+s0_bottom_right_corner_action = 0
 
 [move]
 s0_opacity = 70
