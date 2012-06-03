@@ -6,3 +6,8 @@ nm-applet --sm-disable &
 dropbox start &
 indicator-multiload &
 kupfer --no-splash &
+mpd &
+
+if [ $(ps aux | grep -c mpdscribble) = '1' ]; then
+    mpdscribble &
+fi
