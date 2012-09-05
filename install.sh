@@ -92,6 +92,7 @@ install=(
     htop
     ack-grep
     nautilus-open-terminal
+    qt4-qtconfig
 );
 
 function join() {
