@@ -9,40 +9,90 @@ set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
 
 if exists('*vundle#rc')
+    map - :NERDTreeTabsToggle<CR>
+    map + :TagbarToggle<CR>
+
+    " The best Vim plugin manager
     Bundle 'gmarik/vundle'
+
+    " The best dark colorscheme
     Bundle 'wgibbs/vim-irblack'
+
+    " Make high-color colorschemes look better on low-color terminals
     Bundle 'godlygeek/csapprox'
     let g:CSApprox_verbose_level = 0
 
-    Bundle 'mikewest/vimroom'
-    Bundle 'majutsushi/tagbar'
+    " Color CSS colors with themselves
+    Bundle 'ap/vim-css-color'
+
+    " Quickly find files
+    Bundle 'kien/ctrlp.vim'
+
+    " Git goodness
+    Bundle 'tpope/vim-fugitive'
+
+    " Syntax and style checking
+    Bundle 'scrooloose/syntastic'
+    let g:syntastic_check_on_open=1
+
+    " Highlight matching HTML tags
+    Bundle 'gregsexton/MatchTag'
+
+    " Easy comment handling
     Bundle 'scrooloose/nerdcommenter'
+
+    " Display a sidebar with directory structure
     Bundle 'scrooloose/nerdtree'
+    let NERDTreeIgnore=[
+        \ '\~$',
+        \ '\.pyc$',
+        \ ]
+
+    " Synchronize NERDTree across windows
     Bundle 'jistr/vim-nerdtree-tabs'
 
-    Bundle 'acustodioo/vim-enter-indent'
-    Bundle 'gregsexton/MatchTag'
+    " Awesome snippets
     Bundle 'garbas/vim-snipmate'
+    Bundle 'honza/snipmate-snippets'
+    Bundle "MarcWeber/vim-addon-mw-utils.git"
+    Bundle "tomtom/tlib_vim.git"
+
+    " Do code completion with <tab>
+    Bundle 'ervandew/supertab'
+    let g:SuperTabDefaultCompletionType = "context"
+
+    " Display a sidebar with class outline
+    Bundle 'majutsushi/tagbar'
+    let g:tagbar_singleclick = 1
+
+    " Automatically insert closing delimiters
     Bundle 'Raimondi/delimitMate'
     let delimitMate_autoclose = 1
     let delimitMate_expand_cr = 1
-    let delimitMate_expand_space = 1
+    let delimitMate_expand_space = 0
     let delimitMate_balance_matchpairs = 1
 
-    Bundle 'ap/vim-css-color'
+    " Distraction-free writing
+    " Bundle 'mikewest/vimroom'
+
+    """ Language-specific
+
     Bundle 'pangloss/vim-javascript'
     Bundle 'tpope/vim-markdown'
     Bundle 'juvenn/mustache.vim'
+
+    " Pandoc goodies, including pandoc extended Markdown syntax support
     Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
-    Bundle 'nvie/vim-flake8'
-    Bundle 'xml.vim'
 
-    " dependencies of snipmate
-    Bundle "MarcWeber/vim-addon-mw-utils.git"
-    Bundle "tomtom/tlib_vim.git"
-    Bundle 'honza/snipmate-snippets'
+    " Python completion (rope); syntax (pep8, pyflakes, mccabe) -- duplicates
+    " syntastic functionality; documentation
+    Bundle 'klen/python-mode'
+    let g:pymode_rope_map_space = 0
+    let g:pymode_folding = 0
+    let g:pymode_lint = 0
+    let g:pymode_lint_cwindow = 0
 
 endif
 
@@ -119,8 +169,9 @@ let mapleader = ","
 nmap \ ,
 
 set pastetoggle=<F2>
-map + :TagbarToggle<CR>
-map - :NERDTreeTabsToggle<CR>
+
+" wincmd (e.g. s, v, h, H)
+map <Leader>w <C-W>
 
 " Scroll within wrapped lines
 nnoremap j gj
@@ -137,7 +188,7 @@ map <c-h> :tabp<CR>
 imap <c-h> <ESC>:tabp<CR>
 
 " Tab management
-map <Leader>t :tabnew<CR>
+map <Leader>t :tabnew<CR>:edit<Space>
 map <Leader>q :q<CR>
 
 " Reload vimrc
@@ -150,7 +201,7 @@ map <Leader>hl :set hlsearch!<CR>
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " Toggle display wrap
-map <Leader>w :set wrap!<CR>
+map <Leader>tw :setlocal wrap!<CR>
 
 " Merge consecutive empty lines and clean up trailing whitespace
 map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
@@ -158,34 +209,6 @@ map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
 " Copy and paste to/from OS clipboard
 noremap <Leader>yy "+y
 noremap <Leader>pp "+gP
-
-" From http://www.agillo.net/simple-vim-window-management/
-function! WinMove(key)
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr()) "we havent moved
-        if (match(a:key,'[jk]')) "were we going up/down
-            wincmd v
-        else
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfunction
-
-" Switch to or create new windows in the given direction
-map <Leader>h  :call WinMove('h')<cr>
-map <Leader>k  :call WinMove('k')<cr>
-map <Leader>l  :call WinMove('l')<cr>
-map <Leader>j  :call WinMove('j')<cr>
-map <Leader>wc :wincmd q<cr>
-map <Leader>wr <C-W>r
-
-" Move current window to the given edge of the frame
-map <Leader>H  :wincmd H<cr>
-map <Leader>K  :wincmd K<cr>
-map <Leader>L  :wincmd L<cr>
-map <Leader>J  :wincmd J<cr>
 
 " Resize current window
 nmap <left>    :3wincmd <<cr>
@@ -280,8 +303,6 @@ if has("autocmd")
 
     augroup ft_java
         au!
-        au filetype java setlocal foldmethod=marker
-        au filetype java setlocal foldmarker={,}
         au filetype java setlocal makeprg=javac %
     augroup END
 
@@ -289,8 +310,6 @@ if has("autocmd")
         au!
         au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
 
-        au filetype javascript setlocal foldmethod=marker
-        au filetype javascript setlocal foldmarker={,}
     augroup END
 
     augroup ft_markdown
@@ -309,12 +328,7 @@ if has("autocmd")
     augroup END
 
     augroup ft_python
-        au!
-    augroup END
-
-    augroup ft_ruby
-        au!
-        au filetype ruby setlocal foldmethod=syntax
+        au! filetype python setlocal formatoptions+=t
     augroup END
 
     augroup ft_tex
