@@ -26,11 +26,16 @@ cd ~/.mpd && touch playlists mpd.db mpd.log sticker.sqlite
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
 ln -sf ~/dotfiles/.bash_aliases ~/.bash_aliases
 ln -sf ~/dotfiles/.compiz-session ~/.compiz-session
+ln -sf ~/dotfiles/.gitignore ~/.gitignore
 ln -sf ~/dotfiles/.mpdconf ~/.mpdconf
 ln -sf ~/dotfiles/pmsrc ~/.pms/rc
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 
 source ~/.bashrc
+
+git config --global user.name "$(getent passwd $USER | cut -d: -f5 | cut -d, -f1)"
+git config --global color.ui true
+git config --global core.excludesfile ~/.gitignore
 
 # A list of repos that can be added with add-apt-repository
 repos=(
@@ -134,4 +139,3 @@ fi
 sudo apt-get -y --force-yes install $(join "${install[@]}") | sed '/already the newest version/d'
 #sudo apt-get dist-upgrade
 sudo apt-get -y autoremove
-
