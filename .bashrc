@@ -3,6 +3,17 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+PATH=$PATH:$HOME/dotfiles/bin
+PATH=$PATH:$HOME/.cabal/bin
+export PATH
+
+PYTHONPATH=$HOME/.cabal/bin
+
+mkcd() {
+    dir="$*";
+    mkdir -p "$dir" && cd "$dir";
+}
+
 # force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
 HISTSIZE=2048
@@ -30,9 +41,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
@@ -47,18 +55,18 @@ if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
     source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
 fi
 
-[[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
+if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
+    [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
+fi
 
-PATH=$PATH:$HOME/dotfiles/bin
-PATH=$PATH:$HOME/.cabal/bin
-export PATH
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
-PYTHONPATH=$HOME/.cabal/bin
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
 
-mkcd() {
-    dir="$*";
-    mkdir -p "$dir" && cd "$dir";
-}
-
-
-
+if [ -f ~/.bash_private ]; then
+    source ~/.bash_private
+fi
