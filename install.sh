@@ -6,9 +6,8 @@ if [ ! -d ~/dotfiles ]; then
         sudo apt-get install -q git
     fi
 
-
     git clone git@github.com:mwhite/dotfiles.git ~/dotfiles
-    cd ~/dotfiles && git submodule update --init
+    cd ~/dotfiles && git submodule update --init --recursive
 fi
 
 cd ~/dotfiles/xsessions
@@ -40,79 +39,54 @@ repos=(
 
     # Indicator applet clone of GNOME 2 system monitor panel applet
     ppa:indicator-multiload/stable-daily
-    ppa:bitcoin/bitcoin
 
-    # patched compiz
-    ppa:ef/grid-cycling
+    'deb http://linux.dropbox.com/ubuntu precise main'
+
     'deb http://apt.last.fm/ debian testing'
 );
 
 # Packages to install
 install=(
+    ## Essentials
+    kupfer
+    vim
+    dropbox
+    gnome-tweak-tool
+    compizconfig-settings-manager
+    compiz-plugins-extra
+    indicator-multiload
+    indicator-applet-complete
+
     ## Multimedia
     ubuntu-restricted-extras non-free-codecs w32codecs libdvdcss2   # from Medibuntu
-    vlc gnome-media-player
-    mpd mpdscribble pms ario sonata
+    vlc
+    mpd mpdscribble pms ario
     lastfm
-    picard
     cheese
-    gtkpod
-    gimp
 
     ## Office/Productivity
     pandoc
-    texlive-latex-base texlive-latex-extra texlive-fonts-recommended
-    bibclean
+    pdftk
     abiword
     gnumeric
     qalculate
     catdoc
-
-    ## Development
-    build-essential
-    ddd
-    vim vim-gnome exuberant-ctags
-    git
-    mercurial
-    subversion
-    bzr
-    geany geany-plugins
 
     ## Internet
     curl
     chromium-browser
     midori
     mozplugger mozilla-plugin-vlc
-    pidgin pidgin-facebookchat pidgin-skype pidgin-otr pidgin-plugin-pack
+    pidgin pidgin-skype pidgin-otr pidgin-plugin-pack
     skype
     openssh-server
-    ddclient
-    nautilus-dropbox
 
     ## Misc
-    synaptic
-    gdebi
-    gconf-editor
-    gnome-tweak-tool
+    synaptic gdebi
+    gconf-editor dconf-tools
     htop
     ack-grep
-    pdftk
-    bitcoin-qt
-
     nautilus-open-terminal
-    compizconfig-settings-manager
-    compiz-plugins-extra
-    kupfer
-    indicator-multiload
-    indicator-applet-complete
-    dconf-tools
-    gnuplot
-    scrot
-    wordplay
-
-    ## Packages to remove
-    #indicator-messages-
-    #thunderbird-
 );
 
 function join() {
@@ -125,7 +99,7 @@ function join() {
 sudo sed -i "s/# deb http/deb http/g" /etc/apt/sources.list
 sudo sed -i "s/\ndeb-src/\r# deb-src/g" /etc/apt/sources.list
 
-# add apt repositories
+# add repos
 for r in "${repos[@]}"; do
     ppa=$(echo $r | sed -e 's/ppa://')
     if [[ ! $(sudo grep -r "$ppa" /etc/apt/) ]]; then 
@@ -133,30 +107,31 @@ for r in "${repos[@]}"; do
     fi
 done
 
-# Add last.fm key
+# add keys
+if [[ ! $(sudo apt-key list | grep "dropbox") ]]; then
+    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
+fi
+
+if [[ ! $(sudo apt-key list | grep "google") ]]; then
+    wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub -O- | sudo apt-key add -
+fi
+
 if [[ ! $(sudo apt-key list | grep "last.fm") ]]; then
     wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add -
 fi
 
-# install mendeley
-if ! dpkg-query -W mendeleydesktop > /dev/null; then
-    wget -q http://www.mendeley.com/repositories/ubuntu/stable/mendeleydesktop.key -O- | sudo apt-key add -
-    wget -q http://www.mendeley.com/repositories/ubuntu/stable/i386/mendeleydesktop-latest --output-document=mendeley.deb
-    sudo dpkg -i mendeley.deb
-fi
-
-# Add Medibuntu
-if [ ! -f /etc/apt/sources.list.d/medibuntu.list ]; then
+# add Medibuntu and update package list
+if [[ ! $(dpkg -s medibuntu-keyring > /dev/null 2>&1) ]]; then
     sudo -E wget -q --output-document=/etc/apt/sources.list.d/medibuntu.list \
         http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list
     sudo apt-get -q update
     sudo apt-get -q --allow-unauthenticated install medibuntu-keyring
+else
+    sudo apt-get -q update
 fi
 
-# Update packages
-sudo apt-get -q update
-sudo apt-get -y install $(join "${install[@]}") | sed '/already the newest version/d'
-sudo apt-get -q autoremove
+# update packages
+sudo apt-get -y --force-yes install $(join "${install[@]}") | sed '/already the newest version/d'
 #sudo apt-get dist-upgrade
-
+sudo apt-get -y autoremove
 
