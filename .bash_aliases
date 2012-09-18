@@ -1,3 +1,5 @@
+alias gvim='UBUNTU_MENUPROXY= gvim'
+
 
 alias ls='ls -h --ignore=*.pyc --color=auto --group-directories-first'
 alias dir='dir --color=auto'

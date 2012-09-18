@@ -1,16 +1,18 @@
 " mwhite's .vimrc, cobbled from various sources
 
-" Plugins
-" =======
-
 filetype off
 set backspace=2
 set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
 
+nnoremap ; :
+let mapleader = ","
+nmap \ ,
+
+" Plugins
+" =======
+
 if exists('*vundle#rc')
-    map - :NERDTreeTabsToggle<CR>
-    map + :TagbarToggle<CR>
 
     " The best Vim plugin manager
     Bundle 'gmarik/vundle'
@@ -30,6 +32,8 @@ if exists('*vundle#rc')
 
     " Git goodness
     Bundle 'tpope/vim-fugitive'
+
+    Bundle 'Lokaltog/vim-powerline'
 
     " Syntax and style checking
     Bundle 'scrooloose/syntastic'
@@ -65,6 +69,8 @@ if exists('*vundle#rc')
     Bundle 'majutsushi/tagbar'
     let g:tagbar_singleclick = 1
 
+    Bundle 'jmcantrell/vim-virtualenv'
+
     " Automatically insert closing delimiters
     Bundle 'Raimondi/delimitMate'
     let delimitMate_autoclose = 1
@@ -89,6 +95,7 @@ if exists('*vundle#rc')
     " Python completion (rope); syntax (pep8, pyflakes, mccabe) -- duplicates
     " syntastic functionality; documentation
     Bundle 'klen/python-mode'
+    let g:pymode_utils_whitespaces = 0
     let g:pymode_rope_map_space = 0
     let g:pymode_folding = 0
     let g:pymode_lint = 0
@@ -99,8 +106,19 @@ endif
 filetype on
 syntax on
 
+map - :NERDTreeTabsToggle<CR>
+map + :TagbarToggle<CR>
+
+map <leader>gb :Gblame<CR>
+
 " Settings
 " ========
+
+if has("gui_running")
+    " Hide toolbar
+    set guioptions-=T
+
+endif
 
 set t_Co=256
 colorscheme ir_black
@@ -164,9 +182,6 @@ set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 " Mappings
 " ========
 
-nnoremap ; :
-let mapleader = ","
-nmap \ ,
 
 set pastetoggle=<F2>
 

@@ -33,9 +33,11 @@ from linecache import getline
 PANDOC = 'pandoc'
 TEMPLATE_DIR = os.environ['HOME'] + '/dotfiles/pandoc/pandoc-templates/'
 
+
 def match_file_ending(filename, pattern):
     """Match filename on *.pattern or *.pattern.ext"""
     return re.search(r'{0}(\.[^\./]+)?$'.format(pattern), filename)
+
 
 def get_pandoc_args(filename):
     def line(n):
