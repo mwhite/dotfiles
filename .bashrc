@@ -59,6 +59,10 @@ if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
     [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
 fi
 
+if [[ -f "$HOME/dotfiles/bash/bashmarks/bashmarks.sh" ]]; then
+    source "$HOME/dotfiles/bash/bashmarks/bashmarks.sh"
+fi
+
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
