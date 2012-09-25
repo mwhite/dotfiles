@@ -182,7 +182,6 @@ set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 " Mappings
 " ========
 
-
 set pastetoggle=<F2>
 
 " wincmd (e.g. s, v, h, H)

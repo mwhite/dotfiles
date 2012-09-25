@@ -8,6 +8,8 @@ if [ ! -d ~/dotfiles ]; then
 
     git clone git@github.com:mwhite/dotfiles.git ~/dotfiles
     cd ~/dotfiles && git submodule update --init --recursive
+
+    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 fi
 
 cd ~/dotfiles/xsessions
@@ -54,7 +56,7 @@ repos=(
 install=(
     ## Essentials
     kupfer
-    vim
+    vim-gnome vim-gtk exuberant-ctags
     dropbox
     gnome-tweak-tool
     compizconfig-settings-manager
