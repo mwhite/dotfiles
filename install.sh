@@ -112,7 +112,7 @@ sudo sed -i "s/\ndeb-src/\r# deb-src/g" /etc/apt/sources.list
 
 # add repos
 for r in "${repos[@]}"; do
-    Ppa=$(echo $r | sed -e 's/ppa://')
+    ppa=$(echo $r | sed -e 's/ppa://')
     if [[ ! $(sudo grep -r "$ppa" /etc/apt/) ]]; then 
         sudo add-apt-repository -y "$r"
     fi
@@ -143,5 +143,6 @@ fi
 
 # update packages
 sudo apt-get -y --force-yes install $(join "${install[@]}") | sed '/already the newest version/d'
+sudo apt-get -y --force-yes upgrade
 #sudo apt-get dist-upgrade
 sudo apt-get -y autoremove
