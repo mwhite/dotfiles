@@ -46,7 +46,10 @@ repos=(
 
     # Indicator applet clone of GNOME 2 system monitor panel applet
     ppa:indicator-multiload/stable-daily
-
+   
+    # compiz-plugins-main with sane grid plugin behavior 
+    ppa:ef/grid-cycling
+    
     'deb http://linux.dropbox.com/ubuntu precise main'
 
     'deb http://apt.last.fm/ debian testing'
@@ -109,7 +112,7 @@ sudo sed -i "s/\ndeb-src/\r# deb-src/g" /etc/apt/sources.list
 
 # add repos
 for r in "${repos[@]}"; do
-    ppa=$(echo $r | sed -e 's/ppa://')
+    Ppa=$(echo $r | sed -e 's/ppa://')
     if [[ ! $(sudo grep -r "$ppa" /etc/apt/) ]]; then 
         sudo add-apt-repository -y "$r"
     fi
