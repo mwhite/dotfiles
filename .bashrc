@@ -67,6 +67,10 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+if [[ -f "$HOME/dotfiles/bash/django_bash_completion" ]]; then
+    source "$HOME/dotfiles/bash/django_bash_completion"
+fi
+
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
