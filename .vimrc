@@ -29,6 +29,8 @@ if exists('*vundle#rc')
 
     " Quickly find files
     Bundle 'kien/ctrlp.vim'
+    " Search root git dir, not submodule
+    let g:ctrlp_root_markers= ['.git/']
 
     " Git goodness
     Bundle 'tpope/vim-fugitive'
@@ -68,6 +70,10 @@ if exists('*vundle#rc')
     " Do code completion with <tab>
     Bundle 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = "context"
+
+    
+    Bundle 'tpope/vim-surround'
+
 
     " Display a sidebar with class outline
     Bundle 'majutsushi/tagbar'
@@ -114,6 +120,9 @@ map - :NERDTreeTabsToggle<CR>
 map + :TagbarToggle<CR>
 
 map <leader>gb :Gblame<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gh :Gbrowser<CR>
+map <leader>gs :Gstatus<CR>
 
 " Settings
 " ========
@@ -226,7 +235,7 @@ map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
 
 " Copy and paste to/from OS clipboard
 noremap <Leader>yy "+y
-noremap <Leader>pp "+gP
+noremap <Leader>pp "+gPa<cr><esc>
 
 " Resize current window
 nmap <left>    :3wincmd <<cr>
@@ -250,7 +259,7 @@ if has("autocmd")
         au!
 
         " Change to current directory
-        au BufEnter * lcd %:p:h
+        au BufEnter * if expand('%:p') !~ '://' | cd %:p:h | endif
 
         " Highlight cursorline only in the active window
         au WinEnter * setlocal cursorline
@@ -263,7 +272,9 @@ if has("autocmd")
         au CursorHoldI * stopinsert
         au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
         au InsertLeave * let &updatetime=updaterestore
-
+       
+        " Close window if it's quickfix and the only one visible
+        au WinEnter * if winnr('$') < 2 && &buftype=="quickfix" | quit | endif
     augroup END
 
     augroup tab_settings
