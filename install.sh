@@ -66,6 +66,7 @@ install=(
     compiz-plugins-extra
     indicator-multiload
     indicator-applet-complete
+    vpnc network-manager-vpnc network-manager-vpnc-gnome
 
     ## Multimedia
     ubuntu-restricted-extras non-free-codecs w32codecs libdvdcss2   # from Medibuntu
