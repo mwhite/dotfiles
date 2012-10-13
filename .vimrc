@@ -33,6 +33,10 @@ if exists('*vundle#rc')
     " Git goodness
     Bundle 'tpope/vim-fugitive'
 
+    " Transparent editing of encrypted files
+    Bundle 'jamessan/vim-gnupg'
+
+    " Snazzy modelines
     Bundle 'Lokaltog/vim-powerline'
 
     " Syntax and style checking
