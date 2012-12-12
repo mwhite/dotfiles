@@ -1,3 +1,6 @@
+alias hq='cd ~/hq/cchq && workon hq && ./manage.py runserver --werkzeug'
+alias hqg='cd ~/hq/cchq && workon hq && ./manage.py run_gunicorn -w 3'
+
 alias gvim='UBUNTU_MENUPROXY= gvim'
 
 
