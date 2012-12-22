@@ -25,22 +25,19 @@ mkdir -p ~/.pms ~/.mpd/playlists \
 
 cd ~/.mpd && touch playlists mpd.db mpd.log sticker.sqlite
 
-ln -sf ~/dotfiles/.bashrc ~/.bashrc
-ln -sf ~/dotfiles/.bash_aliases ~/.bash_aliases
-ln -sf ~/dotfiles/.compiz-session ~/.compiz-session
-ln -sf ~/dotfiles/.gitignore ~/.gitignore
-ln -sf ~/dotfiles/.mpdconf ~/.mpdconf
-ln -sf ~/dotfiles/pmsrc ~/.pms/rc
-ln -sf ~/dotfiles/.vimrc ~/.vimrc
+for f in ~/dotfiles/.*; do
+    ln -sf $f ~/
+done
+
+ln -sf ~/.pmsrc ~/.pms/rc
 
 source ~/.bashrc
 
-git config --global user.name "$(getent passwd $USER | cut -d: -f5 | cut -d, -f1)"
-git config --global color.ui true
-git config --global core.excludesfile ~/.gitignore
-
 # A list of repos that can be added with add-apt-repository
 repos=(
+    # latest git releases
+    ppa:git-core/ppa
+
     # Firefox Aurora builds (stable pre-beta)
     ppa:ubuntu-mozilla-daily/firefox-aurora
 
@@ -96,7 +93,6 @@ install=(
     synaptic gdebi
     gconf-editor dconf-tools
     htop
-    ack-grep
     nautilus-open-terminal
     qt4-qtconfig
 );

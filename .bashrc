@@ -49,6 +49,7 @@ fi
 # Load RVM into a shell session as a function
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
     source "$HOME/.rvm/scripts/rvm"
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
 
 if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
@@ -78,3 +79,4 @@ fi
 if [ -f ~/.bash_private ]; then
     source ~/.bash_private
 fi
+

@@ -262,6 +262,11 @@ if has("autocmd")
     augroup general
         au!
 
+        au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
+        au BufNewFile,BufRead *.txt,*.log,README,INSTALL setlocal filetype=text
+        au BufNewFile,BufRead .gitaliases,.gituser setlocal filetype=gitconfig
+        au BufNewFile,BufRead .bash_aliases setlocal filetype=sh
+
         " Change to current directory
         au BufEnter * if expand('%:p') !~ '://' | cd %:p:h | endif
 
@@ -293,16 +298,6 @@ if has("autocmd")
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
         au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
-    augroup END
-
-    augroup ft_bib
-        au!
-        au filetype bib setlocal makeprg=bibclean\ %
-    augroup END
-
-    augroup ft_c
-        au!
-        " au filetype c setlocal foldmethod=syntax
     augroup END
 
     augroup ft_css
@@ -339,22 +334,6 @@ if has("autocmd")
         au filetype java setlocal makeprg=javac %
     augroup END
 
-    augroup ft_javascript
-        au!
-        au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
-
-    augroup END
-
-    augroup ft_markdown
-        au!
-        au filetype markdown setlocal makeprg=pan\ %
-    augroup END
-
-    augroup ft_pandoc
-        au!
-        au filetype pandoc setlocal makeprg=pan\ %
-    augroup END
-
     augroup ft_php
         au!
         au filetype php setlocal makeprg=php\ -l\ %
@@ -368,11 +347,4 @@ if has("autocmd")
         au!
         au filetype tex setlocal makeprg=pdflatex\ %
     augroup END
-
-    augroup ft_text
-        au!
-        au BufRead,BufNewFile *.txt,*.log,README,INSTALL setlocal filetype=text
-    augroup END
 endif
-
-

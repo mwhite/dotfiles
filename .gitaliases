@@ -1,0 +1,90 @@
+[alias]
+    # most of these are from
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+    
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    s = status -s
+    cl = clone
+    co = checkout
+    cob = checkout -b
+    br = branch
+    brd = branch -d
+    brD = branch -D
+    a = add
+    ap = add -p
+    c = commit
+    ca = commit -a
+    cm = commit -m
+    cam = commit -a -m
+    diff = diff --word-diff
+    d = diff --word-diff
+    dc = diff --cached
+    diffr = "!f() { git diff "$1"^.."$1"; }; f" 
+
+    r = reset
+    r1 = reset HEAD^
+    r2 = reset HEAD^^
+    rh = reset --hard
+    rh1 = reset HEAD^ --hard
+    rh2 = reset HEAD^^ --hard
+
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+
+    ra = remote add
+    rr = remote rm
+
+    sa = submodule add
+    si = submodule init
+    su = submodule update --init --recursive
+    sl = submodule
+
+    # one-line log with info
+    l = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+    # log with files changes
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    # log with no colors, for piping
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+    # log with dates
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+    # log with relative dates
+    ldr = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+    # basic log
+    le = log --oneline --decorate
+
+    # file change log
+    lf = log -u
+
+    # summary of last commit
+    dl = "!git ll -1" 
+
+    # diff of last commit
+    dlc = diff --cached HEAD^
+    
+    # summary of revision
+    lc = "!f() { git ll "$1"^.."$1"; }; f"
+
+    # diff of revision
+    dr = "!f() { git diff "$1"^.."$1"; }; f"
+
+    # search by file name
+    f = "!git ls-files | grep -i"
+
+    # grep
+    grep = grep -Ii
+    gr = grep -Ii
+
+    # grep from root directory
+    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+
+    # activity summaries
+    day = shortlog --since=one.day.ago
+    week = shortlog --since=one.week.ago

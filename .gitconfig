@@ -1,0 +1,16 @@
+[include]  # requires git >= 1.7.10
+    path = ~/.gitaliases
+
+[user]
+	name = Mike White
+    email = m@mwhite.info
+
+[color]
+    ui = true
+
+[core]
+    excludesfile = ~/.gitignore
+
+[status]
+    relativePaths = false
+
