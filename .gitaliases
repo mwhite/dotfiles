@@ -9,6 +9,7 @@
     cl = clone
     co = checkout
     cob = checkout -b
+    b = branch
     br = branch
     brd = branch -d
     brD = branch -D
