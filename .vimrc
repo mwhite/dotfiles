@@ -70,10 +70,8 @@ if exists('*vundle#rc')
     " Do code completion with <tab>
     Bundle 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = "context"
-
     
     Bundle 'tpope/vim-surround'
-
 
     " Display a sidebar with class outline
     Bundle 'majutsushi/tagbar'
@@ -88,10 +86,12 @@ if exists('*vundle#rc')
     let delimitMate_expand_space = 0
     let delimitMate_balance_matchpairs = 1
 
-    " Distraction-free writing
-    " Bundle 'mikewest/vimroom'
-
     """ Language-specific
+
+    " Python completion
+    Bundle 'davidhalter/jedi-vim'
+    let g:jedi#autocompletion_command = "<Tab>"
+    let g:jedi#popup_on_dot = 0
 
     Bundle 'sukima/xmledit'
     Bundle 'pangloss/vim-javascript'
@@ -103,18 +103,7 @@ if exists('*vundle#rc')
     Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
-
-    " Python completion (rope); syntax (pep8, pyflakes, mccabe) -- duplicates
-    " syntastic functionality; documentation
-    Bundle 'klen/python-mode'
-    let g:pymode_utils_whitespaces = 0
-    let g:pymode_rope_map_space = 0
-    let g:pymode_folding = 0
-    let g:pymode_lint = 0
-    let g:pymode_lint_cwindow = 0
-
 endif
-
 filetype on
 syntax on
 
@@ -125,7 +114,7 @@ map + :TagbarToggle<CR>
 
 map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
-map <leader>gh :Gbrowser<CR>
+map <leader>gh :Gbrowse<CR>
 map <leader>gs :Gstatus<CR>
 
 " Settings
@@ -168,7 +157,7 @@ set ignorecase
 set smartcase
 
 " insert completion: complete up to longest common string, always show a menu
-set completeopt=longest,menuone,preview
+"set completeopt=longest,menuone,preview
 
 " command completion: complete up to longest common string, show menu
 set wildmenu
