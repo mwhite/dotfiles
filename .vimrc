@@ -34,6 +34,10 @@ if exists('*vundle#rc')
 
     " Git goodness
     Bundle 'tpope/vim-fugitive'
+    map <leader>gb :Gblame<CR>
+    map <leader>gd :Gdiff<CR>
+    map <leader>gh :Gbrowse<CR>
+    map <leader>gs :Gstatus<CR>
 
     " Transparent editing of encrypted files
     Bundle 'jamessan/vim-gnupg'
@@ -57,6 +61,7 @@ if exists('*vundle#rc')
         \ '\~$',
         \ '\.pyc$',
         \ ]
+    map - :NERDTreeTabsToggle<CR>
 
     " Synchronize NERDTree across windows
     Bundle 'jistr/vim-nerdtree-tabs'
@@ -78,6 +83,7 @@ if exists('*vundle#rc')
     " Display a sidebar with class outline
     Bundle 'majutsushi/tagbar'
     let g:tagbar_singleclick = 1
+    map + :TagbarToggle<CR>
 
     Bundle 'jmcantrell/vim-virtualenv'
 
@@ -112,13 +118,7 @@ syntax on
 
 runtime macros/matchit.vim
 
-map - :NERDTreeTabsToggle<CR>
-map + :TagbarToggle<CR>
 
-map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gh :Gbrowse<CR>
-map <leader>gs :Gstatus<CR>
 
 " Settings
 " ========
