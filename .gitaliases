@@ -65,7 +65,7 @@
     lf = log -u
 
     # summary of last commit
-    dl = "!git ll -1" 
+    dl = "!git show -1" 
 
     # diff of last commit
     dlc = diff --cached HEAD^
