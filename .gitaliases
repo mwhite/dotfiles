@@ -81,10 +81,10 @@
 
     # grep
     grep = grep -Ii
-    gr = grep -Ii
+    g = grep -Ii
 
     # grep from root directory
-    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    gr = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
 
     # activity summaries
     day = shortlog --since=one.day.ago

@@ -1,5 +1,6 @@
-alias hq='cd ~/hq/cchq && workon hq && ./manage.py runserver --werkzeug'
-alias hqg='cd ~/hq/cchq && workon hq && ./manage.py run_gunicorn -w 3'
+alias hq='cd ~/hq/cchq && workon hq && ./manage.py runserver 8001 --werkzeug'
+alias hqg='cd ~/hq/cchq && workon hq && ./manage.py run_gunicorn 8001 -w 3'
+alias couchlog='tail -f /usr/local/var/log/couchdb/couch.log'
 
 alias gvim='UBUNTU_MENUPROXY= gvim'
 

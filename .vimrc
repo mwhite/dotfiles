@@ -70,8 +70,10 @@ if exists('*vundle#rc')
     " Do code completion with <tab>
     Bundle 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = "context"
+
     
     Bundle 'tpope/vim-surround'
+
 
     " Display a sidebar with class outline
     Bundle 'majutsushi/tagbar'
@@ -87,10 +89,9 @@ if exists('*vundle#rc')
     let delimitMate_balance_matchpairs = 1
 
     """ Language-specific
-
+    
     " Python completion
     Bundle 'davidhalter/jedi-vim'
-    let g:jedi#autocompletion_command = "<Tab>"
     let g:jedi#popup_on_dot = 0
 
     Bundle 'sukima/xmledit'
@@ -103,7 +104,9 @@ if exists('*vundle#rc')
     Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
+
 endif
+
 filetype on
 syntax on
 
