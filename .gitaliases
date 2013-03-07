@@ -22,7 +22,14 @@
     diff = diff --word-diff
     d = diff --word-diff
     dc = diff --cached
+    ds = diff --stat
     diffr = "!f() { git diff "$1"^.."$1"; }; f" 
+
+    p = push
+    po = push origin
+    pom = push origin master
+    pfo = push -f origin
+    pfom = push -f origin master
 
     r = reset
     r1 = reset HEAD^

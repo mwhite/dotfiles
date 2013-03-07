@@ -34,13 +34,22 @@ if exists('*vundle#rc')
 
     " Git goodness
     Bundle 'tpope/vim-fugitive'
+    map <leader>b :Gblame<CR>
     map <leader>gb :Gblame<CR>
     map <leader>gd :Gdiff<CR>
     map <leader>gh :Gbrowse<CR>
     map <leader>gs :Gstatus<CR>
 
+    Bundle 'mattn/gist-vim'
+    let g:gist_show_privates = 1
+
+    Bundle 'airblade/vim-gitgutter'
+
     " Transparent editing of encrypted files
     Bundle 'jamessan/vim-gnupg'
+
+    " Undo tree visualization
+    Bundle 'sjl/gundo.vim'
 
     " Snazzy modelines
     Bundle 'Lokaltog/vim-powerline'
@@ -61,16 +70,13 @@ if exists('*vundle#rc')
         \ '\~$',
         \ '\.pyc$',
         \ ]
-    map - :NERDTreeTabsToggle<CR>
-
-    " Synchronize NERDTree across windows
-    Bundle 'jistr/vim-nerdtree-tabs'
+    map - :NERDTreeToggle<CR>
 
     " Awesome snippets
-    Bundle 'garbas/vim-snipmate'
-    Bundle 'honza/snipmate-snippets'
-    Bundle "MarcWeber/vim-addon-mw-utils.git"
-    Bundle "tomtom/tlib_vim.git"
+    "Bundle 'garbas/vim-snipmate'
+    "Bundle 'honza/snipmate-snippets'
+    "Bundle "MarcWeber/vim-addon-mw-utils.git"
+    "Bundle "tomtom/tlib_vim.git"
 
     " Do code completion with <tab>
     Bundle 'ervandew/supertab'
@@ -78,7 +84,6 @@ if exists('*vundle#rc')
 
     
     Bundle 'tpope/vim-surround'
-
 
     " Display a sidebar with class outline
     Bundle 'majutsushi/tagbar'
@@ -101,10 +106,13 @@ if exists('*vundle#rc')
     let g:jedi#popup_on_dot = 0
 
     Bundle 'sukima/xmledit'
+    Bundle 'tpope/vim-git'
+    Bundle 'othree/html5.vim'
     Bundle 'pangloss/vim-javascript'
     Bundle 'groenewege/vim-less'
     Bundle 'tpope/vim-markdown'
     Bundle 'juvenn/mustache.vim'
+
 
     " Pandoc goodies, including pandoc extended Markdown syntax support
     Bundle 'vim-pandoc/vim-pandoc'
@@ -117,7 +125,6 @@ filetype on
 syntax on
 
 runtime macros/matchit.vim
-
 
 
 " Settings
@@ -290,23 +297,6 @@ if has("autocmd")
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
         au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
-    augroup END
-
-    augroup ft_css
-        au!
-        au BufNewFile,BufRead *.less setlocal filetype=less
-
-        " au filetype less,css setlocal foldmethod=marker
-        " au filetype less,css setlocal foldmarker={,}
-        au filetype less,css setlocal omnifunc=csscomplete#CompleteCSS
-        au filetype less,css setlocal iskeyword+=-
-
-        " Use <Leader>S to sort properties by name
-        au BufNewFile,BufRead *.less,*.css nnoremap <buffer> <localLeader>S?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
-
-        " Make {<CR> insert a pair of brackets with the cursor positioned
-        " inside of them AND the following code doesn't get unfolded
-        au BufNewFile,BufRead *.less,*.css inoremap <buffer> {<CR> {}<left><CR><Space><Space><Space><Space>.<CR><ESC>kA<BS>
     augroup END
 
     augroup ft_html

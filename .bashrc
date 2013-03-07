@@ -5,6 +5,7 @@
 
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
+PATH="/usr/local/heroku/bin:$PATH"
 export PATH
 
 PYTHONPATH=$HOME/.cabal/bin
@@ -56,6 +57,14 @@ if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
     source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
 fi
 
+if [[ -f "$HOME/dotfiles/bash/django_bash_completion" ]]; then
+    source "$HOME/dotfiles/bash/django_bash_completion"
+fi
+
+if [[ -f "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.sh" ]]; then
+    source "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.sh"
+fi
+
 if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
     [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
 fi
@@ -68,10 +77,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-if [[ -f "$HOME/dotfiles/bash/django_bash_completion" ]]; then
-    source "$HOME/dotfiles/bash/django_bash_completion"
-fi
-
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
@@ -79,7 +84,3 @@ fi
 if [ -f ~/.bash_private ]; then
     source ~/.bash_private
 fi
-
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
