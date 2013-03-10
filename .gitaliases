@@ -86,13 +86,15 @@
 
     # search by file name
     f = "!git ls-files | grep -i"
+    
+    # grep: case-insensitive, recurse into submodules, exclude ignored files
+    g = "!g() { git --no-pager submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
 
-    # grep
-    grep = grep -Ii
-    g = grep -Ii
+    # grep: case-sensitive, recurse into submodules, include ignored files
+    gi = "!g() { git --no-pager submodule foreach --recursive \"git grep -I $1; true\"; }; g"
 
-    # grep from root directory
-    gr = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    # grep, don't match binary files
+    gr = grep -I
 
     # activity summaries
     day = shortlog --since=one.day.ago

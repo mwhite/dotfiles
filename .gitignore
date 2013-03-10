@@ -25,3 +25,12 @@ develop-eggs
 lib64
 
 .bash_private
+
+
+# this prevents these files from showing up in git grep --exclude-standard.
+# You need to use git add -f to add them.
+*.min.js
+jquery*.js
+
+# requires git 1.8.2
+**/js/lib/
