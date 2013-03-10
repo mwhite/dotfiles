@@ -13,3 +13,6 @@
 [submodule "bash/virtualenv-auto-activate"]
 	path = bash/virtualenv-auto-activate
 	url = https://gist.github.com/2211471.git
+[submodule "bash/git-pull-request"]
+	path = bash/git-pull-request
+	url = git://github.com/splitbrain/git-pull-request.git

@@ -97,3 +97,5 @@
     # activity summaries
     day = shortlog --since=one.day.ago
     week = shortlog --since=one.week.ago
+
+    pr = pull-request

@@ -6,6 +6,7 @@
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
 PATH="/usr/local/heroku/bin:$PATH"
+PATH=$PATH:$HOME/dotfiles/bash/git-pull-request
 export PATH
 
 PYTHONPATH=$HOME/.cabal/bin
