@@ -36,7 +36,7 @@ source ~/.bashrc
 # A list of repos that can be added with add-apt-repository
 repos=(
     # latest git releases
-    ppa:git-core/ppa
+    ppa:git-core/candidate 
 
     # Firefox Aurora builds (stable pre-beta)
     ppa:ubuntu-mozilla-daily/firefox-aurora

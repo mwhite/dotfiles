@@ -3,6 +3,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+. ~/.gkr
+
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
 PATH="/usr/local/heroku/bin:$PATH"
