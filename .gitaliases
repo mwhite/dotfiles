@@ -62,7 +62,6 @@
     # log with no colors, for piping
     lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
 
-
     # log with relative dates
     ldr = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
@@ -88,10 +87,10 @@
     f = "!git ls-files | grep -i"
     
     # grep: case-insensitive, recurse into submodules, exclude ignored files
-    g = "!g() { git --no-pager submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
+    g = "!g() { git --no-pager grep --no-index --exclude-standard -Ii $1; git --no-pager submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
 
     # grep: case-sensitive, recurse into submodules, include ignored files
-    gi = "!g() { git --no-pager submodule foreach --recursive \"git grep -I $1; true\"; }; g"
+    gi = "!g() { git --no-pager grep -I $1; git --no-pager submodule foreach --recursive \"git grep -I $1; true\"; }; g"
 
     # grep, don't match binary files
     gr = grep -I
