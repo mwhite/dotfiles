@@ -16,3 +16,6 @@
 [submodule "bash/git-pull-request"]
 	path = bash/git-pull-request
 	url = git://github.com/splitbrain/git-pull-request.git
+[submodule "bash/z"]
+	path = bash/z
+	url = git://github.com/rupa/z.git

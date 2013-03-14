@@ -3,7 +3,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-. ~/.gkr
+#. ~/.gkr
 
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
@@ -72,9 +72,7 @@ if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
     [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
 fi
 
-if [[ -f "$HOME/dotfiles/bash/bashmarks/bashmarks.sh" ]]; then
-    source "$HOME/dotfiles/bash/bashmarks/bashmarks.sh"
-fi
+. "$HOME/dotfiles/bash/z/z.sh"
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh

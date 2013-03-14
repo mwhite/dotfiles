@@ -119,6 +119,8 @@ if exists('*vundle#rc')
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
 
+    "Bundle 'spolu/dwm.vim'
+
 endif
 
 filetype on
@@ -208,8 +210,8 @@ nnoremap j gj
 nnoremap k gk
 
 " Scroll viewport with cursor
-map <c-j> j<c-e>
-map <c-k> k<c-y>
+"map <c-j> j<c-e>
+"map <c-k> k<c-y>
 
 " Switch between tabs
 map <c-l> :tabn<CR>
