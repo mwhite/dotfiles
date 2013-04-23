@@ -31,6 +31,7 @@ if exists('*vundle#rc')
     Bundle 'kien/ctrlp.vim'
     " Search root git dir, not submodule
     let g:ctrlp_root_markers= ['.git/']
+    let g:ctrlp_regexp = 1
 
     " Git goodness
     Bundle 'tpope/vim-fugitive'
@@ -82,7 +83,8 @@ if exists('*vundle#rc')
     Bundle 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = "context"
 
-    
+   
+    Bundle 'mattn/zencoding-vim'
     Bundle 'tpope/vim-surround'
 
     " Display a sidebar with class outline
@@ -104,6 +106,7 @@ if exists('*vundle#rc')
     " Python completion
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
+    let g:jedi#goto_command = "<leader>t"
 
     Bundle 'sukima/xmledit'
     Bundle 'tpope/vim-git'

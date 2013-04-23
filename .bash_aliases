@@ -16,6 +16,8 @@ alias lal='lla'
 
 alias sai='sudo apt-get install'
 
+alias g='git'
+
 if [[ -f "$HOME/.gitaliases" ]]; then
     aliases=$(grep "=" $HOME/.gitaliases | grep -v "#" | awk '{print $1}')
     for cmd in $aliases; do

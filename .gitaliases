@@ -15,14 +15,18 @@
     brD = branch -D
     a = add
     ap = add -p
+    au = add -u
+    rm = rm
     c = commit
     ca = commit -a
     cm = commit -m
     cam = commit -a -m
+    am = "!GIT_COMMITTER_DATE=\"`date`\" git commit --amend --date \"`date`\""
     diff = diff --word-diff
     d = diff --word-diff
     dc = diff --cached
     ds = diff --stat
+    conflicts = diff --name-only --diff-filter=U
     diffr = "!f() { git diff "$1"^.."$1"; }; f" 
 
     p = push
@@ -100,3 +104,5 @@
     week = shortlog --since=one.week.ago
 
     pr = pull-request
+
+    sh = log -p --source --all -S
