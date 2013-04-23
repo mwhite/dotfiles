@@ -19,3 +19,6 @@
 [submodule "bash/z"]
 	path = bash/z
 	url = git://github.com/rupa/z.git
+[submodule "bash/liquidprompt"]
+	path = bash/liquidprompt
+	url = git://github.com/nojhan/liquidprompt.git

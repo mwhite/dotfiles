@@ -68,11 +68,17 @@ if [[ -f "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.
     source "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.sh"
 fi
 
-if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
-    [[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
+#if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
+    #[[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
+#fi
+
+if [[ -f "$HOME/dotfiles/bash/liquidprompt/liquidprompt" ]]; then
+    . "$HOME/dotfiles/bash/liquidprompt/liquidprompt"
 fi
 
-. "$HOME/dotfiles/bash/z/z.sh"
+if [[ -f "$HOME/dotfiles/bash/z/z.sh" ]]; then
+    . "$HOME/dotfiles/bash/z/z.sh"
+fi
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
