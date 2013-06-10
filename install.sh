@@ -26,7 +26,9 @@ mkdir -p ~/.pms ~/.mpd/playlists \
 cd ~/.mpd && touch playlists mpd.db mpd.log sticker.sqlite
 
 for f in ~/dotfiles/.*; do
-    ln -sf $f ~/
+    if [[ ! $f == "git" ]]; then
+        ln -sf $f ~/
+    fi
 done
 
 ln -sf ~/.pmsrc ~/.pms/rc

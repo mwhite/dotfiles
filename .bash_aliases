@@ -4,6 +4,7 @@ alias couchlog='tail -f /usr/local/var/log/couchdb/couch.log'
 
 alias gvim='UBUNTU_MENUPROXY= gvim'
 
+alias ack='ack-grep'
 alias ls='ls -h --ignore=*.pyc --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -17,6 +18,7 @@ alias lal='lla'
 alias sai='sudo apt-get install'
 
 alias g='git'
+__git_complete g __git_main
 
 if [[ -f "$HOME/.gitaliases" ]]; then
     aliases=$(grep "=" $HOME/.gitaliases | grep -v "#" | awk '{print $1}')
@@ -28,3 +30,5 @@ if [[ -f "$HOME/.gitaliases" ]]; then
         fi
     done
 fi
+
+
