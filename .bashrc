@@ -11,6 +11,8 @@ PATH="/usr/local/heroku/bin:$PATH"
 PATH=$PATH:$HOME/dotfiles/bash/git-pull-request
 export PATH
 
+export EDITOR=vim
+
 PYTHONPATH=$HOME/.cabal/bin
 
 mkcd() {

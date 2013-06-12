@@ -26,6 +26,7 @@
     d = diff --word-diff
     dc = diff --cached
     ds = diff --stat
+    de = "!git status -s | cut -f 3 -d' ' | xargs bash -c '</dev/tty vim -p \"$@\"'"
     conflicts = diff --name-only --diff-filter=U
     diffr = "!f() { git diff "$1"^.."$1"; }; f" 
 
