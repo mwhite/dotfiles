@@ -41,10 +41,13 @@ if exists('*vundle#rc')
     map <leader>gh :Gbrowse<CR>
     map <leader>gs :Gstatus<CR>
 
-    Bundle 'mattn/gist-vim'
-    let g:gist_show_privates = 1
+    "Bundle 'mattn/gist-vim'
+    "let g:gist_show_privates = 1
 
     Bundle 'airblade/vim-gitgutter'
+
+    Bundle 'mhinz/vim-startify'
+    Bundle 'mileszs/ack.vim'
 
     " Transparent editing of encrypted files
     Bundle 'jamessan/vim-gnupg'

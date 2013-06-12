@@ -3,6 +3,7 @@ alias hqg='cd ~/hq/cchq && workon hq && ./manage.py run_gunicorn 8001 -w 3'
 alias couchlog='tail -f /usr/local/var/log/couchdb/couch.log'
 
 alias gvim='UBUNTU_MENUPROXY= gvim'
+alias viml='vim -V9vimlog'
 
 alias ack='ack-grep'
 alias ls='ls -h --ignore=*.pyc --color=auto --group-directories-first'
