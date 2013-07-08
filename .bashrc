@@ -12,6 +12,7 @@ PATH=$PATH:$HOME/dotfiles/bash/git-pull-request
 export PATH
 
 export EDITOR=vim
+export TERM='xterm-256color'
 
 PYTHONPATH=$HOME/.cabal/bin
 

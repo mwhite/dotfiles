@@ -5,128 +5,78 @@ set backspace=2
 set rtp+=~/.vim/bundle/vundle/
 silent! call vundle#rc()
 
-nnoremap ; :
-let mapleader = ","
-nmap \ ,
-
 " Plugins
 " =======
 
 if exists('*vundle#rc')
-
-    " The best Vim plugin manager
     Bundle 'gmarik/vundle'
-
-    " The best dark colorscheme
     Bundle 'wgibbs/vim-irblack'
+    colorscheme ir_black
 
-    " Make high-color colorschemes look better on low-color terminals
-    Bundle 'godlygeek/csapprox'
-    let g:CSApprox_verbose_level = 0
-
-    " Color CSS colors with themselves
-    Bundle 'ap/vim-css-color'
-
-    " Quickly find files
     Bundle 'kien/ctrlp.vim'
-    " Search root git dir, not submodule
-    let g:ctrlp_root_markers= ['.git/']
+    let g:ctrlp_root_markers= ['.git/']   " Search root git dir, not submodule
     let g:ctrlp_regexp = 1
 
-    " Git goodness
     Bundle 'tpope/vim-fugitive'
-    map <leader>b :Gblame<CR>
-    map <leader>gb :Gblame<CR>
-    map <leader>gd :Gdiff<CR>
-    map <leader>gh :Gbrowse<CR>
-    map <leader>gs :Gstatus<CR>
-
-    "Bundle 'mattn/gist-vim'
-    "let g:gist_show_privates = 1
-
     Bundle 'airblade/vim-gitgutter'
 
-    Bundle 'mhinz/vim-startify'
-    Bundle 'mileszs/ack.vim'
-
-    " Transparent editing of encrypted files
-    Bundle 'jamessan/vim-gnupg'
-
-    " Undo tree visualization
-    Bundle 'sjl/gundo.vim'
-
-    " Snazzy modelines
-    Bundle 'Lokaltog/vim-powerline'
-
-    " Syntax and style checking
     Bundle 'scrooloose/syntastic'
     let g:syntastic_check_on_open=1
+    
+    Bundle 'mileszs/ack.vim'
+    Bundle 'sjl/gundo.vim'
 
-    " Highlight matching HTML tags
-    Bundle 'gregsexton/MatchTag'
+    Bundle 'bling/vim-airline'
+    let g:airline_left_sep=''
+    let g:airline_right_sep=''
+    Bundle 'bling/vim-bufferline'
+    let g:bufferline_echo=0
+    set statusline=%{bufferline#generate_string()}
 
-    " Easy comment handling
     Bundle 'scrooloose/nerdcommenter'
-
-    " Display a sidebar with directory structure
     Bundle 'scrooloose/nerdtree'
     let NERDTreeIgnore=[
         \ '\~$',
         \ '\.pyc$',
         \ ]
-    map - :NERDTreeToggle<CR>
-
-    " Awesome snippets
-    "Bundle 'garbas/vim-snipmate'
-    "Bundle 'honza/snipmate-snippets'
-    "Bundle "MarcWeber/vim-addon-mw-utils.git"
-    "Bundle "tomtom/tlib_vim.git"
-
-    " Do code completion with <tab>
-    Bundle 'ervandew/supertab'
-    let g:SuperTabDefaultCompletionType = "context"
-
-   
-    Bundle 'mattn/zencoding-vim'
-    Bundle 'tpope/vim-surround'
-
-    " Display a sidebar with class outline
-    Bundle 'majutsushi/tagbar'
-    let g:tagbar_singleclick = 1
-    map + :TagbarToggle<CR>
+    
+    Bundle 'Raimondi/delimitMate'
+    let delimitMate_balance_matchpairs = 1
 
     Bundle 'jmcantrell/vim-virtualenv'
 
-    " Automatically insert closing delimiters
-    Bundle 'Raimondi/delimitMate'
-    let delimitMate_autoclose = 1
-    let delimitMate_expand_cr = 1
-    let delimitMate_expand_space = 0
-    let delimitMate_balance_matchpairs = 1
-
-    """ Language-specific
-    
-    " Python completion
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
-    let g:jedi#goto_command = "<leader>t"
+    let g:jedi#popup_select_first = 0
+    let g:jedi#use_tabs_not_buffers = 0
 
+    Bundle 'tpope/vim-unimpaired'
+    
+    Bundle 'ervandew/supertab'
+    let g:SuperTabDefaultCompletionType = "context"
+
+    Bundle 'jamessan/vim-gnupg'
     Bundle 'sukima/xmledit'
     Bundle 'tpope/vim-git'
     Bundle 'othree/html5.vim'
+    Bundle 'gregsexton/MatchTag'
     Bundle 'pangloss/vim-javascript'
+    Bundle 'ap/vim-css-color'
     Bundle 'groenewege/vim-less'
     Bundle 'tpope/vim-markdown'
-    Bundle 'juvenn/mustache.vim'
-
-
-    " Pandoc goodies, including pandoc extended Markdown syntax support
     Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
 
-    "Bundle 'spolu/dwm.vim'
+    Bundle 'majutsushi/tagbar'
+    let g:tagbar_singleclick = 1
 
+    " Make high-color colorschemes look better on low-color terminals
+    Bundle 'godlygeek/csapprox'
+    let g:CSApprox_verbose_level = 0
+    
+    "Bundle 'mattn/zencoding-vim'
+    "Bundle 'tpope/vim-surround'
 endif
 
 filetype on
@@ -134,18 +84,13 @@ syntax on
 
 runtime macros/matchit.vim
 
-
 " Settings
 " ========
 
 if has("gui_running")
     " Hide toolbar
     set guioptions-=T
-
 endif
-
-set t_Co=256
-colorscheme ir_black
 
 set nocompatible
 filetype plugin on
@@ -157,6 +102,7 @@ set cursorline
 set cursorcolumn
 set splitbelow
 set splitright
+set laststatus=2
 
 " start scrolling when within 5 lines of the top/bottom
 set scrolloff=5
@@ -164,12 +110,9 @@ set scrolloff=5
 " Open moves to the existing buffer instead of reopening it
 set switchbuf=useopen,usetab
 
-" write files you opened without the necessary permissions with :w!!
-cmap w!! %!sudo tee > /dev/null %
 
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4  " filetype-specific settings below
 set autoindent
-set autowrite
 set hlsearch
 set incsearch
 set ignorecase
@@ -198,70 +141,66 @@ if has("persistent_undo")
     set undofile
 endif
 
+" Make diffs look better
+highlight! link DiffText MatchParen
+
+" write files you opened without the necessary permissions with :w!!
+cmap w!! %!sudo tee > /dev/null %
+
 " Use sane regexes
 nnoremap / /\v
 vnoremap / /\v
 
 set grepprg=grep\ -rnH\ --exclude='*~'\ --exclude='*.svn-base'\ $*
 
-" http://vim.wikia.com/wiki/Auto_highlight_current_word_when_idle
-" Highlight all instances of word under cursor, when idle.
-" Useful when studying strange source code.
-" Type z/ to toggle highlighting on/off.
-nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
-function! AutoHighlightToggle()
-  let @/ = ''
-  if exists('#auto_highlight')
-    au! auto_highlight
-    augroup! auto_highlight
-    setl updatetime=4000
-    echo 'Highlight current word: off'
-    return 0
-  else
-    augroup auto_highlight
-      au!
-      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=50
-    echo 'Highlight current word: ON'
-    return 1
-  endif
-endfunction
-
 " Mappings
 " ========
 
 set pastetoggle=<F2>
 
-" wincmd (e.g. s, v, h, H)
-map <Leader>w <C-W>
+nnoremap ; :
+let mapleader = ","
+nmap \ ,
 
-" Scroll within wrapped lines
+map - :NERDTreeToggle<CR>
+map + :TagbarToggle<CR>
+
+map <leader>p :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
+map <leader>ct :CtrlPBufTag<CR>
+map <leader>cq :CtrlPQuickfix<CR>
+
+map <leader>gb :Gblame<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gh :Gbrowse<CR>
+map <leader>gs :Gstatus<CR>
+map <leader>gl :Glog<CR>
+map <leader>ge :Gedit<CR>
+map <leader>gg :Ggrep<space>
+
+map <leader>se :Errors<CR>
+
+cabbrev make silent make
+cabbrev grep silent grep
+cabbrev Ggrep silent Ggrep
+cabbrev Glog silent Glog
+
+let g:jedi#goto_command = "<leader>jg"
+let g:jedi#get_definition_command = "<leader>jd"
+let g:jedi#rename_command = "<leader>jr"
+let g:jedi#related_names_command = "<leader>jn"
+
 nnoremap j gj
 nnoremap k gk
 
-" Scroll viewport with cursor
-"map <c-j> j<c-e>
-"map <c-k> k<c-y>
+map <c-j> j<c-e>
+map <c-k> k<c-y>
 
-" Switch between tabs
-map <c-l> :tabn<CR>
-imap <c-l> <ESC>:tabn<CR>
-map <c-h> :tabp<CR>
-imap <c-h> <ESC>:tabp<CR>
-
-" Tab management
-map <Leader>t :tabnew<CR>:edit<Space>
+map <leader>w <c-w>
 map <Leader>q :q<CR>
-
-" Reload vimrc
 map <Leader>v :so ~/.vimrc<CR>
 
-" Toggle search highlighting
-map <Leader>hl :set hlsearch!<CR>
-
-" <Esc><Esc> to clear search highlights
-nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+nnoremap <silent> <Esc><Esc> <Esc>:set hlsearch!<CR><Esc>
 
 " Toggle display wrap
 map <Leader>tw :setlocal wrap!<CR>
@@ -270,8 +209,8 @@ map <Leader>tw :setlocal wrap!<CR>
 map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
 
 " Copy and paste to/from OS clipboard
-noremap <Leader>yy "+y
-noremap <Leader>pp "+gPa<cr><esc>
+noremap <Leader>sy "+y
+noremap <Leader>sp "+gPa<cr><esc>
 
 " Resize current window
 nmap <left>    :3wincmd <<cr>
@@ -279,13 +218,14 @@ nmap <right>   :3wincmd ><cr>
 nmap <up>      :3wincmd +<cr>
 nmap <down>    :3wincmd -<cr>
 
+" Change to current directory
+command! Cwd if expand('%:p') !~ '://' | cd %:p:h | endif
+
 " Disable useless keys
 noremap <F1> :set invfullscreen<CR>
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 " manual key
 nnoremap K <nop>
-" hash key
-inoremap # X<BS>#
 
 " Autocommands
 " ============
@@ -299,8 +239,7 @@ if has("autocmd")
         au BufNewFile,BufRead .gitaliases,.gituser setlocal filetype=gitconfig
         au BufNewFile,BufRead .bash_aliases setlocal filetype=sh
 
-        " Change to current directory
-        au BufEnter * if expand('%:p') !~ '://' | cd %:p:h | endif
+        au QuickFixCmdPost [^l]* nested cwindow
 
         " Highlight cursorline only in the active window
         au WinEnter * setlocal cursorline
@@ -313,7 +252,7 @@ if has("autocmd")
         au CursorHoldI * stopinsert
         au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
         au InsertLeave * let &updatetime=updaterestore
-       
+
         " Close window if it's quickfix and the only one visible
         au WinEnter * if winnr('$') < 2 && &buftype=="quickfix" | quit | endif
     augroup END
@@ -341,7 +280,7 @@ if has("autocmd")
         "   <tag>
         "        |
         "   </tag>
-        au filetype html,jinja nnoremap <buffer> <s-cr>vit<ESC>a<CR><ESC>vito<ESC>i<CR><ESC>
+        au filetype html,htmldjango,jinja nnoremap <buffer> <s-cr>vit<ESC>a<CR><ESC>vito<ESC>i<CR><ESC>
     augroup END
 
     augroup ft_java
