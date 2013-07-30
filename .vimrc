@@ -29,9 +29,7 @@ if exists('*vundle#rc')
     Bundle 'bling/vim-airline'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
-    Bundle 'bling/vim-bufferline'
-    let g:bufferline_echo=0
-    set statusline=%{bufferline#generate_string()}
+    let g:airline_enable_syntastic=0
 
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
@@ -49,6 +47,7 @@ if exists('*vundle#rc')
     let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
     let g:jedi#use_tabs_not_buffers = 0
+    Bundle 'tell-k/vim-autopep8'
 
     Bundle 'tpope/vim-unimpaired'
     
@@ -99,7 +98,6 @@ set mouse=a
 set wrap
 set number
 set cursorline
-set cursorcolumn
 set splitbelow
 set splitright
 set laststatus=2
@@ -179,14 +177,20 @@ map <leader>ge :Gedit<CR>
 map <leader>gg :Ggrep<space>
 
 map <leader>se :Errors<CR>
+map <leader>uu :GundoToggle<CR>
+
+map <leader>ag :Ack<space>
+
+map <leader>gf :Ggrep <cword><cr>
+map <leader>af :Ack <cword><cr>
 
 cabbrev make silent make
 cabbrev grep silent grep
 cabbrev Ggrep silent Ggrep
 cabbrev Glog silent Glog
 
-let g:jedi#goto_command = "<leader>jg"
-let g:jedi#get_definition_command = "<leader>jd"
+let g:jedi#goto_command = "<leader>l"
+let g:jedi#get_definition_command = "<leader>d"
 let g:jedi#rename_command = "<leader>jr"
 let g:jedi#related_names_command = "<leader>jn"
 
@@ -222,10 +226,14 @@ nmap <down>    :3wincmd -<cr>
 command! Cwd if expand('%:p') !~ '://' | cd %:p:h | endif
 
 " Disable useless keys
+noremap <PageUp> <nop>
+noremap <PageDown> <nop>
+
 noremap <F1> :set invfullscreen<CR>
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 " manual key
 nnoremap K <nop>
+
 
 " Autocommands
 " ============

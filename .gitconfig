@@ -10,10 +10,14 @@
 
 [core]
     excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
 	pager = less -x1,5
 
 [status]
     relativePaths = false
+
+[merge]
+    tool = vimdiff
 
 [github]
 	user = mwhite
