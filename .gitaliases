@@ -1,33 +1,37 @@
 [alias]
-    # most of these are from
+    # some of these are from
     # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
     
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
+    h = help
 
     s = status -s
-    cl = clone
     co = checkout
     cob = checkout -b
-    b = branch
-    br = branch
-    brd = branch -d
-    brD = branch -D
+    b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+    bl = branch
+    bm = branch --merged
+    bnm = branch --no-merged
+    bd = branch -d
+    bD = branch -D
+
     a = add
     ap = add -p
     au = add -u
     rm = rm
-    c = commit
-    ca = commit -a
+    c = commit --verbose
+    ca = commit -a --verbose
     cm = commit -m
     cam = commit -a -m
-    am = "!GIT_COMMITTER_DATE=\"`date`\" git commit --amend --date \"`date`\""
+    m = commit --amend --verbose
+    #am = "!GIT_COMMITTER_DATE=\"`date`\" git commit --amend --date \"`date`\""
     diff = diff --word-diff
     d = diff --word-diff
     dc = diff --cached
     ds = diff --stat
     de = "!git status -s | cut -f 3 -d' ' | xargs bash -c '</dev/tty vim -p \"$@\"'"
-    conflicts = diff --name-only --diff-filter=U
+    con = diff --name-only --diff-filter=U
     diffr = "!f() { git diff "$1"^.."$1"; }; f" 
 
     p = push
@@ -35,6 +39,11 @@
     pom = push origin master
     pfo = push -f origin
     pfom = push -f origin master
+
+    re = rebase
+    rei = rebase -i
+    rec = rebase --continue
+    res = rebase --skip
 
     r = reset
     r1 = reset HEAD^
@@ -58,26 +67,15 @@
     # one-line log with info including date
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
-    # one-line log with info
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-
     # log with files changes
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-
-    # log with no colors, for piping
-    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-
-    # log with relative dates
-    ldr = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-
-    # basic log
-    le = log --oneline --decorate
 
     # file change log
     lf = log -u
 
     # summary of last commit
-    dl = "!git show -1" 
+    dl = show -1
+    dls = show -1 --stat
 
     # diff of last commit
     dlc = diff --cached HEAD^
@@ -103,7 +101,10 @@
     # activity summaries
     day = shortlog --since=one.day.ago
     week = shortlog --since=one.week.ago
-
-    pr = pull-request
+    month = shortlog --since=one.month.ago
 
     sh = log -p --source --all -S
+
+    ribbon = tag --force _ribbon origin/master
+    catchup = log --patch --reverse --topo-order _ribbon..origin/master
+

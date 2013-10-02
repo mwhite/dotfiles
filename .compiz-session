@@ -10,7 +10,7 @@ kupfer --no-splash &
 mpd &
 
 pidgin &
-skype &
+#skype &
 
 if [ $(ps aux | grep -c mpdscribble) = '1' ]; then
     mpdscribble &

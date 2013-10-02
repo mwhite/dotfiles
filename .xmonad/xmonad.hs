@@ -20,9 +20,9 @@ import XMonad.Util.EZConfig
 myTerminal = "gnome-terminal"
 
 myLayoutHook = smartBorders $ avoidStruts $ 
-        onWorkspaces ["web","music"] (highSpacing (toggleFull oneTall)) $
-        onWorkspace "chat" (highSpacing oneTall) $
-        onWorkspace "term" (lowSpacing (toggleFull goldenTall)) $
+        onWorkspaces ["1:web","5:music"] (highSpacing (toggleFull oneTall)) $
+        onWorkspaces ["3:skype","4:chat"] (highSpacing oneTall) $
+        onWorkspace "2:term" (lowSpacing (toggleFull goldenTall)) $
         highSpacing goldenTall
         where
                 toggleFull = toggleLayouts Full {-fullscreenFull-}
@@ -34,18 +34,19 @@ myLayoutHook = smartBorders $ avoidStruts $
                 delta = 5/100
                 ratio = toRational (2/(1 + sqrt 5 :: Double))
 
-myWorkspaces = [ "web"
-               , "term"
-               , "chat"
-               , "music"
+myWorkspaces = [ "1:web"
+               , "2:term"
+               , "3:skype"
+               , "4:chat"
+               , "5:music"
                ]
 
 
-myManageHook = composeAll       [ resource =? "skype" --> doShift "chat"
-                                , resource =? "pidgin" --> doShift "chat"
-                                , resource =? "ario" --> doShift "music"
-                                , resource =? "sonata" --> doShift "music"
-                                , resource =? "spotify" --> doShift "music"
+myManageHook = composeAll       [ resource =? "skype" --> doShift "3:skype"
+                                , className =? "Pidgin" --> doShift "4:chat"
+                                , resource =? "ario" --> doShift "5:music"
+                                , resource =? "sonata" --> doShift "5:music"
+                                , resource =? "spotify" --> doShift "5:music"
                                 , manageDocks
                                 {-, fullscreenManageHook-}
                                 ] <+> manageHook defaultConfig

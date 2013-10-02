@@ -11,6 +11,7 @@ silent! call vundle#rc()
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
     Bundle 'wgibbs/vim-irblack'
+    Bundle 'endel/vim-github-colorscheme'
     colorscheme ir_black
 
     Bundle 'kien/ctrlp.vim'
@@ -26,11 +27,16 @@ if exists('*vundle#rc')
     Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
 
+    Bundle 'mattboehm/vim-accordion'
+    Bundle 'mattboehm/vim-unstack'
+    Bundle 'vim-scripts/ZoomWin'
+
     Bundle 'bling/vim-airline'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
     let g:airline_enable_syntastic=0
 
+    Bundle 'michaeljsmith/vim-indent-object'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
     let NERDTreeIgnore=[
@@ -42,12 +48,15 @@ if exists('*vundle#rc')
     let delimitMate_balance_matchpairs = 1
 
     Bundle 'jmcantrell/vim-virtualenv'
-
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
     let g:jedi#use_tabs_not_buffers = 0
     Bundle 'tell-k/vim-autopep8'
+    
+    Bundle 'marijnh/tern_for_vim'
+
+
 
     Bundle 'tpope/vim-unimpaired'
     
@@ -101,6 +110,7 @@ set cursorline
 set splitbelow
 set splitright
 set laststatus=2
+set nofoldenable
 
 " start scrolling when within 5 lines of the top/bottom
 set scrolloff=5
@@ -168,10 +178,14 @@ map <leader>b :CtrlPBuffer<CR>
 map <leader>ct :CtrlPBufTag<CR>
 map <leader>cq :CtrlPQuickfix<CR>
 
+map <leader>a2 :Accordion 2<CR>
+map <leader>a3 :Accordion 3<CR>
+
 map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gh :Gbrowse<CR>
 map <leader>gs :Gstatus<CR>
+map <leader>gc :Gcommit<CR>
 map <leader>gl :Glog<CR>
 map <leader>ge :Gedit<CR>
 map <leader>gg :Ggrep<space>
@@ -189,10 +203,10 @@ cabbrev grep silent grep
 cabbrev Ggrep silent Ggrep
 cabbrev Glog silent Glog
 
-let g:jedi#goto_command = "<leader>l"
-let g:jedi#get_definition_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>l"
+let g:jedi#goto_definition_command = "<leader>d"
 let g:jedi#rename_command = "<leader>jr"
-let g:jedi#related_names_command = "<leader>jn"
+let g:jedi#usages_command = "<leader>jn"
 
 nnoremap j gj
 nnoremap k gk
@@ -277,6 +291,14 @@ if has("autocmd")
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
         au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
+    augroup END
+
+    augroup ft_javascript
+        au!
+        au filetype javascript nnoremap <buffer> <leader>d :TernDef<CR>
+        au filetype javascript nnoremap <buffer> K :TernDoc<CR>
+        au filetype javascript nnoremap <buffer> <leader>jr :TernRename<CR>
+        au filetype javascript nnoremap <buffer> <leader>jn :TernRefs<CR>
     augroup END
 
     augroup ft_html

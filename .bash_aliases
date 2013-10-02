@@ -1,5 +1,4 @@
-alias hq='cd ~/hq/cchq && workon hq && ./manage.py runserver 8001 --werkzeug'
-alias hqg='cd ~/hq/cchq && workon hq && ./manage.py run_gunicorn 8001 -w 3'
+alias hq='workon hq'
 alias couchlog='tail -f /usr/local/var/log/couchdb/couch.log'
 
 alias gvim='UBUNTU_MENUPROXY= gvim'
@@ -27,7 +26,7 @@ if [[ -f "$HOME/.gitaliases" ]]; then
         alias g$cmd="git $cmd"
         
         if [[ ${cmd:0:1} = 'l' ]]; then
-            alias "g${cmd}g"="git $cmd --graph"
+            alias "g${cmd}g"="git $cmd --graph --date-order"
         fi
     done
 fi
