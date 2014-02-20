@@ -11,13 +11,18 @@
 [core]
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
-	pager = less -x1,5
+    pager = less -x1,5
+
+[diff]
+    renames = copies
+    renamelimit = 0
 
 [status]
     relativePaths = false
 
 [merge]
     tool = vimdiff
+    ff = false
 
 [github]
 	user = mwhite

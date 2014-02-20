@@ -56,14 +56,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Load RVM into a shell session as a function
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-    source "$HOME/.rvm/scripts/rvm"
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-fi
+#if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+    #source "$HOME/.rvm/scripts/rvm"
+    #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#fi
 
-if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
-    source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
-fi
+#if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
+    #source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
+#fi
 
 if [[ -f "$HOME/dotfiles/bash/django_bash_completion" ]]; then
     source "$HOME/dotfiles/bash/django_bash_completion"

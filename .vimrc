@@ -175,7 +175,7 @@ map + :TagbarToggle<CR>
 
 map <leader>p :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
-map <leader>ct :CtrlPBufTag<CR>
+map <leader>t :CtrlPBufTag<CR>
 map <leader>cq :CtrlPQuickfix<CR>
 
 map <leader>a2 :Accordion 2<CR>
@@ -202,6 +202,8 @@ cabbrev make silent make
 cabbrev grep silent grep
 cabbrev Ggrep silent Ggrep
 cabbrev Glog silent Glog
+
+cabbrev ft set filetype=
 
 let g:jedi#goto_assignments_command = "<leader>l"
 let g:jedi#goto_definition_command = "<leader>d"

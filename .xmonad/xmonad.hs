@@ -1,38 +1,46 @@
 import XMonad
 import XMonad.Config.Gnome
 
+import XMonad.Layout.Accordion
 import XMonad.Layout.Spacing
-import XMonad.Layout.Fullscreen
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.SimplestFloat
+{-import XMonad.Layout.SimplestFloat-}
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ToggleLayouts
-import XMonad.Layout.PerWorkspace
+{-import XMonad.Layout.PerWorkspace-}
+import XMonad.Layout.WindowNavigation
 
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 
-import XMonad.Actions.CycleWS
+import XMonad.Actions.GridSelect
+import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWindows
 
 import XMonad.Util.EZConfig
 
+import qualified XMonad.StackSet as W
+
+import XMonad.Prompt
+import XMonad.Prompt.AppendFile
+import XMonad.Prompt.Man
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
+import XMonad.Prompt.Workspace
+import XMonad.Prompt.XMonad
+
 myTerminal = "gnome-terminal"
 
-myLayoutHook = smartBorders $ avoidStruts $ 
-        onWorkspaces ["1:web","5:music"] (highSpacing (toggleFull oneTall)) $
-        onWorkspaces ["3:skype","4:chat"] (highSpacing oneTall) $
-        onWorkspace "2:term" (lowSpacing (toggleFull goldenTall)) $
-        highSpacing goldenTall
+myLayoutHook = smartBorders $ avoidStruts $ toggle $ windowNavigation $ tiled
+        ||| Mirror tiled
+        ||| Accordion
+        ||| tabbed shrinkText defaultTheme
         where
-                toggleFull = toggleLayouts Full {-fullscreenFull-}
-                lowSpacing = spacing 5
+                toggle = toggleLayouts (noBorders Full)
                 highSpacing = spacing 15
-                goldenTall = ResizableTall 1 delta (toRational (2/(1 + sqrt 5 :: Double))) []
-                oneTall = ResizableTall 1 delta (toRational (4/5)) []
-                twoTall = ResizableTall 1 delta (toRational 1/2) []
+                tiled = highSpacing $ ResizableTall 1 delta (toRational 1/2) []
                 delta = 5/100
-                ratio = toRational (2/(1 + sqrt 5 :: Double))
 
 myWorkspaces = [ "1:web"
                , "2:term"
@@ -48,8 +56,16 @@ myManageHook = composeAll       [ resource =? "skype" --> doShift "3:skype"
                                 , resource =? "sonata" --> doShift "5:music"
                                 , resource =? "spotify" --> doShift "5:music"
                                 , manageDocks
-                                {-, fullscreenManageHook-}
-                                ] <+> manageHook defaultConfig
+                                , isFullscreen --> doFullFloat
+                                ] <+> manageHook gnomeConfig
+
+myXPConfig = greenXPConfig 
+        { font = "xft:Lucida Grande:pixelsize=24:autohint=true"
+        , position = Top
+        , height = 24
+        , fgColor = "#E5DFD9"
+        , bgColor = "#292929"
+        }
 
 main = do
         xmonad $ gnomeConfig
@@ -57,17 +73,38 @@ main = do
                 , workspaces = myWorkspaces
                 , layoutHook = myLayoutHook
                 , manageHook = myManageHook
-                {-, handleEventHook = XMonad.Hooks.EwmhDesktops.fullscreenEventHook <+>-}
-                        {-XMonad.Layout.Fullscreen.fullscreenEventHook <+> handleEventHook gnomeConfig-}
                 , modMask = mod4Mask
+                , borderWidth = 2
+                , focusedBorderColor = "black"
+                , normalBorderColor = "gray"
                 }
-                 `additionalKeys`
-                [ ((mod4Mask, xK_Tab), cycleRecentWindows [xK_Alt_L] xK_Tab (xK_Tab .|. xK_Shift_L))
-                , ((mod4Mask .|. shiftMask, xK_l), sendMessage ToggleLayout)
-                , ((mod4Mask, xK_q), prevScreen)
-                , ((mod4Mask, xK_w), nextScreen)
+                 `additionalKeysP`
+                [ 
+                {-("M1-<Tab>", cycleRecentWindows [xK_Alt_L] xK_Tab xK_Tab )-}
+                  ("M-S-l", sendMessage ToggleLayout)
+                {-, ("M-q", prevScreen)-}
+                {-, ("M-w", nextScreen)-}
                 {-, ((mod4Mask, xK_e), swapNextScreen)-}
                 {-, ((mod4Mask .|. shiftMask, xK_q), shiftPrevScreen)-}
-                , ((mod4Mask .|. shiftMask, xK_w), shiftNextScreen)
-                , ((mod4Mask .|. shiftMask, xK_q), nextScreen >> shiftNextScreen)
+                {-, ("M-S-w", shiftNextScreen)-}
+                {-, ("M-S-q", nextScreen >> shiftNextScreen)-}
+                {-, ("M-S-m", manPrompt myXPConfig)-}
+                {-, ("M-S-m", (workspacePrompt defaultXPConfig (windows . W.shift)))-}
+                , ("M-w-h", sendMessage $ Go L)
+                , ("M-w-l", sendMessage $ Go R)
+                , ("M-w-j", sendMessage $ Go D)
+                , ("M-w-k", sendMessage $ Go U)
+                , ("M-S-w-h", sendMessage $ Swap L)
+                , ("M-S-w-l", sendMessage $ Swap R)
+                , ("M-S-w-j", sendMessage $ Swap D)
+                , ("M-S-w-k", sendMessage $ Swap U)
+
+                , ("M-s", (goToSelected defaultGSConfig))
+                , ("M-d", (bringSelected defaultGSConfig))
+                , ("M-x", (windowPromptGoto myXPConfig))
+                , ("M-c", (windowPromptBring myXPConfig))
+                , ("M-r", (shellPrompt myXPConfig))
+                , ("M-n", (appendFilePrompt myXPConfig "/home/mwhite/personal/Dropbox/notes.txt"))
+                , ("M-z", (xmonadPrompt myXPConfig))
+
                 ]

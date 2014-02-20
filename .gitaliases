@@ -16,6 +16,7 @@
     bd = branch -d
     bD = branch -D
 
+    mm = "!f() { git reset HEAD && git add "$1" && git commit --amend --verbose --no-edit; }; f"
     a = add
     ap = add -p
     au = add -u
@@ -25,23 +26,29 @@
     cm = commit -m
     cam = commit -a -m
     m = commit --amend --verbose
+    cf = commit --fixup
     #am = "!GIT_COMMITTER_DATE=\"`date`\" git commit --amend --date \"`date`\""
-    diff = diff --word-diff
-    d = diff --word-diff
+    d = diff
     dc = diff --cached
     ds = diff --stat
     de = "!git status -s | cut -f 3 -d' ' | xargs bash -c '</dev/tty vim -p \"$@\"'"
     con = diff --name-only --diff-filter=U
     diffr = "!f() { git diff "$1"^.."$1"; }; f" 
 
+    findmerge = "!git log --merges --ancestry-path --oneline $1..origin | tail"
     p = push
     po = push origin
     pom = push origin master
+    pf = push -f
     pfo = push -f origin
     pfom = push -f origin master
 
+    f = fetch --recurse-submodules=on-demand
+
+    cp = cherry-pick
+
     re = rebase
-    rei = rebase -i
+    rei = rebase -i --autosquash
     rec = rebase --continue
     res = rebase --skip
 
@@ -59,20 +66,27 @@
     ra = remote add
     rr = remote rm
 
-    sa = submodule add
-    si = submodule init
-    su = submodule update --init --recursive
-    sl = submodule
+    sm = submodule
+    sma = submodule add
+    smi = submodule init
+    smu = submodule update --init --recursive
     
     # one-line log with info including date
-    l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit --date=relative 
 
+    ln = log HEAD --not
+    lnm = log HEAD --not master
+    lnd = log HEAD --not develop
+    lpn = log -p HEAD --not  
+    lpnm = log -p HEAD --not master
+    lpnd = log HEAD --not develop
     # log with files changes
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 
     # file change log
     lf = log -u
 
+    dn = diff HEAD
     # summary of last commit
     dl = show -1
     dls = show -1 --stat
@@ -87,13 +101,13 @@
     dr = "!f() { git diff "$1"^.."$1"; }; f"
 
     # search by file name
-    f = "!git ls-files | grep -i"
+    ;f = "!git ls-files | grep -i"
     
     # grep: case-insensitive, recurse into submodules, exclude ignored files
-    g = "!g() { git --no-pager grep --no-index --exclude-standard -Ii $1; git --no-pager submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
+    g = "!g() { git grep --no-index --exclude-standard -Ii $1; git submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
 
     # grep: case-sensitive, recurse into submodules, include ignored files
-    gi = "!g() { git --no-pager grep -I $1; git --no-pager submodule foreach --recursive \"git grep -I $1; true\"; }; g"
+    gi = "!g() { git grep -I $1; git submodule foreach --recursive \"git grep -I $1; true\"; }; g"
 
     # grep, don't match binary files
     gr = grep -I

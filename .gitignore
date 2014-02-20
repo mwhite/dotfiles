@@ -13,7 +13,7 @@
 # Packages
 *.egg
 *.egg-info
-dist
+#dist
 build
 eggs
 parts
@@ -27,6 +27,7 @@ lib64
 
 .bash_private
 
+*.orig
 
 # this prevents these files from showing up in git grep --exclude-standard.
 # You need to use git add -f to add them.
@@ -35,3 +36,5 @@ lib64
 
 # requires git 1.8.2
 # **/js/lib/
+
+vagrant20*
