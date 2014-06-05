@@ -1,9 +1,3 @@
-alias c='cd ~/hq/cchq'
-alias hq='workon hq'
-alias runserver='./manage.py runserver 8001 --werkzeug'
-alias run_gunicorn='./manage.py run_gunicorn 0.0.0.0:8001 -w 3'
-alias couchlog='tail -f /usr/local/var/log/couchdb/couch.log'
-
 alias gvim='UBUNTU_MENUPROXY= gvim'
 alias viml='vim -V9vimlog'
 
@@ -14,16 +8,14 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias gr='grep -r'
-
-alias ll='ls -lh'
+alias ll='ls -lh --time-style=long-iso'
 alias la='ls -A'
 alias lla='ls -lhA'
 alias lal='lla'
 
-alias sai='sudo apt-get install'
-
+alias upgrade='sudo apt-get update && sudo apt-get upgrade'
 alias g='git'
+
 __git_complete g __git_main
 
 function_exists() {

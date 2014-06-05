@@ -2,7 +2,7 @@
     path = ~/.gitaliases
 
 [user]
-	name = Mike White
+	name = Michael White
     email = m@mwhite.info
 
 [color]
@@ -17,12 +17,26 @@
     renames = copies
     renamelimit = 0
 
+[fetch]
+    recurseSubmodules = on-demand
+    prune = true
+
 [status]
     relativePaths = false
 
 [merge]
     tool = vimdiff
     ff = false
+
+[mergetool]
+    prompt = true
+
+[rebase]
+    autosquash = true
+    autostash = true
+
+[rerere]
+    enabled = true
 
 [github]
 	user = mwhite

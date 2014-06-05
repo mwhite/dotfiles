@@ -11,7 +11,7 @@ silent! call vundle#rc()
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
     Bundle 'wgibbs/vim-irblack'
-    Bundle 'endel/vim-github-colorscheme'
+    "Bundle 'endel/vim-github-colorscheme'
     colorscheme ir_black
 
     Bundle 'kien/ctrlp.vim'
@@ -23,13 +23,9 @@ if exists('*vundle#rc')
 
     Bundle 'scrooloose/syntastic'
     let g:syntastic_check_on_open=1
+    let g:syntastic_enable_signs=0
     
-    Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
-
-    Bundle 'mattboehm/vim-accordion'
-    Bundle 'mattboehm/vim-unstack'
-    Bundle 'vim-scripts/ZoomWin'
 
     Bundle 'bling/vim-airline'
     let g:airline_left_sep=''
@@ -38,7 +34,7 @@ if exists('*vundle#rc')
 
     Bundle 'michaeljsmith/vim-indent-object'
     Bundle 'scrooloose/nerdcommenter'
-    Bundle 'scrooloose/nerdtree'
+    "Bundle 'scrooloose/nerdtree'
     let NERDTreeIgnore=[
         \ '\~$',
         \ '\.pyc$',
@@ -47,15 +43,16 @@ if exists('*vundle#rc')
     Bundle 'Raimondi/delimitMate'
     let delimitMate_balance_matchpairs = 1
 
+    Bundle 'guns/vim-clojure-static'
+
+
     Bundle 'jmcantrell/vim-virtualenv'
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
     let g:jedi#use_tabs_not_buffers = 0
-    Bundle 'tell-k/vim-autopep8'
     
     Bundle 'marijnh/tern_for_vim'
-
 
 
     Bundle 'tpope/vim-unimpaired'
@@ -104,6 +101,7 @@ set nocompatible
 filetype plugin on
 filetype indent on
 set mouse=a
+set lazyredraw
 set wrap
 set number
 set cursorline
@@ -263,7 +261,7 @@ if has("autocmd")
         au BufNewFile,BufRead .gitaliases,.gituser setlocal filetype=gitconfig
         au BufNewFile,BufRead .bash_aliases setlocal filetype=sh
 
-        au QuickFixCmdPost [^l]* nested cwindow
+        au QuickFixCmdPost [^l]* nested cwindow | redraw!
 
         " Highlight cursorline only in the active window
         au WinEnter * setlocal cursorline

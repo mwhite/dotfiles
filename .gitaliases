@@ -1,124 +1,104 @@
 [alias]
-    # some of these are from
-    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
-    
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
     h = help
+    
+    su = submodule
 
-    s = status -s
+    ### Reading ###
+    
+    sh = show
+    # diffs with last commit
+    dl = show -1
+    dls = show -1 --stat
+    
+    # branches with details, sorted by last modified
+    b = "!git for-each-ref --sort='-authordate' --format='%(refname)   $%(authordate:relative)   $%(authorname)   $%(objectname:short)' refs/heads | sed -e 's-refs/heads/--' | column -nt -s$"
+    br = branch
+    
+    # one-line log with info
+    l = log --topo-order --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit --date=relative 
+
+    # one-line log with file changes summary
+    ll = "!git l --decorate --numstat"
+
+    # log for a specific file
+    lf = "!git l -u"
+
+    # log commits not shared with something else
+    ln = "!git l HEAD --not"
+
     co = checkout
     cob = checkout -b
-    b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
-    bl = branch
-    bm = branch --merged
-    bnm = branch --no-merged
-    bd = branch -d
-    bD = branch -D
 
-    mm = "!f() { git reset HEAD && git add "$1" && git commit --amend --verbose --no-edit; }; f"
-    a = add
-    ap = add -p
-    au = add -u
-    rm = rm
+    rl = reflog
+    
+    # find files by name
+    find = "!git ls-files --exclude-standard | grep -i"
+
+    # Grep grouped by file 
+    g = grep --break --heading --line-number --no-index --exclude-standard -I
+
+    # search history for a pattern
+    hg = log --patch --source --all --pickaxe-regex -S
+
+    day = "!git shortlog --format='[%h] %s' --since=one.day.ago"
+    week = "!git shortlog --format='[%h] %s' --since=one.week.ago"
+    month = "!git shortlog --format='[%h] %s' --since=one.month.ago"
+
+    ribbon = tag --force _ribbon origin/master
+    catchup = log --patch --reverse --topo-order _ribbon..origin/master
+
+    ### Writing ###
+    
+    s = status -s
+
+    # don't add untracked files
+    a = add -u
+    ap = add -u -p
+    aa = add 
+
+    # show diff in commit message editor
     c = commit --verbose
     ca = commit -a --verbose
     cm = commit -m
     cam = commit -a -m
     m = commit --amend --verbose
+    
+    # create a fixup commit for rebase with autosquash
     cf = commit --fixup
-    #am = "!GIT_COMMITTER_DATE=\"`date`\" git commit --amend --date \"`date`\""
+
     d = diff
-    dc = diff --cached
     ds = diff --stat
-    de = "!git status -s | cut -f 3 -d' ' | xargs bash -c '</dev/tty vim -p \"$@\"'"
+    dc = diff --cached
+    
+    dlc = diff --cached HEAD^
+    dlcs = diff --cached --stat HEAD^
+
     con = diff --name-only --diff-filter=U
-    diffr = "!f() { git diff "$1"^.."$1"; }; f" 
 
     findmerge = "!git log --merges --ancestry-path --oneline $1..origin | tail"
     p = push
     po = push origin
-    pom = push origin master
-    pf = push -f
     pfo = push -f origin
-    pfom = push -f origin master
+    pu = push upstream
+    pfu = push -f upstream
 
-    f = fetch --recurse-submodules=on-demand
+    pl = pull
 
     cp = cherry-pick
 
-    re = rebase
-    rei = rebase -i --autosquash
-    rec = rebase --continue
-    res = rebase --skip
+    r = rebase
+    ri = rebase -i
+    rc = rebase --continue
 
-    r = reset
-    r1 = reset HEAD^
-    r2 = reset HEAD^^
-    rh = reset --hard
-    rh1 = reset HEAD^ --hard
-    rh2 = reset HEAD^^ --hard
+    re = reset
+    re1 = reset HEAD^
+    re2 = reset HEAD^^
+    reh = reset --hard
+    reh1 = reset HEAD^ --hard
+    reh2 = reset HEAD^^ --hard
 
-    sl = stash list
-    sa = stash apply
-    ss = stash save
-
-    ra = remote add
-    rr = remote rm
-
-    sm = submodule
-    sma = submodule add
-    smi = submodule init
-    smu = submodule update --init --recursive
+    st = stash
     
-    # one-line log with info including date
-    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit --date=relative 
-
-    ln = log HEAD --not
-    lnm = log HEAD --not master
-    lnd = log HEAD --not develop
-    lpn = log -p HEAD --not  
-    lpnm = log -p HEAD --not master
-    lpnd = log HEAD --not develop
-    # log with files changes
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-
-    # file change log
-    lf = log -u
-
-    dn = diff HEAD
-    # summary of last commit
-    dl = show -1
-    dls = show -1 --stat
-
-    # diff of last commit
-    dlc = diff --cached HEAD^
-    
-    # summary of revision
-    lc = "!f() { git ll "$1"^.."$1"; }; f"
-
-    # diff of revision
-    dr = "!f() { git diff "$1"^.."$1"; }; f"
-
-    # search by file name
-    ;f = "!git ls-files | grep -i"
-    
-    # grep: case-insensitive, recurse into submodules, exclude ignored files
-    g = "!g() { git grep --no-index --exclude-standard -Ii $1; git submodule foreach --recursive \"git grep --no-index --exclude-standard -Ii $1; true\"; }; g"
-
-    # grep: case-sensitive, recurse into submodules, include ignored files
-    gi = "!g() { git grep -I $1; git submodule foreach --recursive \"git grep -I $1; true\"; }; g"
-
-    # grep, don't match binary files
-    gr = grep -I
-
-    # activity summaries
-    day = shortlog --since=one.day.ago
-    week = shortlog --since=one.week.ago
-    month = shortlog --since=one.month.ago
-
-    sh = log -p --source --all -S
-
-    ribbon = tag --force _ribbon origin/master
-    catchup = log --patch --reverse --topo-order _ribbon..origin/master
 
