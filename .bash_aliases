@@ -16,6 +16,9 @@ alias lal='lla'
 alias upgrade='sudo apt-get update && sudo apt-get upgrade'
 alias g='git'
 
+function cpcd () { cp "$@" && eval cd "\"\$$#\""; }
+function mvcd () { mv "$@" && eval cd "\"\$$#\""; }
+
 __git_complete g __git_main
 
 function_exists() {

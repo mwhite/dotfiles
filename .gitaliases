@@ -4,6 +4,7 @@
     h = help
     
     su = submodule
+    root = "!pwd"
 
     ### Reading ###
     
@@ -37,7 +38,7 @@
     find = "!git ls-files --exclude-standard | grep -i"
 
     # Grep grouped by file 
-    g = grep --break --heading --line-number --no-index --exclude-standard -I
+    g = grep -P --break --heading --line-number --no-index --exclude-standard -I
 
     # search history for a pattern
     hg = log --patch --source --all --pickaxe-regex -S

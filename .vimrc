@@ -287,7 +287,7 @@ if has("autocmd")
         au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
         au filetype text,txt,markdown,pandoc  setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype html,xhtml,xml            setlocal ts=4 sts=4 sw=4 et
+        au filetype html,xhtml,xml            setlocal ts=2 sts=2 sw=2 et
         au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
         au filetype vim                       setlocal ts=4 sts=4 sw=4 et
         au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80

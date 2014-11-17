@@ -6,6 +6,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
 {-import XMonad.Layout.SimplestFloat-}
+import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ToggleLayouts
 {-import XMonad.Layout.PerWorkspace-}
@@ -17,6 +18,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.GridSelect
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWindows
+import XMonad.Actions.UpdatePointer
 
 import XMonad.Util.EZConfig
 
@@ -34,12 +36,12 @@ myTerminal = "gnome-terminal"
 
 myLayoutHook = smartBorders $ avoidStruts $ toggle $ windowNavigation $ tiled
         ||| Mirror tiled
-        ||| Accordion
-        ||| tabbed shrinkText defaultTheme
+        {-||| Accordion-}
+        {-||| tabbed shrinkText defaultTheme-}
+        {-||| spiral (6/7)-}
         where
                 toggle = toggleLayouts (noBorders Full)
-                highSpacing = spacing 15
-                tiled = highSpacing $ ResizableTall 1 delta (toRational 1/2) []
+                tiled = (spacing 5) $ ResizableTall 1 delta (toRational 1/2) []
                 delta = 5/100
 
 myWorkspaces = [ "1:web"
@@ -51,6 +53,7 @@ myWorkspaces = [ "1:web"
 
 
 myManageHook = composeAll       [ resource =? "skype" --> doShift "3:skype"
+                                , resource =? "transmission-gtk" --> doShift "4:chat"
                                 , className =? "Pidgin" --> doShift "4:chat"
                                 , resource =? "ario" --> doShift "5:music"
                                 , resource =? "sonata" --> doShift "5:music"
@@ -59,13 +62,16 @@ myManageHook = composeAll       [ resource =? "skype" --> doShift "3:skype"
                                 , isFullscreen --> doFullFloat
                                 ] <+> manageHook gnomeConfig
 
-myXPConfig = greenXPConfig 
-        { font = "xft:Lucida Grande:pixelsize=24:autohint=true"
-        , position = Top
-        , height = 24
-        , fgColor = "#E5DFD9"
-        , bgColor = "#292929"
-        }
+-- move the pointer when focus changes
+myLogHook = updatePointer (Relative 0.05 0.05) <+> logHook gnomeConfig
+
+{-myXPConfig = greenXPConfig -}
+        {-{ font = "xft:Lucida Grande:pixelsize=24:autohint=true"-}
+        {-, position = Top-}
+        {-, height = 24-}
+        {-, fgColor = "#E5DFD9"-}
+        {-, bgColor = "#292929"-}
+        {-}-}
 
 main = do
         xmonad $ gnomeConfig
@@ -73,15 +79,17 @@ main = do
                 , workspaces = myWorkspaces
                 , layoutHook = myLayoutHook
                 , manageHook = myManageHook
+                , logHook = myLogHook
                 , modMask = mod4Mask
-                , borderWidth = 2
-                , focusedBorderColor = "black"
-                , normalBorderColor = "gray"
+                , borderWidth = 3
+                , focusedBorderColor = "green"
+                , normalBorderColor = "black"
                 }
                  `additionalKeysP`
                 [ 
                 {-("M1-<Tab>", cycleRecentWindows [xK_Alt_L] xK_Tab xK_Tab )-}
                   ("M-S-l", sendMessage ToggleLayout)
+                , ("M-S-<Return>", spawn "gnome-terminal")
                 {-, ("M-q", prevScreen)-}
                 {-, ("M-w", nextScreen)-}
                 {-, ((mod4Mask, xK_e), swapNextScreen)-}
@@ -101,10 +109,10 @@ main = do
 
                 , ("M-s", (goToSelected defaultGSConfig))
                 , ("M-d", (bringSelected defaultGSConfig))
-                , ("M-x", (windowPromptGoto myXPConfig))
-                , ("M-c", (windowPromptBring myXPConfig))
-                , ("M-r", (shellPrompt myXPConfig))
-                , ("M-n", (appendFilePrompt myXPConfig "/home/mwhite/personal/Dropbox/notes.txt"))
-                , ("M-z", (xmonadPrompt myXPConfig))
+                {-, ("M-x", (windowPromptGoto myXPConfig))-}
+                {-, ("M-c", (windowPromptBring myXPConfig))-}
+                {-, ("M-r", (shellPrompt myXPConfig))-}
+                {-, ("M-n", (appendFilePrompt myXPConfig "/home/mwhite/personal/Dropbox/notes.txt"))-}
+                {-, ("M-z", (xmonadPrompt myXPConfig))-}
 
                 ]
