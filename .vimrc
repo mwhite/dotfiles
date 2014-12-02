@@ -46,7 +46,7 @@ if exists('*vundle#rc')
     Bundle 'guns/vim-clojure-static'
 
 
-    Bundle 'jmcantrell/vim-virtualenv'
+    "Bundle 'jmcantrell/vim-virtualenv'
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
@@ -69,7 +69,7 @@ if exists('*vundle#rc')
     Bundle 'ap/vim-css-color'
     Bundle 'groenewege/vim-less'
     Bundle 'tpope/vim-markdown'
-    Bundle 'vim-pandoc/vim-pandoc'
+    "Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
 
