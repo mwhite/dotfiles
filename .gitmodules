@@ -6,19 +6,13 @@
 	url = git@github.com:mwhite/pandoc-templates.git
 [submodule "bash/git-prompt"]
 	path = bash/git-prompt
-	url = git://github.com/lvv/git-prompt.git
-[submodule "bash/bashmarks"]
-	path = bash/bashmarks
-	url = git://github.com/huyng/bashmarks.git
+	url = git@github.com:lvv/git-prompt.git
 [submodule "bash/virtualenv-auto-activate"]
 	path = bash/virtualenv-auto-activate
 	url = https://gist.github.com/2211471.git
-[submodule "bash/git-pull-request"]
-	path = bash/git-pull-request
-	url = git://github.com/splitbrain/git-pull-request.git
 [submodule "bash/z"]
 	path = bash/z
-	url = git://github.com/rupa/z.git
+	url = git@github.com:rupa/z.git
 [submodule "bash/liquidprompt"]
 	path = bash/liquidprompt
-	url = git://github.com/nojhan/liquidprompt.git
+	url = git@github.com:nojhan/liquidprompt.git

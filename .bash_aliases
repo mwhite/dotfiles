@@ -19,12 +19,13 @@ alias g='git'
 function cpcd () { cp "$@" && eval cd "\"\$$#\""; }
 function mvcd () { mv "$@" && eval cd "\"\$$#\""; }
 
-__git_complete g __git_main
-
 function_exists() {
     declare -f -F $1 > /dev/null
     return $?
 }
+
+if function_exists __git_complete; then
+__git_complete g __git_main
 
 for al in `__git_aliases`; do
     alias g$al="git $al"
@@ -32,3 +33,5 @@ for al in `__git_aliases`; do
     complete_func=_git_$(__git_aliased_command $al) 
     function_exists $complete_fnc && __git_complete g$al $complete_func
 done
+
+fi
