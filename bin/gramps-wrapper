@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo "Usage: gramps-wrapper \"database name\""
+echo "Use gramps -l to get a list of databases"
+
+wd=`pwd`
+DIR=~/genealogy/bd
+db="$1"
+
+echo "Opening database"
+gramps -O "$db"
+
+echo "Exporting GEDCOM"
+echo "yes\n" | gramps -O "$db" -e "$DIR/$db.ged"
+
+echo "Converting to Geneweb"
+cd $DIR
+../geneweb/ged2gwb/ged2gwb -f "$db.ged" -o "$db" -log $db.ged2gwb.log # -uin
+../geneweb/src/consang "$db"
+
+cd $wd
+
+echo "Backing up to .gramps"
+echo "yes\n" | gramps -O "$db" -e "$DIR/$db.gramps"
+
