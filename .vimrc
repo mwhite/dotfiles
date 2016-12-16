@@ -11,12 +11,16 @@ silent! call vundle#rc()
 if exists('*vundle#rc')
     Bundle 'gmarik/vundle'
     Bundle 'wgibbs/vim-irblack'
+    Bundle 'scheakur/vim-scheakur'
     "Bundle 'endel/vim-github-colorscheme'
     colorscheme ir_black
 
     Bundle 'kien/ctrlp.vim'
     let g:ctrlp_root_markers= ['.git/']   " Search root git dir, not submodule
     let g:ctrlp_regexp = 1
+    let g:ctrlp_custom_ignore = {
+    \   'dir': 'uploads$\|static$',
+    \ }
 
     Bundle 'tpope/vim-fugitive'
     Bundle 'airblade/vim-gitgutter'
@@ -26,7 +30,7 @@ if exists('*vundle#rc')
     Bundle 'scrooloose/syntastic'
     let g:syntastic_check_on_open=1
     let g:syntastic_enable_signs=0
-    let g:syntastic_javascript_checkers = ['jsxhint']
+    let g:syntastic_javascript_checkers = ['eslint']
 
     
     Bundle 'sjl/gundo.vim'
@@ -39,7 +43,7 @@ if exists('*vundle#rc')
 
     Bundle 'michaeljsmith/vim-indent-object'
     Bundle 'scrooloose/nerdcommenter'
-    "Bundle 'scrooloose/nerdtree'
+    Bundle 'scrooloose/nerdtree'
     let NERDTreeIgnore=[
         \ '\~$',
         \ '\.pyc$',
@@ -73,6 +77,7 @@ if exists('*vundle#rc')
     Bundle 'pangloss/vim-javascript'
     Bundle 'Glench/Vim-Jinja2-Syntax'
     Bundle 'mxw/vim-jsx'
+    let g:jsx_ext_required = 0
     Bundle 'ap/vim-css-color'
     Bundle 'groenewege/vim-less'
     Bundle 'tpope/vim-markdown'
@@ -218,6 +223,8 @@ let g:jedi#usages_command = "<leader>jn"
 
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 map <c-j> j<c-e>
 map <c-k> k<c-y>
@@ -318,7 +325,7 @@ if has("autocmd")
         "   <tag>
         "        |
         "   </tag>
-        au filetype html,htmldjango,jinja nnoremap <buffer> <s-cr>vit<ESC>a<CR><ESC>vito<ESC>i<CR><ESC>
+        "au filetype html,htmldjango,jinja nnoremap <buffer> <s-cr>vit<ESC>a<CR><ESC>vito<ESC>i<CR><ESC>
     augroup END
 
     augroup ft_java

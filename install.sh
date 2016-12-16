@@ -38,7 +38,7 @@ source ~/.bashrc
 # A list of repos that can be added with add-apt-repository
 repos=(
     # latest git releases
-    ppa:git-core/candidate 
+    ppa:git-core/ppa
 
     # Firefox Aurora builds (stable pre-beta)
     ppa:ubuntu-mozilla-daily/firefox-aurora
@@ -47,32 +47,41 @@ repos=(
     ppa:indicator-multiload/stable-daily
    
     # compiz-plugins-main with sane grid plugin behavior 
-    ppa:ef/grid-cycling
+    # ppa:ef/grid-cycling
     
-    'deb http://linux.dropbox.com/ubuntu precise main'
+    'deb http://linux.dropbox.com/ubuntu trusty main'
 
-    'deb http://apt.last.fm/ debian testing'
+    ppa:chris-lea/node.js      
 );
 
 # Packages to install
 install=(
     ## Essentials
+    xmonad
+    gnome-panel
+
     kupfer
     vim-gnome vim-gtk exuberant-ctags
     dropbox
     gnome-tweak-tool
-    compizconfig-settings-manager
-    compiz-plugins-extra
+    shutter
+    #compizconfig-settings-manager
+    #compiz-plugins-extra
     indicator-multiload
     indicator-applet-complete
-    vpnc network-manager-vpnc network-manager-vpnc-gnome
+    #vpnc network-manager-vpnc network-manager-vpnc-gnome
+    gnome-wise-icon-theme
+    gdebi
+
+    ## For clearlooks-phenix
+    gtk2-engines
 
     ## Multimedia
     ubuntu-restricted-extras non-free-codecs w32codecs libdvdcss2   # from Medibuntu
     vlc
     mpd mpdscribble pms ario
-    lastfm
-    cheese
+    #lastfm
+    flashplugin-installer
 
     ## Office/Productivity
     pandoc
@@ -81,6 +90,7 @@ install=(
     gnumeric
     qalculate
     catdoc
+    graphviz
 
     ## Internet
     curl
@@ -97,6 +107,10 @@ install=(
     htop
     nautilus-open-terminal
     qt4-qtconfig
+
+    ## Development
+    nodejs
+    build-essential
 );
 
 function join() {
@@ -126,9 +140,9 @@ if [[ ! $(sudo apt-key list | grep "google") ]]; then
     wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub -O- | sudo apt-key add -
 fi
 
-if [[ ! $(sudo apt-key list | grep "last.fm") ]]; then
-    wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add -
-fi
+#if [[ ! $(sudo apt-key list | grep "last.fm") ]]; then
+#    wget -q http://apt.last.fm/last.fm.repo.gpg -O- | sudo apt-key add -
+#fi
 
 # add Medibuntu and update package list
 if [[ ! $(dpkg -s medibuntu-keyring > /dev/null 2>&1) ]]; then
