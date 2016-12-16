@@ -20,17 +20,22 @@ if exists('*vundle#rc')
 
     Bundle 'tpope/vim-fugitive'
     Bundle 'airblade/vim-gitgutter'
+    let g:gitgutter_max_signs = 10000
+
 
     Bundle 'scrooloose/syntastic'
     let g:syntastic_check_on_open=1
     let g:syntastic_enable_signs=0
+    let g:syntastic_javascript_checkers = ['jsxhint']
+
     
     Bundle 'sjl/gundo.vim'
 
-    Bundle 'bling/vim-airline'
-    let g:airline_left_sep=''
-    let g:airline_right_sep=''
-    let g:airline_enable_syntastic=0
+    "Disabling, error with current installed version of vim
+    "Bundle 'bling/vim-airline'
+    "let g:airline_left_sep=''
+    "let g:airline_right_sep=''
+    "let g:airline_enable_syntastic=0
 
     Bundle 'michaeljsmith/vim-indent-object'
     Bundle 'scrooloose/nerdcommenter'
@@ -66,9 +71,12 @@ if exists('*vundle#rc')
     Bundle 'othree/html5.vim'
     Bundle 'gregsexton/MatchTag'
     Bundle 'pangloss/vim-javascript'
+    Bundle 'Glench/Vim-Jinja2-Syntax'
+    Bundle 'mxw/vim-jsx'
     Bundle 'ap/vim-css-color'
     Bundle 'groenewege/vim-less'
     Bundle 'tpope/vim-markdown'
+    let g:markdown_fenced_languages = ['javascript', 'python', 'html', 'sql', 'json']
     "Bundle 'vim-pandoc/vim-pandoc'
     let g:pandoc_no_folding = 1
     let g:pandoc_use_hard_wraps = 1
@@ -271,9 +279,9 @@ if has("autocmd")
         au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
         " Leave insert mode after 15 seconds without input
-        au CursorHoldI * stopinsert
-        au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
-        au InsertLeave * let &updatetime=updaterestore
+        "au CursorHoldI * stopinsert
+        "au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+        "au InsertLeave * let &updatetime=updaterestore
 
         " Close window if it's quickfix and the only one visible
         au WinEnter * if winnr('$') < 2 && &buftype=="quickfix" | quit | endif

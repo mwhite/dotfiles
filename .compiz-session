@@ -9,7 +9,7 @@ indicator-multiload &
 kupfer --no-splash &
 #mpd &
 
-pidgin &
+#pidgin &
 #skype &
 
 if [ $(ps aux | grep -c mpdscribble) = '1' ]; then
