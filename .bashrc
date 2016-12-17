@@ -51,42 +51,14 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
-
-if [ -f /etc/bash_completion.d/git-prompt ] && ! shopt -oq posix; then
-    . /etc/bash_completion.d/git-prompt
-fi
-
-# Load RVM into a shell session as a function
-#if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-    #source "$HOME/.rvm/scripts/rvm"
-    #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
 #fi
 
-#if [[ -s "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash" ]]; then
-    #source "$HOME/dotfiles/bash/pandoc-completion/pandoc-completion.bash"
-#fi
+DOTFILES=$HOME/code/dotfiles
 
-if [[ -f "$HOME/dotfiles/bash/django_bash_completion" ]]; then
-    source "$HOME/dotfiles/bash/django_bash_completion"
-fi
-
-if [[ -f "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.sh" ]]; then
-    source "$HOME/dotfiles/bash/virtualenv-auto-activate/virtualenv-auto-activate.sh"
-fi
-
-#if [[ -f "$HOME/dotfiles/bash/git-prompt/git-prompt.sh" ]]; then
-    #[[ $- == *i* ]] &&   . "$HOME/dotfiles/bash/git-prompt/git-prompt.sh"
-#fi
-
-if [[ -f "$HOME/dotfiles/bash/liquidprompt/liquidprompt" ]]; then
-    . "$HOME/dotfiles/bash/liquidprompt/liquidprompt"
-fi
-
-if [[ -f "$HOME/dotfiles/bash/z/z.sh" ]]; then
-    . "$HOME/dotfiles/bash/z/z.sh"
+if [[ -f "$DOTFILES/bash/liquidprompt/liquidprompt" ]]; then
+    . "$DOTFILES/bash/liquidprompt/liquidprompt"
 fi
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
