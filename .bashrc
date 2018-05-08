@@ -9,6 +9,7 @@ set -o vi
 
 PATH=$PATH:$HOME/dotfiles/bin
 PATH=$PATH:$HOME/.cabal/bin
+PATH=$PATH:$HOME/.local/bin
 PATH="/usr/local/heroku/bin:$PATH"
 PATH=$PATH:$HOME/dotfiles/bash/git-pull-request
 export PATH
@@ -51,11 +52,14 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
-DOTFILES=$HOME/code/dotfiles
+DOTFILES=$HOME/dotfiles
+
+LP_PS1_PREFIX="\[[\e]0;\u@\h: \w\a]\]"
+
 
 if [[ -f "$DOTFILES/bash/liquidprompt/liquidprompt" ]]; then
     . "$DOTFILES/bash/liquidprompt/liquidprompt"

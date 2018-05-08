@@ -31,6 +31,12 @@
 [mergetool]
     prompt = true
 
+[pull]
+    ff = only
+
+[push]
+    default = upstream
+
 [rebase]
     autosquash = true
     autostash = true

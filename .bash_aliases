@@ -1,5 +1,6 @@
 alias gvim='UBUNTU_MENUPROXY= gvim'
 alias viml='vim -V9vimlog'
+alias v='viml'
 
 alias ack='ack-grep'
 alias l="ls"

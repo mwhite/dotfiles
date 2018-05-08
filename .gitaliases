@@ -3,18 +3,21 @@
     la = "!git config -l | grep alias | cut -c 7-"
     h = help
     
-    su = submodule
     root = "!pwd"
 
     ### Reading ###
     
-    sh = show
     # diffs with last commit
     dl = show -1
     dls = show -1 --stat
     
-    # branches with details, sorted by last modified
+    # List local branches with details, sorted by last modified.
     b = "!git for-each-ref --sort='-authordate' --format='%(refname)   $%(authordate:relative)   $%(authorname)   $%(objectname:short)' refs/heads | sed -e 's-refs/heads/--' | column -nt -s$"
+    # List all branches with details, sorted by last modified, first 20.
+    ba = "!git for-each-ref --sort='-authordate' --format='%(refname)   $%(authordate:relative)    $%(authorname)    $%(objectname:short)' refs/heads refs/remotes | sed -e 's-refs/heads/--' | column -nt -s$ | head -n 20"
+
+    # List all branches with details, sorted by last modified.
+    baa = "!git for-each-ref --sort='-authordate' --format='%(refname)   $%(authordate:relative)    $%(authorname)    $%(objectname:short)' refs/heads refs/remotes | sed -e 's-refs/heads/--' | column -nt -s$ | less"
     br = branch
     
     # one-line log with info
@@ -32,8 +35,6 @@
     co = checkout
     cob = checkout -b
 
-    rl = reflog
-    
     # find files by name
     find = "!git ls-files --exclude-standard | grep -i"
 
@@ -57,7 +58,6 @@
     # don't add untracked files
     a = add -u
     ap = add -u -p
-    aa = add 
 
     # show diff in commit message editor
     c = commit --verbose
@@ -78,16 +78,19 @@
 
     con = diff --name-only --diff-filter=U
 
-    findmerge = "!git log --merges --ancestry-path --oneline $1..origin | tail"
+    bmd = "!git branch --merged $1 | grep -v $1 -v $(git current-branch) | xargs -n 1 git branch -d"
+
+    find-merge = "!git log --merges --ancestry-path --oneline $1..origin | tail"
+    current-branch = "!git branch | grep -e \"^*\" | cut -d' ' -f 2"
     p = push
     po = push origin
     pfo = push -f origin
     pu = push upstream
     pfu = push -f upstream
 
-    pl = pull
+    ;pl = pull
 
-    cp = cherry-pick
+    ;cp = cherry-pick
 
     r = rebase
     ri = rebase -i
@@ -100,6 +103,6 @@
     reh1 = reset HEAD^ --hard
     reh2 = reset HEAD^^ --hard
 
-    st = stash
+    ;st = stash
     
 

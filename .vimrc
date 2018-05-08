@@ -15,12 +15,18 @@ if exists('*vundle#rc')
     "Bundle 'endel/vim-github-colorscheme'
     colorscheme ir_black
 
-    Bundle 'kien/ctrlp.vim'
-    let g:ctrlp_root_markers= ['.git/']   " Search root git dir, not submodule
+    Bundle 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_root_markers= ['.git/', '.git']   " Search root git dir, not submodule
     let g:ctrlp_regexp = 1
-    let g:ctrlp_custom_ignore = {
-    \   'dir': 'uploads$\|static$',
-    \ }
+    let g:ctrlp_max_files = 0
+
+    Bundle 'mhinz/vim-startify'
+
+    Bundle 'yssl/QFEnter'
+    let g:qfenter_keymap = {}
+    let g:qfenter_keymap.vopen = ['<C-v>']
+    let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+    let g:qfenter_keymap.topen = ['<C-t>']
 
     Bundle 'tpope/vim-fugitive'
     Bundle 'airblade/vim-gitgutter'
@@ -28,14 +34,20 @@ if exists('*vundle#rc')
 
 
     Bundle 'scrooloose/syntastic'
-    let g:syntastic_check_on_open=1
+    let g:syntastic_check_on_open=0
     let g:syntastic_enable_signs=0
+    " Slows things down a lot
+    let g:syntastic_enable_highlighting=0
     let g:syntastic_javascript_checkers = ['eslint']
 
+    Bundle 'milkypostman/vim-togglelist'
+    let g:toggle_list_no_mappings = 1
+    nmap <script> <silent> <leader>tl :call ToggleLocationList()<CR>
+    nmap <script> <silent> <leader>tql :call ToggleQuickfixList()<CR>
     
     Bundle 'sjl/gundo.vim'
+    let g:gundo_prefer_python3 = 1
 
-    "Disabling, error with current installed version of vim
     "Bundle 'bling/vim-airline'
     "let g:airline_left_sep=''
     "let g:airline_right_sep=''
@@ -52,34 +64,28 @@ if exists('*vundle#rc')
     Bundle 'Raimondi/delimitMate'
     let delimitMate_balance_matchpairs = 1
 
-    Bundle 'guns/vim-clojure-static'
-
-
     "Bundle 'jmcantrell/vim-virtualenv'
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#popup_on_dot = 0
-    let g:jedi#popup_select_first = 0
+    "let g:jedi#popup_select_first = 0
     let g:jedi#use_tabs_not_buffers = 0
     
     Bundle 'marijnh/tern_for_vim'
 
-
-    Bundle 'tpope/vim-unimpaired'
+    "Bundle 'tpope/vim-unimpaired'
     
     Bundle 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+
+    Bundle 'sheerun/vim-polyglot'
 
     Bundle 'jamessan/vim-gnupg'
     Bundle 'sukima/xmledit'
-    Bundle 'tpope/vim-git'
-    Bundle 'othree/html5.vim'
     Bundle 'gregsexton/MatchTag'
-    Bundle 'pangloss/vim-javascript'
     Bundle 'Glench/Vim-Jinja2-Syntax'
-    Bundle 'mxw/vim-jsx'
-    let g:jsx_ext_required = 0
     Bundle 'ap/vim-css-color'
-    Bundle 'groenewege/vim-less'
+
     Bundle 'tpope/vim-markdown'
     let g:markdown_fenced_languages = ['javascript', 'python', 'html', 'sql', 'json']
     "Bundle 'vim-pandoc/vim-pandoc'
@@ -88,6 +94,7 @@ if exists('*vundle#rc')
 
     Bundle 'majutsushi/tagbar'
     let g:tagbar_singleclick = 1
+    let g:tagbar_sort = 0
 
     " Make high-color colorschemes look better on low-color terminals
     Bundle 'godlygeek/csapprox'
@@ -113,6 +120,7 @@ endif
 set nocompatible
 filetype plugin on
 filetype indent on
+syntax on
 set mouse=a
 set lazyredraw
 set wrap
@@ -122,6 +130,11 @@ set splitbelow
 set splitright
 set laststatus=2
 set nofoldenable
+
+set autoread
+set title
+set titleold=
+set updatetime=500
 
 " start scrolling when within 5 lines of the top/bottom
 set scrolloff=5
@@ -184,6 +197,7 @@ nmap \ ,
 map - :NERDTreeToggle<CR>
 map + :TagbarToggle<CR>
 
+map <leader>tn :tabnew 
 map <leader>p :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 map <leader>t :CtrlPBufTag<CR>
@@ -271,6 +285,9 @@ if has("autocmd")
     augroup general
         au!
 
+        "au BufEnter * let &titlestring = @%
+        au BufEnter * set title
+
         au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
         au BufNewFile,BufRead *.txt,*.log,README,INSTALL setlocal filetype=text
         au BufNewFile,BufRead .gitaliases,.gituser setlocal filetype=gitconfig
@@ -297,7 +314,7 @@ if has("autocmd")
     augroup tab_settings
         au!
         au filetype c,cpp                     setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=79
+        au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=120
         au filetype sh,csh,tcsh,zsh           setlocal ts=4 sts=4 sw=4 et
         au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et tw=80
         au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
@@ -339,7 +356,10 @@ if has("autocmd")
     augroup END
 
     augroup ft_python
-        au! filetype python setlocal formatoptions+=t
+        au! 
+        au filetype python setlocal formatoptions+=t
+        au filetype python setlocal omnifunc=jedi#completions
+
     augroup END
 
     augroup ft_tex

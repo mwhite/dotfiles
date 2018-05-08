@@ -1,5 +1,7 @@
 .ropeproject/
 .tern-port
+.tern-project
+.vimrc
 
 *.swp
 .DS_Store
