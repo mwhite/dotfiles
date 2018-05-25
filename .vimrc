@@ -1,108 +1,106 @@
 " mwhite's .vimrc, cobbled from various sources
 
-filetype off
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 set backspace=2
-set rtp+=~/.vim/bundle/vundle/
-silent! call vundle#rc()
 
 " Plugins
 " =======
 
-if exists('*vundle#rc')
-    Bundle 'gmarik/vundle'
-    Bundle 'wgibbs/vim-irblack'
-    Bundle 'scheakur/vim-scheakur'
-    "Bundle 'endel/vim-github-colorscheme'
-    colorscheme ir_black
+call plug#begin('~/.vim/plugged')
 
-    Bundle 'ctrlpvim/ctrlp.vim'
-    let g:ctrlp_root_markers= ['.git/', '.git']   " Search root git dir, not submodule
-    let g:ctrlp_regexp = 1
-    let g:ctrlp_max_files = 0
+Plug 'wgibbs/vim-irblack'
+Plug 'scheakur/vim-scheakur'
+"Plug 'endel/vim-github-colorscheme'
 
-    Bundle 'mhinz/vim-startify'
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_root_markers= ['.git/', '.git']   " Search root git dir, not submodule
+let g:ctrlp_regexp = 1
+let g:ctrlp_max_files = 0
+Plug 'jasoncodes/ctrlp-modified.vim'
 
-    Bundle 'yssl/QFEnter'
-    let g:qfenter_keymap = {}
-    let g:qfenter_keymap.vopen = ['<C-v>']
-    let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
-    let g:qfenter_keymap.topen = ['<C-t>']
+Plug 'mhinz/vim-startify'
 
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'airblade/vim-gitgutter'
-    let g:gitgutter_max_signs = 10000
+Plug 'yssl/QFEnter'
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
 
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_max_signs = 10000
 
-    Bundle 'scrooloose/syntastic'
-    let g:syntastic_check_on_open=0
-    let g:syntastic_enable_signs=0
-    " Slows things down a lot
-    let g:syntastic_enable_highlighting=0
-    let g:syntastic_javascript_checkers = ['eslint']
+Plug 'scrooloose/syntastic'
+let g:syntastic_check_on_open=0
+let g:syntastic_enable_signs=0
+" Slows things down a lot
+let g:syntastic_enable_highlighting=0
+let g:syntastic_javascript_checkers = ['eslint']
 
-    Bundle 'milkypostman/vim-togglelist'
-    let g:toggle_list_no_mappings = 1
-    nmap <script> <silent> <leader>tl :call ToggleLocationList()<CR>
-    nmap <script> <silent> <leader>tql :call ToggleQuickfixList()<CR>
-    
-    Bundle 'sjl/gundo.vim'
-    let g:gundo_prefer_python3 = 1
+Plug 'milkypostman/vim-togglelist'
+let g:toggle_list_no_mappings = 1
 
-    "Bundle 'bling/vim-airline'
-    "let g:airline_left_sep=''
-    "let g:airline_right_sep=''
-    "let g:airline_enable_syntastic=0
+Plug 'sjl/gundo.vim'
+let g:gundo_prefer_python3 = 1
 
-    Bundle 'michaeljsmith/vim-indent-object'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'scrooloose/nerdtree'
-    let NERDTreeIgnore=[
-        \ '\~$',
-        \ '\.pyc$',
-        \ ]
-    
-    Bundle 'Raimondi/delimitMate'
-    let delimitMate_balance_matchpairs = 1
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore=[
+    \ '\~$',
+    \ '\.pyc$',
+    \ ]
+let NERDTreeHijackNetrw=1
 
-    "Bundle 'jmcantrell/vim-virtualenv'
-    Bundle 'davidhalter/jedi-vim'
-    let g:jedi#popup_on_dot = 0
-    "let g:jedi#popup_select_first = 0
-    let g:jedi#use_tabs_not_buffers = 0
-    
-    Bundle 'marijnh/tern_for_vim'
+Plug 'Raimondi/delimitMate'
+let delimitMate_balance_matchpairs = 1
 
-    "Bundle 'tpope/vim-unimpaired'
-    
-    Bundle 'ervandew/supertab'
-    let g:SuperTabDefaultCompletionType = "context"
-    let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+"Plug 'jmcantrell/vim-virtualenv'
+Plug 'davidhalter/jedi-vim'
+let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_select_first = 0
+let g:jedi#use_tabs_not_buffers = 0
 
-    Bundle 'sheerun/vim-polyglot'
+Plug 'marijnh/tern_for_vim'
 
-    Bundle 'jamessan/vim-gnupg'
-    Bundle 'sukima/xmledit'
-    Bundle 'gregsexton/MatchTag'
-    Bundle 'Glench/Vim-Jinja2-Syntax'
-    Bundle 'ap/vim-css-color'
+Plug 'tpope/vim-unimpaired'
 
-    Bundle 'tpope/vim-markdown'
-    let g:markdown_fenced_languages = ['javascript', 'python', 'html', 'sql', 'json']
-    "Bundle 'vim-pandoc/vim-pandoc'
-    let g:pandoc_no_folding = 1
-    let g:pandoc_use_hard_wraps = 1
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
-    Bundle 'majutsushi/tagbar'
-    let g:tagbar_singleclick = 1
-    let g:tagbar_sort = 0
+Plug 'sheerun/vim-polyglot'
 
-    " Make high-color colorschemes look better on low-color terminals
-    Bundle 'godlygeek/csapprox'
-    let g:CSApprox_verbose_level = 0
-    
-    "Bundle 'mattn/zencoding-vim'
-    "Bundle 'tpope/vim-surround'
-endif
+Plug 'jamessan/vim-gnupg'
+Plug 'sukima/xmledit'
+Plug 'gregsexton/MatchTag'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'ap/vim-css-color'
+
+Plug 'tpope/vim-markdown'
+let g:markdown_fenced_languages = ['javascript', 'python', 'html', 'sql', 'json']
+"Plug 'vim-pandoc/vim-pandoc'
+let g:pandoc_no_folding = 1
+let g:pandoc_use_hard_wraps = 1
+
+Plug 'majutsushi/tagbar'
+let g:tagbar_singleclick = 1
+let g:tagbar_sort = 0
+
+" Make high-color colorschemes look better on low-color terminals
+Plug 'godlygeek/csapprox'
+let g:CSApprox_verbose_level = 0
+
+Plug 'tpope/vim-sleuth'
+
+call plug#end()
+
+colorscheme ir_black
 
 filetype on
 syntax on
@@ -117,6 +115,7 @@ if has("gui_running")
     set guioptions-=T
 endif
 
+set secure
 set nocompatible
 filetype plugin on
 filetype indent on
@@ -143,8 +142,10 @@ set scrolloff=5
 set switchbuf=useopen,usetab
 
 
+set textwidth=80
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4  " filetype-specific settings below
 set autoindent
+set breakindent
 set hlsearch
 set incsearch
 set ignorecase
@@ -197,38 +198,29 @@ nmap \ ,
 map - :NERDTreeToggle<CR>
 map + :TagbarToggle<CR>
 
-map <leader>tn :tabnew 
 map <leader>p :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
+map <leader>bu :CtrlPBuffer<CR>
 map <leader>t :CtrlPBufTag<CR>
 map <leader>cq :CtrlPQuickfix<CR>
-
-map <leader>a2 :Accordion 2<CR>
-map <leader>a3 :Accordion 3<CR>
+map <leader>m :CtrlPModified<CR>
+map <leader>b :CtrlPBranch<CR>
+map <leader>bm :CtrlPBranchModified<CR>
 
 map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
 map <leader>gh :Gbrowse<CR>
-map <leader>gs :Gstatus<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gl :Glog<CR>
-map <leader>ge :Gedit<CR>
 map <leader>gg :Ggrep<space>
+map <leader>gf :Ggrep <cword><cr>
 
 map <leader>se :Errors<CR>
 map <leader>uu :GundoToggle<CR>
 
-map <leader>ag :Ack<space>
-
-map <leader>gf :Ggrep <cword><cr>
-map <leader>af :Ack <cword><cr>
+nmap <script> <silent> <leader>tl :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>tql :call ToggleQuickfixList()<CR>
 
 cabbrev make silent make
 cabbrev grep silent grep
 cabbrev Ggrep silent Ggrep
 cabbrev Glog silent Glog
-
-cabbrev ft set filetype=
 
 let g:jedi#goto_assignments_command = "<leader>l"
 let g:jedi#goto_definition_command = "<leader>d"
@@ -245,15 +237,11 @@ map <c-k> k<c-y>
 
 map <leader>w <c-w>
 map <Leader>q :q<CR>
-map <Leader>v :so ~/.vimrc<CR>
 
 nnoremap <silent> <Esc><Esc> <Esc>:set hlsearch!<CR><Esc>
 
 " Toggle display wrap
 map <Leader>tw :setlocal wrap!<CR>
-
-" Merge consecutive empty lines and clean up trailing whitespace
-map <Leader>fm :g/^\s*$/,/\S/-j<Bar>%s/\s\+$//<CR>
 
 " Copy and paste to/from OS clipboard
 noremap <Leader>sy "+y
@@ -311,23 +299,10 @@ if has("autocmd")
         au WinEnter * if winnr('$') < 2 && &buftype=="quickfix" | quit | endif
     augroup END
 
-    augroup tab_settings
-        au!
-        au filetype c,cpp                     setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype python                    setlocal ts=4 sts=4 sw=4 et tw=120
-        au filetype sh,csh,tcsh,zsh           setlocal ts=4 sts=4 sw=4 et
-        au filetype php,javascript,css        setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype ruby,eruby,yaml           setlocal ts=2 sts=2 sw=2 et
-        au filetype text,txt,markdown,pandoc  setlocal ts=4 sts=4 sw=4 et tw=80
-        au filetype html,xhtml,xml            setlocal ts=2 sts=2 sw=2 et
-        au filetype haskell                   setlocal ts=8 sts=8 sw=8 et
-        au filetype vim                       setlocal ts=4 sts=4 sw=4 et
-        au filetype tex                       setlocal ts=4 sts=4 sw=4 et tw=80
-    augroup END
-
     augroup ft_javascript
         au!
         au filetype javascript nnoremap <buffer> <leader>d :TernDef<CR>
+        au filetype javascript nnoremap <buffer> <leader>l :TernDef<CR>
         au filetype javascript nnoremap <buffer> K :TernDoc<CR>
         au filetype javascript nnoremap <buffer> <leader>jr :TernRename<CR>
         au filetype javascript nnoremap <buffer> <leader>jn :TernRefs<CR>
