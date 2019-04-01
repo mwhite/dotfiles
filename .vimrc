@@ -14,8 +14,8 @@ set backspace=2
 call plug#begin('~/.vim/plugged')
 
 Plug 'wgibbs/vim-irblack'
-Plug 'scheakur/vim-scheakur'
-"Plug 'endel/vim-github-colorscheme'
+
+Plug 'mhinz/vim-startify'
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_root_markers= ['.git/', '.git']   " Search root git dir, not submodule
@@ -23,7 +23,6 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_max_files = 0
 Plug 'jasoncodes/ctrlp-modified.vim'
 
-Plug 'mhinz/vim-startify'
 
 Plug 'yssl/QFEnter'
 let g:qfenter_keymap = {}
@@ -60,13 +59,13 @@ let NERDTreeHijackNetrw=1
 Plug 'Raimondi/delimitMate'
 let delimitMate_balance_matchpairs = 1
 
-"Plug 'jmcantrell/vim-virtualenv'
+Plug 'jmcantrell/vim-virtualenv'
 Plug 'davidhalter/jedi-vim'
 let g:jedi#popup_on_dot = 0
 "let g:jedi#popup_select_first = 0
 let g:jedi#use_tabs_not_buffers = 0
 
-Plug 'marijnh/tern_for_vim'
+Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 
 Plug 'tpope/vim-unimpaired'
 
@@ -169,9 +168,16 @@ set directory=~/.vim/tmp/swap//
 set backup
 set backupskip=/tmp/*
 
+if !isdirectory(&backupdir)
+    call mkdir(expand(&backupdir), "p")
+endif
+
 if has("persistent_undo")
     set undodir=~/.vim/undodir
     set undofile
+    if !isdirectory(&undodir)
+        call mkdir(expand(&undodir), "p")
+    endif
 endif
 
 " Make diffs look better

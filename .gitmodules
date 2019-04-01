@@ -4,9 +4,6 @@
 [submodule "pandoc/pandoc-templates"]
 	path = pandoc/pandoc-templates
 	url = git@github.com:mwhite/pandoc-templates.git
-[submodule "bash/git-prompt"]
-	path = bash/git-prompt
-	url = git@github.com:lvv/git-prompt.git
 [submodule "bash/virtualenv-auto-activate"]
 	path = bash/virtualenv-auto-activate
 	url = https://gist.github.com/2211471.git

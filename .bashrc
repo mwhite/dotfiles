@@ -58,9 +58,6 @@ fi
 
 DOTFILES=$HOME/dotfiles
 
-LP_PS1_PREFIX="\[[\e]0;\u@\h: \w\a]\]"
-
-
 if [[ -f "$DOTFILES/bash/liquidprompt/liquidprompt" ]]; then
     . "$DOTFILES/bash/liquidprompt/liquidprompt"
 fi
