@@ -13,27 +13,50 @@ set backspace=2
 
 call plug#begin('~/.vim/plugged')
 
+"" Color theme
 Plug 'wgibbs/vim-irblack'
 
+"" Start screen
 Plug 'mhinz/vim-startify'
 
+"" File and symbol selector
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jasoncodes/ctrlp-modified.vim'
 let g:ctrlp_root_markers= ['.git/', '.git']   " Search root git dir, not submodule
 let g:ctrlp_regexp = 1
 let g:ctrlp_max_files = 0
-Plug 'jasoncodes/ctrlp-modified.vim'
+map <leader>p :CtrlP<CR>
+map <leader>bu :CtrlPBuffer<CR>
+map <leader>t :CtrlPBufTag<CR>
+map <leader>cq :CtrlPQuickfix<CR>
+map <leader>m :CtrlPModified<CR>
+map <leader>b :CtrlPBranch<CR>
+map <leader>bm :CtrlPBranchModified<CR>
 
-
+"" Quickfix location opening
 Plug 'yssl/QFEnter'
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
 
+"" Git integration
+Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 10000
+map <leader>gb :Gblame<CR>
+map <leader>gh :Gbrowse<CR>
+map <leader>gg :Ggrep<space>
+map <leader>gf :Ggrep <cword><cr>
 
+"" Tagbar
+Plug 'majutsushi/tagbar'
+let g:tagbar_singleclick = 1
+let g:tagbar_sort = 0
+map + :TagbarToggle<CR>
+
+"" Syntax checking
 Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open=0
 let g:syntastic_enable_signs=0
@@ -44,37 +67,71 @@ let g:syntastic_javascript_checkers = ['eslint']
 Plug 'milkypostman/vim-togglelist'
 let g:toggle_list_no_mappings = 1
 
+"" Undo tree
 Plug 'sjl/gundo.vim'
 let g:gundo_prefer_python3 = 1
+map <leader>uu :GundoToggle<CR>
 
+"" Indent object for braceless languages
 Plug 'michaeljsmith/vim-indent-object'
+
+"" Comment toggling
 Plug 'scrooloose/nerdcommenter'
+
+"" File manager
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 let NERDTreeIgnore=[
     \ '\~$',
     \ '\.pyc$',
     \ ]
 let NERDTreeHijackNetrw=1
+map - :NERDTreeTabsToggle<CR>
+"autocmd BufWinEnter * NERDTreeMirrorOpen
 
 Plug 'Raimondi/delimitMate'
 let delimitMate_balance_matchpairs = 1
 
+"" Python support
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'davidhalter/jedi-vim'
 let g:jedi#popup_on_dot = 0
 "let g:jedi#popup_select_first = 0
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#goto_assignments_command = "<leader>l"
+let g:jedi#goto_definition_command = "<leader>d"
+let g:jedi#rename_command = "<leader>jr"
+let g:jedi#usages_command = "<leader>jn"
+augroup ft_python
+    au! 
+    au filetype python setlocal formatoptions+=t
+    au filetype python setlocal omnifunc=jedi#completions
+augroup END
 
+
+"" JavaScript support
 Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
+augroup ft_javascript
+    au!
+    au filetype javascript nnoremap <buffer> <leader>d :TernDef<CR>
+    au filetype javascript nnoremap <buffer> <leader>l :TernDef<CR>
+    au filetype javascript nnoremap <buffer> K :TernDoc<CR>
+    au filetype javascript nnoremap <buffer> <leader>jr :TernRename<CR>
+    au filetype javascript nnoremap <buffer> <leader>jn :TernRefs<CR>
+augroup END
 
 Plug 'tpope/vim-unimpaired'
 
+"" Universal tab completion
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
+"" Syntax pack
 Plug 'sheerun/vim-polyglot'
 
+"" Extra functionality for common filetypes
 Plug 'jamessan/vim-gnupg'
 Plug 'sukima/xmledit'
 Plug 'gregsexton/MatchTag'
@@ -87,14 +144,11 @@ let g:markdown_fenced_languages = ['javascript', 'python', 'html', 'sql', 'json'
 let g:pandoc_no_folding = 1
 let g:pandoc_use_hard_wraps = 1
 
-Plug 'majutsushi/tagbar'
-let g:tagbar_singleclick = 1
-let g:tagbar_sort = 0
-
 " Make high-color colorschemes look better on low-color terminals
 Plug 'godlygeek/csapprox'
 let g:CSApprox_verbose_level = 0
 
+" Intelligently set tab settings
 Plug 'tpope/vim-sleuth'
 
 call plug#end()
@@ -201,37 +255,18 @@ nnoremap ; :
 let mapleader = ","
 nmap \ ,
 
-map - :NERDTreeToggle<CR>
-map + :TagbarToggle<CR>
 
-map <leader>p :CtrlP<CR>
-map <leader>bu :CtrlPBuffer<CR>
-map <leader>t :CtrlPBufTag<CR>
-map <leader>cq :CtrlPQuickfix<CR>
-map <leader>m :CtrlPModified<CR>
-map <leader>b :CtrlPBranch<CR>
-map <leader>bm :CtrlPBranchModified<CR>
-
-map <leader>gb :Gblame<CR>
-map <leader>gh :Gbrowse<CR>
-map <leader>gg :Ggrep<space>
-map <leader>gf :Ggrep <cword><cr>
 
 map <leader>se :Errors<CR>
-map <leader>uu :GundoToggle<CR>
 
 nmap <script> <silent> <leader>tl :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>tql :call ToggleQuickfixList()<CR>
 
-cabbrev make silent make
+"cabbrev make silent make
 cabbrev grep silent grep
 cabbrev Ggrep silent Ggrep
 cabbrev Glog silent Glog
 
-let g:jedi#goto_assignments_command = "<leader>l"
-let g:jedi#goto_definition_command = "<leader>d"
-let g:jedi#rename_command = "<leader>jr"
-let g:jedi#usages_command = "<leader>jn"
 
 nnoremap j gj
 nnoremap k gk
@@ -279,13 +314,7 @@ if has("autocmd")
     augroup general
         au!
 
-        "au BufEnter * let &titlestring = @%
         au BufEnter * set title
-
-        au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
-        au BufNewFile,BufRead *.txt,*.log,README,INSTALL setlocal filetype=text
-        au BufNewFile,BufRead .gitaliases,.gituser setlocal filetype=gitconfig
-        au BufNewFile,BufRead .bash_aliases setlocal filetype=sh
 
         au QuickFixCmdPost [^l]* nested cwindow | redraw!
 
@@ -296,34 +325,10 @@ if has("autocmd")
         " Remember cursor position
         au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-        " Leave insert mode after 15 seconds without input
-        "au CursorHoldI * stopinsert
-        "au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
-        "au InsertLeave * let &updatetime=updaterestore
-
         " Close window if it's quickfix and the only one visible
         au WinEnter * if winnr('$') < 2 && &buftype=="quickfix" | quit | endif
-    augroup END
-
-    augroup ft_javascript
-        au!
-        au filetype javascript nnoremap <buffer> <leader>d :TernDef<CR>
-        au filetype javascript nnoremap <buffer> <leader>l :TernDef<CR>
-        au filetype javascript nnoremap <buffer> K :TernDoc<CR>
-        au filetype javascript nnoremap <buffer> <leader>jr :TernRename<CR>
-        au filetype javascript nnoremap <buffer> <leader>jn :TernRefs<CR>
-    augroup END
-
-    augroup ft_html
-        au!
-        " Use Shift-Return to turn this:
-        "   <tag>|</tag>
-        "
-        " into this:
-        "   <tag>
-        "        |
-        "   </tag>
-        "au filetype html,htmldjango,jinja nnoremap <buffer> <s-cr>vit<ESC>a<CR><ESC>vito<ESC>i<CR><ESC>
+        
+        au BufNewFile,BufRead *.json,*.jison setlocal filetype=javascript
     augroup END
 
     augroup ft_java
@@ -334,13 +339,6 @@ if has("autocmd")
     augroup ft_php
         au!
         au filetype php setlocal makeprg=php\ -l\ %
-    augroup END
-
-    augroup ft_python
-        au! 
-        au filetype python setlocal formatoptions+=t
-        au filetype python setlocal omnifunc=jedi#completions
-
     augroup END
 
     augroup ft_tex
